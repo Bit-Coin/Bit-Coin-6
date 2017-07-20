@@ -1,0 +1,51 @@
+@import "colors";
+
+// survey.css
+.reflection_survey {
+  .receiver_name {
+    margin: 0px;
+    background-color: #ccc;
+    padding: 10px 10px 10px 10px;
+    border-radius: 6px;
+
+    h1, h5 { margin: 0px; }
+  }
+  .receiver_email {
+    margin: 0px;
+  }
+  span.label { font-size: 12px; }
+
+  .question {
+    .btn-group {
+      .response-button {
+        @media (max-width: 500px) {
+          font-size: 80%;
+        }
+        padding: 6px 0px 6px 0px;
+      }
+      .selected { 
+        background-color: #2EA84F; 
+        color: white;
+      }
+      .error {
+        background-color: red;
+        color: white;
+      }
+    }
+    .score-labels { color: #888; }
+  }
+
+  #ceu {
+    .comment-container { display: none; }
+    .char-count {
+      margin-top: -15px;
+      font-size: 90%;
+      color: #aaa; 
+    }
+  }
+
+  .self-survey-instructions {
+    font-style: italic;
+    color: $ripple-dark-red;
+  }
+}

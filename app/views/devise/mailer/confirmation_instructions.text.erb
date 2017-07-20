@@ -1,0 +1,9 @@
+Welcome <%= @email %>!
+
+Thank you for signing up for a Ripple account!
+
+In order to complete your registration, please click on the link below:
+
+<%= user_confirmation_url(@resource, confirmation_token: @token, host: @resource.host) %>
+
+If you have any questions, send a message to support@ripplecrew.com and we'll be happy to help.

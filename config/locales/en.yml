@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        cohort: "Seniority"
+    errors:
+      models:
+        user:
+          attributes:
+            cohort:
+              blank: "is required"
+            email:
+              blank: "is required"

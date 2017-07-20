@@ -1,0 +1,25 @@
+h1 Roles
+
+.row
+  .col-md-1.pull-right = link_to "New", new_admin_role_path, class: 'btn btn-success'
+  .col-md-11 People play many roles.  Which one is being surveyed?  Every user has a default
+    UserRole of "Colleague" pointing to its Company surveyable.
+
+table.table.table-striped
+  thead
+    tr
+      th ID
+      th Name
+      th Description
+      th &nbsp;
+  tbody
+    - @roles.each do |r|
+      tr
+        td = r.id
+        td = r.name
+        td = r.description
+        td
+          = link_to "<i class='fa fa-pencil'></i>".html_safe, edit_admin_role_path(r)
+          = link_to "<i class='fa fa-trash'></i>".html_safe, admin_role_path(r),
+              method: :delete, data: { confirm: 'Delete?' }
+

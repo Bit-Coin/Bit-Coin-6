@@ -1,0 +1,13 @@
+Dear colleague,
+
+I recently signed up for Ripple: a peer-to-peer networking application empowering co-workers to share authentic and honest feedback with their colleagues. This information is collected through a series of short web-based surveys (Reflection Surveys). A typical survey takes no more than 20-30 seconds to complete. The process is quick, easy, and completely anonymous.
+
+I value your opinion and am interested in getting your feedback. Would you please complete a Reflection Survey on me? The Reflection Survey will provide me invaluable insight as to how I am perceived by you and my other colleagues. I’ll be better equipped to make meaningful changes in my work habits. Please help me become a better co-worker. You can see how Ripple works at http://ripplecrew.com.
+
+It’s easy to complete the survey – just visit <%= short_url(short_path: @survey.giver.short_path, host: @survey.giver.company.host) %> in your browser. Oh, and when you’re done with my survey, you can sign up and start requesting feedback from others too! (Don’t worry - it’s quick and easy to request feedback. Ripple will guide you through the process.)
+
+Thank you.
+
+All the best -
+
+<%= @survey.receiver.first_name %>

@@ -1,0 +1,27 @@
+p &nbsp;
+p Survey Plans are the connections between users (graph edges). Self-surveys require
+  survey plans as well.
+
+table.table.table-striped
+  thead
+    tr
+      th Giver
+      th Receiver
+      th State
+      th Next Due
+      th Last Reminded
+  tbody
+    - SurveyPlan.where('company_survey_series_id in (?)', @company.company_survey_series.pluck(:id)).each do |sp|
+      - if sp.giver.present? && sp.receiver.present?
+        tr
+          td 
+            div 
+              b = sp.giver.full_name
+            div = sp.giver.email
+          td 
+            div 
+              b = sp.receiver.full_name
+            div = sp.receiver.email
+          td = sp.state
+          td = sp.next_due
+          td = sp.last_reminded_at

@@ -1,0 +1,29 @@
+.row
+  .col-md-9.col-md-offset-1.col-xs-12
+    = bootstrap_form_for [:admin, @survey_set] do |f|
+      = f.hidden_field :survey_series_id, value: @survey_set.survey_series.id
+      = f.text_field :survey_series, value: @survey_set.survey_series.name, disabled: true
+      = f.text_field :name, label: 'Survey Set Name', autofocus: true
+      = f.text_field :position
+      = f.submit "Cancel"
+      = f.submit "Save"
+
+    p &nbsp;
+    - if @survey_set.persisted?
+      .pull-right = link_to "Add", new_admin_survey_set_question_path(sset: @survey_set.id), 
+          class: 'btn btn-success'
+    - else
+      a.pull-right.btn.btn-success disabled='disabled' Add
+    h4 Questions in this Survey Set
+    table.table.table-striped
+      thead
+        tr
+          th
+      tbody
+        - @survey_set.survey_set_questions.each do |ssq|
+          tr
+            td = ssq.question.other_phrased
+            td
+              = link_to "<i class='fa fa-trash'></i>".html_safe, 
+                  admin_survey_set_question_path(ssq), method: :delete,
+                  data: { confirm: 'Remove question from survey set?' }

@@ -1,0 +1,16 @@
+h1 Edit Company Survey Series
+
+.row
+  .col-md-6.col-md-offset-1.col-xs-12
+
+    = bootstrap_form_for [:admin, @css] do |f|
+      = f.hidden_field :company, value: @company.id
+      = f.select :survey_series, options_for_select(@css.options_for_select, @css.survey_series_id), 
+          { label: 'Which survey series...'}, { disabled: true }
+      = f.text_area :config  
+
+      #buttons
+        = link_to "Cancel", admin_company_path(@company), class: 'btn btn-default', 
+            style: 'margin-right:10px;'
+        = f.submit "Update", class: 'btn btn-success', id: 'submit'
+        

@@ -1,0 +1,53 @@
+.light-container
+  .container
+    
+    - if @sub_type === 'free'
+      .row
+        .col-xs-12.col-md-8
+          h2 Free Trial
+        
+          p Your RippleCrew is currently using Ripple with a free trial subscription. 
+          - if @subscription.has_end?
+            p
+              b Your company's free trial ends on #{ @subscription.end_at.strftime("%b&nbsp;%d,&nbsp;%Y").html_safe }.
+        .col-xs-12.col-md-4
+          .pull-right
+            = link_to 'Upgrade Subscription', upgrade_subscription_path(@subscription), :class => 'btn btn-lg btn-success'
+      p &nbsp;
+    
+    - elsif @sub_type === 'company'
+      .row
+        .col-xs-12.col-md-8
+          h2 Monthly Company Subscription
+          p Your RippleCrew is currently on a monthly subscription plan. 
+          p 
+            b Every month, we will invoice #{ number_to_currency(@subscription.plan.price) } per user.
+        .col-xs-12.col-md-4
+          .pull-right
+            = link_to 'Update Payment Info', pay_subscription_path(@subscription), :class => 'btn btn-md btn-primary'
+            
+      p &nbsp; 
+    
+    - elsif @sub_type === 'enterprise'
+      h2 Enterprise Subscription
+      p 
+        span Your RippleCrew is on an enterprise subscription plan. 
+        span We are not able to accept payment for these types of subscriptions online at this time,
+        span so please contact your Ripple representative for all billing concerns.
+      
+.container
+
+  p &nbsp;
+  
+  = flash_messages
+
+  p &nbsp;
+  
+  - if current_user.company.invoices.count > 0
+    = render :partial => 'subscriptions/invoices', :locals => { :invoices => current_user.company.invoices }
+    
+  p &nbsp;
+  p &nbsp;
+  p &nbsp;
+  
+  = link_to 'Cancel Subscription', '#', :class => 'btn btn-sm btn-default'

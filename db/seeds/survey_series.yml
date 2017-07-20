@@ -1,0 +1,21 @@
+---
+- id: 1
+  name: 'Ripple 50/5-up'
+  description: 'Ripple 50 questions five at a time'
+  default_config: { hours_between_surveys: 168, for_self: false, allow_comments: false }
+  parent_characteristic_id: 1
+- id: 2
+  name: 'Ripple 50/50-up'
+  description: 'Ripple 50 questions all at once'
+  default_config: { hours_between_surveys: 8760, for_self: true, allow_comments: false }
+  parent_characteristic_id: 1
+- id: 3
+  name: 'Project Questions'
+  description: 'Ripple questions about the project itself'
+  default_config: { create_manually: true, for_self: false, allow_comments: false }
+  parent_characteristic_id: 7
+- id: 4
+  name: 'Project Owner Role Questions'
+  description: 'Ripple questions for project_owner (role 1)'
+  default_config: { create_manually: true, for_self: false, allow_comments: false }
+  parent_characteristic_id: 7

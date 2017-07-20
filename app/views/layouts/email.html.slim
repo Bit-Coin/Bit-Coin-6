@@ -1,0 +1,23 @@
+- border = "rgb(24, 190, 217)"
+- text = "rgb(0, 15, 25)"
+- border_height = 100
+
+doctype html
+html
+  head
+    
+  body style="font-family:'Arial',sans-serif;color:#{text}"
+    table style='border-collapse:collapse;'
+      tr
+        td height="#{border_height}px;" width='80px;' style="background-color:#{border};" &nbsp;
+        td width='500px;' style="background-color:#{border};"
+          a href='http://www.ripplecrew.com'
+            img src='https://s3.amazonaws.com/ripplecrew-production/ripple-word-white.png'
+        td width='80px;' style="background-color:#{border};" &nbsp;
+      tr
+        td style="background-color:#{border};"
+        td style='padding:18px;'
+          = yield
+          = render 'shared/email_footer'
+        td style="background-color:#{border};"
+      tr: td height="#{border_height}px;" style="background-color:#{border};" colspan=3

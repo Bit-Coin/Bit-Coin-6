@@ -1,0 +1,78 @@
+.container style='padding-top:50px;'
+  .row
+    .form-group
+      .col-sm-6
+        label for='char-filter' Behavioral Characteristic
+        select.form-control#char-filter
+          option All
+          - @score_reporter.component_characteristics.each do |cc|
+            option = cc.name.capitalize
+
+      .hidden-md.hidden-lg style='height:10px;' &nbsp;
+      
+      .col-sm-6
+        label for='scope-filter' Filter
+        select.form-control#scope-filter
+          - if current_user.comments.any?
+            option Show Scored Questions but Hide Comments
+            option Show Scored Questions and Show Comments
+            option Only Show Questions that have Comments
+            option Show Everything
+          - else
+            option Scored Questions
+            option All Questions
+
+coffee:
+  $(document).ready ->
+
+    # Default settings
+    $('.question').hide()
+    $('.scored').show()
+    $('.comments').hide()
+
+    $('#char-filter').on 'change', ->
+      scopeFilterValue = $('#scope-filter').val()
+      $('#scope-filter').val(scopeFilterValue).change()
+
+    $('#scope-filter').on 'change', ->
+
+      selector = ''
+      showComments = false
+      $('.question').hide()
+
+      if this.value == 'Show Scored Questions but Hide Comments'
+        selector = '.scored'
+
+      else if this.value == 'Show Scored Questions and Show Comments'
+        selector = '.scored'
+        showComments = true
+
+      else if this.value == 'Only Show Questions that have Comments'
+        selector = '.with-comments'
+        showComments = true
+
+      else if this.value == 'Show Everything'
+        selector = '.question'
+        showComments = true
+
+      # Options for customers not using comments
+      else if this.value == 'Scored Questions'
+        selector = '.scored'
+
+      else if this.value == 'All Questions'
+        selector = '.question'
+
+      else
+        alert 'no clue'
+
+      # Now show by characteristic
+      charFilter = $('#char-filter')
+      if $(charFilter).val() != 'All'
+        selector += '.' + $(charFilter).val()
+
+      # Show what needs to be shown
+      $(selector).show()
+      if showComments
+        $('.comments').show()
+      else
+        $('.comments').hide()

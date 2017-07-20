@@ -1,0 +1,30 @@
+.row
+  .hidden-xs.hidden-sm.col-md-1
+  .col-xs-12.col-md-12
+    h2 Listing Blogs
+    = link_to 'New Blog', new_admin_blog_path
+
+    table.table.table-striped
+      thead: tr
+        th S. No.
+        th Title
+        th Description
+        th Author
+        th Image
+        th Published at
+        th State
+        th colspan="3"
+
+      tbody
+        - @blogs.each_with_index do |blog, index|
+          tr
+            td = index + 1
+            td = blog.title
+            td = raw blog.description.truncate(300)
+            td = blog.author
+            td = image_tag blog.image, {width: 100}
+            td = blog.published_at
+            td = blog.state
+            td = link_to 'Show', admin_blog_path(blog)
+            td = link_to 'Edit', edit_admin_blog_path(blog)
+            td = link_to 'Destroy', admin_blog_path(blog), method: :delete, data: { confirm: 'Are you sure?' }

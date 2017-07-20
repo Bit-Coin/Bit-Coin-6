@@ -1,0 +1,57 @@
+.container-fluid.white-container
+  .container
+    .row
+      .col-xs-12
+        p.larger Ripple Board of Advisors
+        p &nbsp;
+
+    .row
+      .col-xs-12.col-sm-12.col-md-3.col.lg-3
+        .portrait
+          img.img-circle.img-responsive.portrait src=asset_path("portrait_lm.jpg")
+      .col-xs-12.col-sm-12.col-md-3.col.lg-3
+        div.smaller
+          b Lisa Mascolo
+        p.description-text
+          smaller Lisa is a proven C-Suite leader across IT, strategy, business development, change management and operations. She currently serves as Managing Director of IBM’s US Public Service GBS business unit.<br/> Prior to IBM, Lisa coached senior leaders and provided business strategy consulting services to small and large businesses as the CEO of Listen Learn Lead LLC. Lisa spent almost 30 years with Accenture, and was a key leader both when the organization was a private professional services firm and a Fortune 500 public company.<br/> Lisa is a Trustee and graduate of the Stevens Institute of Technology, and serves as Chair of the HR &amp; Compensation Committee. Her philanthropic focus includes K-12 educational nonprofits, veterans and domestic organizations focused on helping disadvantaged women achieve economic independence. She holds a US Patent for Customs Processing.<br /> Lisa became involved with Ripple because she is passionate about improving the quality and effectivity of feedback.
+      .col-xs-12.col-sm-12.col-md-3.col.lg-3
+        .portrait
+          img.img-circle.img-responsive.portrait src=asset_path("portrait_lh.jpg")
+      .col-xs-12.col-sm-12.col-md-3.col.lg-3
+        div
+          b Lynne Healey
+        p.description-text
+          smaller Lynne has dedicated her career to guiding and supporting individuals and leaders. She began her career helping the mentally ill gain their independence, before advancing in various Human Resources roles in Managed Care, Technology, and Financial Services, specializing in Performance Management, Talent Development, Total Rewards, and Employee Engagement.<br/> Lynne’s educational background is in Psychology, and she later went on to earn several professional certifications in leadership development and personality assessments. She also holds the Senior Professional in Human Resources (SPHR) designation.<br/> Lynne has firsthand experience with the challenges of traditional performance management practices, both as a leader of people, and in her current role as head of Human Resources for a global financial institution headquartered in New York City. She is currently driving progressive changes around these practices within her own organization.<br/> Lynne is committed to improving the employee experience and finding innovative ways to create meaningful business relationships between employees and their managers. Lynne fully supports Ripple&#39;s strategy to lead transformative change in the process of giving/receiving workplace feedback.
+      .col-xs-12.col-sm-12.col-md-2.col.lg-2
+        .portrait
+    p &nbsp;
+    .row
+      .col-xs-12.col-sm-12.col-md-3.col.lg-3
+        .portrait
+          img.img-circle.img-responsive.portrait src=asset_path("portrait_msm_2.jpg")
+      .col-xs-12.col-sm-12.col-md-3.col.lg-3
+        div.smaller
+          b M. Sean Molley
+        p.description-text
+          smaller Sean is our resident data jockey and standup philosopher.  He’s been a lone developer, a team leader, a technology executive, and everything in between.  Sean spent most of the last 20 years building business intelligence software and services for the healthcare industry. One of his hobbies is sports officiating, so he’s used to getting negative feedback.
+      .col-xs-12.col-sm-12.col-md-3.col.lg-3
+        .portrait
+          img.img-circle.img-responsive.portrait src=asset_path("portrait_bg_2.jpg")
+      .col-xs-12.col-sm-12.col-md-3.col.lg-3
+        div.smaller
+          b Bob Gatewood
+        p.description-text
+          smaller Bob has been building systems since 1988. He was the founding CTO of athenahealth and subsequently led ventures in sustainable food and clean energy. Somehow he managed to get an aerospace engineering degree from the University of Virginia and an MBA at the University of Colorado in Boulder.  When not developing software, Bob is most likely either cooking dinner or embarrassing his teenagers.
+    .row
+      .col-xs-12.col-sm-12.col-md-3.col.lg-3
+        .portrait
+javascript:
+  $(function(){
+    $('.description-text').readmore({
+      speed: 75,
+      lessLink: '<a href="javascript:void(0);" class="more-link">less</a>',
+      moreLink: '<a href="javascript:void(0);" class="more-link">...Read more</a>',
+      collapsedHeight: 40,
+      heightMargin: 16
+    });
+  });

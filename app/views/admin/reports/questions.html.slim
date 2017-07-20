@@ -1,0 +1,26 @@
+= render 'question_filters'
+
+- if @general_comments.any?
+  .container.comments
+    .general-comments
+      h1 General Comments
+      = render partial: 'comments', locals: { comments: @general_comments }
+
+.hidden-xs.hidden-sm  
+  .container
+    .scores
+      - if @res
+        = render partial: 'questions_desktop'
+      - else
+        = render partial: 'no_data_yet'
+
+.hidden-md.hidden-lg
+  .container
+    .scores
+      - if @res
+        = render partial: 'questions_mobile'
+      - else
+        = render partial: 'no_data_yet'  
+
+p &nbsp;
+p &nbsp;

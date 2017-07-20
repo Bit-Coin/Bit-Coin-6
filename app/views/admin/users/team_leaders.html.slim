@@ -1,0 +1,52 @@
+.row
+  .col-xs-12
+    h1 Team Leaders
+    p #{@users.count} total team leaders (#{User.active.count} active) as of #{Time.now}
+    p &nbsp;
+
+.row
+  .col-xs-12
+    table.table.table-striped
+      thead
+        tr
+          th ID
+          th Name
+          th Email
+          th Company
+          th Type/State
+          th Teams
+          th &nbsp;
+
+      tbody
+        - @users.each do |user|
+          tr
+            td
+              a href="/admin/users/#{user.id}" #{user.id}
+            td 
+              div: b = "#{user.first_name} #{user.last_name}"
+              - if user.test_driver?
+                span.label.label-info Test Driver
+            td = user.email
+            td = user.company_placeholder_name
+            td #{user.type} / #{user.state}
+            td = user.manage_teams.map(&:name).join(", ")
+            td 
+              - if user.rippler?
+                = link_to 'Proxy', become_proxy_path(user.id), method: :post
+              - else
+                | N/A
+            
+            
+.row
+  .col-md-12
+    .paginate = paginate @users
+    
+    
+javascript:
+  $(function() {
+    $('form.search select.state').val("#{@state}");
+    $('form.search select.company_id').val("#{@company_id}");
+  });
+  
+  
+  

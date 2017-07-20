@@ -1,0 +1,96 @@
+.row
+  .col-xs-12
+    h1 Users
+    p #{@total_users.count} total users (#{@total_users.active.count} active) as of #{Time.now}
+    p &nbsp;
+
+form.inline.search target=admin_users_path
+  .row
+    .col-sm-12.col-md-4 
+      .form-group
+        label.control-label for='name' Name
+        input.form-control.name name='name' value="#{@name}"
+    .col-xs-12.col-md-4
+      .form-group
+        label.control-label for='state' State
+        select.form-control.state name='state'
+          option value='' All
+          option value='rippler' Rippler
+          option value='active' Active
+          option value='prospect' Prospect 
+          option value='pending' Pending
+          option value='bouncing' Bouncing
+          option value='unsubscribed' Unsubscribed
+          option value='unregistered_givers' Unregistered Giver
+          option value='unresponsive' Unresponsive
+          option value='deleted' Deleted
+    .col-sm-12.col-md-4 
+      .form-group
+        label.control-label for='company_id' Company
+        select.form-control.company_id name='company_id'
+          option value='' All
+          - Company.all.each do |company|
+            option value="#{company.id}" = company.name
+    .col-sm-12.col-md-4
+      .form-group
+        div &nbsp;
+        input.btn.btn-success type='submit' value='Search'
+p &nbsp;
+
+.row
+  .col-xs-12
+    table.table.table-striped
+      thead
+        tr
+          th id
+          th name
+          th email
+          th company
+          th type/state
+          th created_at
+          th &nbsp;
+          th
+          th
+
+
+      tbody
+        - @users.each do |user|
+          tr
+            td
+              a href="/admin/users/#{user.id}" #{user.id}
+            td 
+              div: b = "#{user.first_name} #{user.last_name}"
+              - if user.test_driver?
+                span.label.label-info Test Driver
+            td = user.email
+            td = user.company_placeholder_name
+            td #{user.type} / #{user.state}
+            td = user.created_at
+            td 
+              - if user.rippler?
+                = link_to 'Proxy', become_proxy_path(user.id), method: :post
+              - else
+                | N/A
+            td
+              = link_to 'Delete', "#{admin_user_path(user)}?return=user_reports", class: 'btn btn-sm btn-default',
+                  method: :delete, data: { confirm: "Permanently delete #{user.email}?" }
+              | &nbsp;
+            td.pull-right
+              = link_to 'Delete Final', "/admin/users/#{user.id}/destroy_final?return=user_reports", class: 'btn btn-sm btn-default',
+                  method: :delete, data: { confirm: "Permanently delete #{user.email}?" }
+              | &nbsp;
+            
+            
+.row
+  .col-md-12
+    .paginate = paginate @users
+    
+    
+javascript:
+  $(function() {
+    $('form.search select.state').val("#{@state}");
+    $('form.search select.company_id').val("#{@company_id}");
+  });
+  
+  
+  

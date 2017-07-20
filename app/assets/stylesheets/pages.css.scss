@@ -1,0 +1,74 @@
+// pages.css.scss
+
+@import 'colors';
+$landing-height: 800px; // default.  overridden in js
+
+body { padding-top: 0px; }
+
+.landing { height: $landing-height; }
+
+#landing-bg {
+    background: url('https://s3.amazonaws.com/ripplecrew-production/ripplecrew.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    margin: 0px -15px 0px -15px;
+}
+
+#landing-nav {
+  display: inline;
+  color: white;
+  .btn {
+    background-color: transparent;
+    margin-top: 20px;
+    border: 1px solid white;
+  }
+  a { color: white; }
+}
+
+#tagline {
+  margin-top: 30px;
+  margin-bottom: 150px;
+}
+
+#landing-content {
+  color: white;
+
+  .well {
+    opacity: .7;
+    color: black;
+    text-align: center;
+  }
+
+  .step { height: 300px; }
+
+  h2.well {
+    padding: 40px 0px 40px 0px;
+    margin: 0px 0px 50px 0px;
+  }
+
+  .huge {
+    font-size: 96px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
+  #call-to-action {
+    margin-top: 40px;
+    text-align: center;
+  }
+}
+
+.divider {
+  height: 140px;
+  opacity: 0.5;
+}
+
+.content {
+  height: 800px;
+
+  h1 { padding-top: 40px; }
+}

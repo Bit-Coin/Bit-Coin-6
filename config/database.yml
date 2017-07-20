@@ -1,0 +1,43 @@
+# $ createuser -P -s ripple
+
+development:
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: ripple_development
+  username: ripple
+  password: ripple
+
+test:
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: ripple_test
+  username: ripple
+  password: ripple
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: ripple_staging
+  username: ripple
+  password: ripple
+  
+demo:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: ripple_demo
+  username: ripple
+  password: ripple
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: ripple_production
+  username: ripple
+  password: ripple

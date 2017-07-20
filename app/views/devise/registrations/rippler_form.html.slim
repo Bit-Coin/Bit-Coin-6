@@ -1,0 +1,42 @@
+.row
+  .col-sm-12
+    h1 Please complete your profile
+    p &nbsp;
+    
+.row
+  .col-xs-12.col-md-6.col-md-offset-1
+    = bootstrap_form_tag(url: register_rippler_path(id: @user.id), method: :put) do |f|
+      - unless @user.errors.empty?
+        .alert.alert-danger
+          p
+            b Sorry, we couldn't complete your profile
+          ul
+            - @user.errors.full_messages.each do |e|
+              li = e
+            
+
+      .field
+        = f.email_field :email, label: 'Work email', 
+            value: @user.email, disabled: true
+
+      = render partial: 'company_selector'
+
+      .field
+        = f.text_field :first_name, label: 'First name', 
+            value: @user.first_name, autofocus: true
+
+      .field
+        = f.text_field :last_name, label: 'Last name', 
+            value: @user.last_name
+
+      p.help-block Please choose a password containing at least one uppercase letter, at least one lowercase letter, and at least one number.
+      
+      .field.password
+        = f.password_field :password, autocomplete: "off", label: 'Password'   
+
+      .field.password
+        = f.password_field :password_confirmation, autocomplete: "off", 
+            label: 'Repeat password, please...'
+
+      .actions
+        = f.submit 'Get started', id: 'start-btn', class: 'btn btn-success'

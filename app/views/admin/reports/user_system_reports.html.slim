@@ -1,0 +1,71 @@
+.hidden-xs.hidden-sm
+  .container
+    - @all_cm_scores.each do |score_name, scores|
+      - @scores = scores; @score_name = score_name # hack
+      .scores
+        - if scores
+          = render partial: 'scores_desktop'
+        - else
+          = render partial: 'no_data_yet'
+
+.hidden-md.hidden-lg
+  .mobile-light-container
+    .container
+      - @all_cm_scores.each do |score_name, scores|
+        - @scores = scores; @score_name = score_name # double hack
+        .scores
+          - if @scores
+            = render partial: 'scores_mobile'
+          - else
+            = render partial: 'no_data_yet'
+        
+p &nbsp;
+p &nbsp;
+
+.container
+  .row
+    .col-xs-12
+      p Your Ripple Effect Score (RES) is the average of all responses received to all of the “Ripple 50” questions from all respondents. (The RES is not the average of the five competency scores). Each competency score is the average of all responses received to the 10 questions specific to that competency. A total of #{@user.company.members.count} colleagues (#{@user.survey_plans.count} Peers and #{@user.company.members.count - @user.survey_plans.count} Direct Reports) completed surveys for you. #{@user.is_self_survey? ? "You also completed a self-survey" : "You have not yet completed your self-survey"}.
+
+      - if @scores
+        p Overall, your RES of #{@all_cm_scores.values.first[:personal][0][:scores][:overall]} is within the typical range of scores that we have seen for most employees at most of our clients. You scored slightly higher on the Conscientious and Consistent competencies, and slightly lower on the Cooperative competency, but these scores are all very close, which means that it’s more important to drill down into the individual questions and less important to focus on the top-level scores.
+
+      - @all_cm_scores.each do |score_name, scores|
+        - if scores[:personal].length == 1 # componentless characteristic
+          - components = [scores[:personal][0]]
+        - else
+          - components = scores[:personal][1..(scores[:personal].length - 1)]
+        - components.each_with_index do |c, i|
+          - if c[:characteristic][:description].present?
+            - description = c[:characteristic][:description].split(",")
+            - measure = description.take(3).join(",")
+            - perceive = (description - description.take(3)).join(",")
+          p
+            | The 10 questions which make up the 
+            b #{c[:characteristic][:name].titleize} 
+            | competency are designed to measure how #{measure} you are. Do your colleagues perceive you as #{perceive}?
+      
+
+javascript:
+  $(function() {
+    var duration = 500;
+    $('button[data-action="show-details"]').click(function(e) {
+      var char = $(this).data('char');
+      $('.detail-area .detail-row[data-char="' + char + '"]').slideDown({
+        duration: duration,
+        start: function () {
+          $('.overview-area .score-row[data-char="' + char + '"]').hide(duration);
+        }
+      });
+    });
+    
+    $('button[data-action="hide-details"]').click(function(e) {
+      var char = $(this).data('char');
+      $('.detail-area .detail-row[data-char="' + char + '"]').slideUp({
+        duration: duration,
+        start:  function () {
+          $('.overview-area .score-row[data-char="' + char + '"]').show(duration);
+        }
+      });
+    }); 
+  });

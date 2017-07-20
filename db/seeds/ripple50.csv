@@ -1,0 +1,51 @@
+survey_set_name,survey_series_id,self_survey_set_name,self_survey_series_id,characteristic_name,response_set,other_phrased,self_phrased
+"Ripple 50, Group A",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} listens to my perspectives,I listen to my colleagues' perspectives
+"Ripple 50, Group A",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} follows through on commitments,I follow through on commitments
+"Ripple 50, Group A",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} solicits my input/feedback,I solicit input/feedback from my colleagues
+"Ripple 50, Group A",1,"Ripple 50, All",2,cooperative,1,#{receiver.first_name} is empathetic,I am empathetic
+"Ripple 50, Group A",1,"Ripple 50, All",2,consistent,1,#{receiver.first_name} appropriately expresses his/her emotions in the workplace,I appropriately express my emotions in the workplace
+"Ripple 50, Group B",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} is open to new approaches to solving problems,I am open to new approaches to solving problems
+"Ripple 50, Group B",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} is effective at focusing attention on important issues,I am effective at focusing attention on important issues
+"Ripple 50, Group B",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} actively listens to my feedback to ensure he/she understands me,I actively listen to my colleagues' feedback to ensure I understand
+"Ripple 50, Group B",1,"Ripple 50, All",2,cooperative,1,#{receiver.first_name} is effective working in a team environment when necessary,I am effective working in a team environment when necessary
+"Ripple 50, Group B",1,"Ripple 50, All",2,consistent,1,#{receiver.first_name} thinks before responding,I think before responding
+"Ripple 50, Group C",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} is willing to question the way things get done to be more productive,I am willing to question the way things get done to be more productive
+"Ripple 50, Group C",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} demonstrates integrity,I demonstrate integrity
+"Ripple 50, Group C",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} encourages all forms of contributions when solving an issue,I encourage all forms of contributions when solving an issue
+"Ripple 50, Group C",1,"Ripple 50, All",2,cooperative,1,#{receiver.first_name} works effectively with a diverse set of employees,I work effectively with a diverse set of employees
+"Ripple 50, Group C",1,"Ripple 50, All",2,consistent,1,#{receiver.first_name} is encouraging,I am encouraging
+"Ripple 50, Group D",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} is willing to experiment and take calculated risks,I am willing to experiment and take calculated risks
+"Ripple 50, Group D",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} stays focused on the topic at hand,I stay focused on the topic at hand
+"Ripple 50, Group D",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} has the courage to initiate difficult conversations,I have the courage to initiate difficult conversations
+"Ripple 50, Group D",1,"Ripple 50, All",2,cooperative,1,#{receiver.first_name} looks beyond his/her own agenda to arrive at solutions,I look beyond my own agenda to arrive at solutions
+"Ripple 50, Group D",1,"Ripple 50, All",2,consistent,1,#{receiver.first_name} remains calm in difficult situations,I remain calm in difficult situations
+"Ripple 50, Group E",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} seeks new opportunities to improve our business,I seek new opportunities to improve our business
+"Ripple 50, Group E",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} sets high personal standards,I set high personal standards
+"Ripple 50, Group E",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} asks good questions,I ask good questions
+"Ripple 50, Group E",1,"Ripple 50, All",2,cooperative,1,#{receiver.first_name} is able to compromise to arrive at solutions,I am able to compromise to arrive at solutions
+"Ripple 50, Group E",1,"Ripple 50, All",2,consistent,1,#{receiver.first_name} delivers on promises,I deliver on promises
+"Ripple 50, Group F",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} thinks about the future and its implications,I think about the future and its implications
+"Ripple 50, Group F",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} is customer focused,I am customer-focused
+"Ripple 50, Group F",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} participates in discussions when necessary,I participate in discussions when necessary
+"Ripple 50, Group F",1,"Ripple 50, All",2,cooperative,1,#{receiver.first_name} puts others before himself/herself,I put others before myself
+"Ripple 50, Group F",1,"Ripple 50, All",2,consistent,1,#{receiver.first_name} is optimistic,I am optimistic
+"Ripple 50, Group G",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} uses creative solutions to resolve complicated problems,I use creative solutions to resolve complicated problems
+"Ripple 50, Group G",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} is a reliable resource that I can trust during challenging times,I am a reliable resource that my colleagues can trust during challenging times
+"Ripple 50, Group G",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} explains things clearly,I explain things clearly
+"Ripple 50, Group G",1,"Ripple 50, All",2,cooperative,1,I can count on #{receiver.first_name} to support me,My colleagues can count on me to support them
+"Ripple 50, Group G",1,"Ripple 50, All",2,consistent,1,#{receiver.first_name} learns from his/her mistakes,I learn from my mistakes
+"Ripple 50, Group H",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} is interested in learning,I am interested in learning
+"Ripple 50, Group H",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} makes practical decisions,I make practical decisions
+"Ripple 50, Group H",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} clearly articulates his/her opinion in all forms of communication,I clearly articulate my opinion in all forms of communication
+"Ripple 50, Group H",1,"Ripple 50, All",2,cooperative,1,#{receiver.first_name} genuinely wants me to succeed,I genuinely want my colleagues to succeed
+"Ripple 50, Group H",1,"Ripple 50, All",2,consistent,1,#{receiver.first_name} stays focused in times of change,I stay focused in times of change
+"Ripple 50, Group I",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} can make good decisions even when all information is not available,I can make good decisions even when all information is not available
+"Ripple 50, Group I",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} makes decisions in a timely manner,I make decisions in a timely manner
+"Ripple 50, Group I",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} exhibits strong business instinct,I exhibit strong business instinct
+"Ripple 50, Group I",1,"Ripple 50, All",2,cooperative,1,#{receiver.first_name} maintains a sense of humor,I maintain a sense of humor
+"Ripple 50, Group I",1,"Ripple 50, All",2,consistent,1,#{receiver.first_name} recognizes his/her weaknesses,I recognize my weaknesses
+"Ripple 50, Group J",1,"Ripple 50, All",2,curious,1,#{receiver.first_name} challenges me to innovate,I challenge my colleagues to innovate
+"Ripple 50, Group J",1,"Ripple 50, All",2,conscientious,1,#{receiver.first_name} is organized,I am organized
+"Ripple 50, Group J",1,"Ripple 50, All",2,committed,1,#{receiver.first_name} provides information that helps me do my job better,I provide information that helps my colleagues do their jobs better
+"Ripple 50, Group J",1,"Ripple 50, All",2,cooperative,1,#{receiver.first_name} is able to look past my prior mistakes,I am able to look past my colleagues' prior mistakes
+"Ripple 50, Group J",1,"Ripple 50, All",2,consistent,1,I trust #{receiver.first_name},My colleagues trust me

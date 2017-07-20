@@ -1,0 +1,16 @@
+.page-footer
+  .row
+    .col-xs-12.col-sm-12.col-md-6.foot
+      div = "&copy; 2014-#{Date.today.year} Ripple Analytics Inc.".html_safe
+      div All rights reserved
+    
+    .col-xs-12.col-sm-12.col-md-3.foot
+      div Questions or feedback? &nbsp;
+      div = link_to 'support@ripplecrew.com', 'mailto:support@ripplecrew.com'
+        
+    .col-xs-12.col-sm-12.col-md-3.foot
+      div = link_to 'Terms and Conditions', '/pages/terms_and_conditions'
+      div = link_to 'Privacy Policy', '/pages/privacy_policy'
+      div = link_to 'FAQ', '/pages/faq'
+              
+    

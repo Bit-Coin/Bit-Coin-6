@@ -1,0 +1,33 @@
+= render partial: 'shared/email_styles'
+
+table width="100%"
+  tr: td
+    = 'Dear ' + @survey.giver.full_name + ','
+
+  tr: td &nbsp;
+
+  tr: td
+    p Your colleague, #{@survey.receiver.full_name}, recently signed up for Ripple: a peer-to-peer networking application empowering co-workers to share authentic and honest feedback with their colleagues. This information is collected through a series of short web-based surveys (Reflection Surveys). A typical survey takes no more than 20-30 seconds to complete. The process is quick, easy, and completely anonymous.
+
+    p #{@survey.receiver.first_name} values your opinion and is interested in getting your feedback. Would you please complete a Reflection Survey on #{@survey.receiver.first_name}? Using the information you provide, #{@survey.receiver.first_name} will be better equipped to make meaningful changes in everyday work habits and become a better co-worker.  You can see how Ripple works at #{link_to 'ripplecrew.com', 'http://ripplecrew.com'}.
+    
+    p It’s easy to complete the survey – just click the link below. Oh, and when you’re done with #{@survey.receiver.first_name}'s survey, you can sign up and start requesting feedback from others too! (Don’t worry - it’s quick and easy to request feedback.  Ripple will guide you through the process.)
+
+  tr: td &nbsp;
+
+  tr: td
+    - if @sample
+      // Viewing a sample
+      - path = '#'
+    - else
+      - path = short_url(short_path: @survey.giver.short_path, host: @survey.giver.company.host)
+    = link_to 'Start Rippling!', path
+
+  tr: td &nbsp;
+
+  tr: td
+    p We thank you on #{@survey.receiver.first_name}'s behalf,
+    p Ripple Analytics
+
+  tr: td
+    p P.S. If that link doesn't work, just go to #{short_url(short_path: @survey.giver.short_path, host: @survey.giver.company.host)} in your browser.

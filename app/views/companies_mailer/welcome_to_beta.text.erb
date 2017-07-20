@@ -1,0 +1,11 @@
+Dear <%= @maven.first_name %>, 
+
+Welcome to Ripple!  We would love to have you register and start inviting your colleagues to give you feedback.  
+
+The Reflection Survey process is fast, easy and completely anonymous.  Simply click on the [button/link] below to begin inviting feedback.  You'll need at least five different people to complete Reflection Surveys about you before you'll be able to see your first Ripple Effect Score.  The more people you invite, the better you'll be able to appreciate how your co-workers perceive you.
+
+Please make sure you login with the first 7 days to avoid any issues with your account
+
+To get started, paste this entire URL into your browser:
+
+<%= edit_user_password_url(@maven, reset_password_token: @token, host: @maven.company.host) %>

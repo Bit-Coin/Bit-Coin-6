@@ -1,0 +1,10 @@
+.container
+
+  p &nbsp;
+  h2 Update Payment Method
+
+  p Enter your new card information now to update the payment method used for your RippleCrew's paid subscription plan.
+  p If you have any outstanding invoices, we will charge them now.
+  
+  = render :partial => 'subscriptions/form', :locals => { :url => update_payment_subscription_path(@subscription), :button => 'Update Payment Method' }
+

@@ -1,0 +1,26 @@
+.row style='margin-bottom:20px;'
+  - if current_user.receiver_survey_plans.active.any?
+    .col-sm-12
+      h1 
+        i.fa.fa-clock-o
+        | Waiting for #{@score_name} responses...
+
+      p We are collating surveys and will generate your initial #{@score_name} as soon as we have enough data. Check back soon!
+  - else
+    .col-sm-12
+      h1
+        i.fa.fa-clock-o
+        | You won't be getting a #{@score_name} because no one has been invited to give you feedback.
+
+.row
+  .col-sm-6
+    - if current_user.surveys.open.any?
+      = link_to "Complete Your Surveys", next_survey_path, 
+        class: 'btn btn-lg btn-success btn-block js-complete-your-surveys'
+
+      - unless current_user.company.settings[:consultant_mode]
+        .or.text-center style='padding:10px 0px 10px 0px;' or
+
+    - unless current_user.company.settings[:consultant_mode]
+      = link_to 'Invite Feedback', manage_invitations_path, 
+          class: 'btn btn-lg btn-success btn-block js-invite-feedback'

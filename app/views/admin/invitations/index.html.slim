@@ -1,0 +1,36 @@
+.row
+  .col-md-12
+    h1 = @headline
+    p #{@invitations.count} invitations as of #{Time.now}
+
+    table.table.table-striped
+      thead
+        tr
+          th id
+          th created_at
+          th reminded_at
+          th hold_until
+          th expires_in
+          th company
+          th giver
+          th receiver
+          th state
+          th &nbsp;
+
+      tbody
+        - @invitations.each do |inv|
+          tr
+            td = inv.id
+            td = inv.created_at
+            td = inv.reminded_at
+            td = inv.hold_until
+            td = inv.decorate.expires_in_days
+            td = inv.company.name
+            td = inv.giver.full_name
+            td = inv.receiver.full_name
+            td = inv.state
+            td
+              = link_to 'delete', admin_invitation_path(inv), method: :delete,
+                  data: { confirm: 'Delete? Action cannot be undone.' }
+              | &nbsp;
+              = link_to 'resend', resend_admin_invitation_path(inv)

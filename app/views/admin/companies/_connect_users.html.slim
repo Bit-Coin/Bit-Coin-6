@@ -1,0 +1,7 @@
+= bootstrap_form_tag :url => connect_users_admin_company_path(@company) do |f|
+  .row
+    .col-xs-12.col-md-6
+      = f.select :team_id, @company.teams.collect {|p| [ p.name, p.id ] }, :include_blank => true, :label => 'Team'
+      = f.check_box :connect_maven, :label => 'Connect New Users to Maven/Team Manager'
+      = f.check_box :connect_all, :label => 'Connect All Users'
+  = f.submit 'Connect Users', :class => 'btn btn-success'

@@ -1,0 +1,12 @@
+table.table.table-striped
+  thead
+    tr
+      - @table.first.keys.each do |col|
+        th = col
+
+  tbody
+    - @table.each do |row|
+      tr
+        - row.each do |k,v|
+          td = v
+          

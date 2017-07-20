@@ -1,0 +1,21 @@
+survey_set_name,survey_series_id,self_survey_set_name,self_survey_series_id,characteristic_name,response_set_id,other_phrased,self_phrased
+Project questions,3,,,Performance,2,#{project.name} achieved its goals,
+Project questions,3,,,Performance,2,#{project.name} was completed on schedule,
+Project questions,3,,,Performance,2,#{project.name} was completed on-budget,
+Project questions,3,,,Performance,2,I consider #{project.name} a success,
+Project questions,3,,,Performance,2,#{project.name} is a model for other projects,
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}
+Project-owner questions,4,Project-owner questions,4,Performance,1,#{receiver.first_name} communicated effectively about #{project.name},I communicated effectively about #{project.name}

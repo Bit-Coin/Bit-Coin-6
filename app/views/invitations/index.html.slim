@@ -1,0 +1,20 @@
+.row
+  .col-xs-12.col-md-6.col-md-offset-1.active-invitations
+    - sp_scope = current_user.receiver_survey_plans.undeleted.active
+    - if current_user.receiver_survey_plans.active.any?
+      table.table.table-striped
+        thead
+          th colspan="2"
+            b Your Ripplecrew &nbsp;
+            span.label.label-success = sp_scope.count
+          th
+        tbody
+          - sp_scope.sorted_for_view.each do |sp|
+            tr data-state="#{sp.state}"
+              td = sp.decorate.state_icon.html_safe
+              td
+                b = sp.decorate.truncated_giver_email
+                .state-details
+                  span.label.label-success = sp.decorate.relationship_type_label
+                  span &nbsp; &nbsp;
+                  span = sp.decorate.state_details.html_safe

@@ -1,0 +1,29 @@
+.row
+  .col-xs-12.col-md-6
+    p &nbsp;
+    
+    = flash_messages
+    
+    .well
+      
+      = bootstrap_form_for(@payment, :url => url, :html => {:id => 'payment-form'}) do |f|
+  
+        .payment-errors
+  
+        = f.text_field :card_number, 'data-stripe' => 'number', 'label' => 'Card Number'
+        .row
+          .col-xs-6
+            = f.select :expiration_month, @payment.expiration_month_options, 'data-stripe' => 'exp-month', 'label' => 'Exp Month'
+          .col-xs-6
+            = f.select :expiration_year, @payment.expiration_year_options, 'data-stripe' => 'exp-year', 'label' => 'Exp Year'
+        .row
+          .col-xs-6
+            = f.text_field :cvc, 'data-stripe' => 'cvc', 'label' => 'CVC/Security Code'
+  
+        button.btn.btn-success type="submit" #{button}
+  
+
+script type="text/javascript" src="https://js.stripe.com/v2/"
+
+javascript:
+  Ripple.makeStripeForm('#payment-form')

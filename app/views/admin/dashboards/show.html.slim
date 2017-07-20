@@ -1,0 +1,71 @@
+p &nbsp;
+
+h1 Ripple Crew Admin Page
+
+p &nbsp;
+
+.row
+  .col-xs-12.col-md-8
+    table.table.table-striped
+      thead: tr
+        th ID
+        th Type
+        th Company Name
+        th
+        th Actions
+      tbody
+      - @companies.order(:id).each do |c|
+        tr
+          td = c.id
+          td = c.type.upcase
+          td = link_to c.name, admin_company_path(c)
+          td
+            div #{c.users.rippler.count} Ripplers
+            div #{c.users.not_rippler.count} Other Users
+          td = link_to "Delete", admin_company_path(c), method: :delete, data: {confirm: "Are you sure ?"}
+  .col-xs-12.col-md-4
+    p &nbsp;
+    .well
+      h4 Onboarding
+      ul
+        li = link_to 'Create a Prospect', admin_users_new_contact_path
+        li = link_to 'Promote Prospects', prospects_admin_users_path
+        li = link_to 'All User Accounts', admin_users_path
+        li = link_to 'Team Leaders', team_leaders_admin_users_path
+        li = link_to 'All User Reports', admin_user_reports_path
+        li = link_to 'Blogs', admin_blogs_path
+        li = link_to 'Impressions', admin_impression_count_path
+
+
+    .well
+      h4 Reports
+      ul
+        li = link_to 'Reminder Status Report', reminders_admin_users_path
+        li = link_to 'Dead Letter Office', admin_dead_letters_path
+        li = link_to 'System Events', admin_system_events_path
+        li = link_to 'Operational Metrics', admin_system_reports_path
+
+    .well
+      h4 Global Setup
+      p In this order:
+      ol
+        li = link_to 'Response Sets', admin_response_sets_path
+        li = link_to 'Roles', admin_roles_path
+        li = link_to 'Competency Models', admin_characteristics_path
+        li = link_to 'Survey Series', controller: :survey_series, action: :index
+        li = link_to 'Questions', "/admin/questions"
+      p Then choose the company(ies) that want to use the new Survey Series, and
+        add it under the "Survey Series" tab. You will need separate Survey Series
+        for others- and self-feedback.
+
+    - if Rails.env.development?
+      .well
+        h5 Misc
+        ul
+          li = link_to 'Email Samples', 'rails/mailers'
+
+    .well
+      h4 Danger
+      ul
+        li = link_to 'Rails Admin', '/admin/rails'
+        li = link_to 'Resque', '/admin/resque', target: '_blank'

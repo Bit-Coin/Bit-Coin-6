@@ -1,0 +1,18 @@
+- if current_user.company.domain
+  javascript:
+    // only display this page once, if domain is nil
+    window.location.href = '/invitations/manage'
+
+-else
+  .row
+    .col-md-12
+      h1 Confirm Domain
+      p Welcome, you are the first Rippler at #{current_user.company.name}!
+        
+      p Can we assume that anyone who registers with a <b>#{current_user.email_domain}</b>
+        email address also works at #{current_user.company.name}?
+
+      = bootstrap_form_for current_user.company do |f|
+        = f.hidden_field :domain, value: current_user.email_domain
+        = f.submit 'No', class: 'btn btn-lg btn-default', style: 'margin-right: 5px;'
+        = f.submit 'Yes', class: 'btn btn-lg btn-success'

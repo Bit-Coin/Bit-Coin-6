@@ -1,0 +1,29 @@
+h1 Survey Series
+
+.pull-right = link_to "New", new_admin_survey_series_path, class: 'btn btn-success'
+p What questions in what order at what pace?
+
+table.table.table-striped
+  thead
+    tr
+      th ID
+      th Name
+      th Description
+      th Competency Model
+      th Default Config
+      th Survey Sets
+      th &nbsp;
+  tbody
+    - @survey_series.order(:id).each do |ss|
+      tr
+        td = ss.id
+        td = ss.name
+        td = ss.description
+        td = ss.parent_characteristic.name.titleize
+        td = ss.default_config
+        td = ss.survey_sets.count
+        td
+          = link_to "<i class='fa fa-pencil'></i>".html_safe, edit_admin_survey_series_path(ss)
+          = link_to "<i class='fa fa-trash'></i>".html_safe, admin_survey_series_path(ss),
+              method: :delete, data: { confirm: 'Delete?' }
+

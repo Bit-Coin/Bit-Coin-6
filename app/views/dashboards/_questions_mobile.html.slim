@@ -1,0 +1,39 @@
+
+- @score_reporter.questions.each do |question|
+  - personal_score = @score_reporter.personal_score_for_question(question)
+  - company_score = @score_reporter.company_score_for_question(question)
+  - self_score = @score_reporter.self_score_for_question(question)
+  .detail-area.question class="
+        #{personal_score[:scores][:overall] != 0.0 ? 'scored' : 'not-scored'} 
+        #{personal_score[:comments].any? ? 'with-comments' : 'no-comments'}
+        #{question.characteristic.name.titleize}
+      "
+    .detail-row
+      .row
+        .col-xs-11
+          .characteristic-label = question.characteristic.name.humanize.upcase
+          .char-name = personal_score[:question][:text]
+        .col-xs-1
+
+      .row
+        .col-xs-4
+          .box-score
+            .overall-score.personal-score-boxed = personal_score[:scores][:overall]
+        .col-xs-4
+          .box-score
+            .overall-score.self-score-boxed = self_score[:scores][:overall]
+        .col-xs-4
+          .box-score
+            .overall-score.company-score-boxed = company_score[:scores][:overall]
+      .row
+        .col-xs-4
+          .score-annotation YOUR AVG
+        .col-xs-4
+          .score-annotation SELF SCORE
+        .col-xs-4
+          .score-annotation COMPANY AVG
+
+      - if personal_score[:comments].any?
+        .row.comments style='padding-top: 9px;'
+          .col-xs-12
+            = render partial: 'comments', locals: {comments: personal_score[:comments]}

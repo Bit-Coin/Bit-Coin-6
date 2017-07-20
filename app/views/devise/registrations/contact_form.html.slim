@@ -1,0 +1,48 @@
+.row
+  .col-xs-12.col-md-6.col-md-offset-1
+
+    p Please provide some additional information and we'll 
+      contact you as soon as a spot opens up in our private beta.
+
+    p * required fields
+
+    = bootstrap_form_tag method: :put do |f|
+      = devise_error_messages!
+
+      = f.email_field :email, value: @user.email, label: 'Email*', disabled: true
+      = f.text_field :first_name, autofocus: true, label: 'First name*', wrapper_class: 'first_name'
+      = f.text_field :last_name, label: 'Last name*', wrapper_class: 'last_name'
+      = f.check_box :company_account, label: 'I may be interested in using Ripple in my company'
+      = f.text_field :company_name, label: 'Company name*', wrapper_class: 'company_name'
+      = f.submit "Contact me when you're ready >>", class: 'btn btn-default', id: 'submit'
+
+coffee:
+  $(document).on 'ready', ->
+    $('.company_name').hide()
+
+    $('#_company_account').on 'click', (e) ->
+      if e.currentTarget.checked
+        $('.company_name').show()
+      else
+        $('.company_name').hide()
+
+    $('#submit').on 'click', (e) ->
+      firstName = $('#first_name')
+      lastName = $('#last_name')
+      companyName = $('#company_name')
+      hasError = false
+
+      if firstName[0].value == ''
+        $('.first_name').addClass('has-error')
+        hasError = true
+
+      if lastName[0].value == ''
+        $('.last_name').addClass('has-error')
+        hasError = true
+
+      if $('#_company_account')[0].checked && companyName[0].value == ''
+        $('.company_name').addClass('has-error')
+        hasError = true
+
+      if hasError
+        e.preventDefault()

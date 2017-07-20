@@ -1,0 +1,28 @@
+p &nbsp;
+
+- @company.teams.includes(:members).each do |team|
+  h4 = "Team #{team.name}"
+  table.table.table-striped
+    thead: tr
+      th select team members
+    tbody
+      tr
+        td
+          = bootstrap_form_tag :url => assign_team_admin_company_path(@company), :layout => :inline, :html => {:class => "assign_team"} do |f|
+            = f.hidden_field :team_id, :value => team.id
+            = f.select(:user_id, @company.users.collect {|t| [t.full_name, t.id]}, {:selected => team.members.map(&:id), :hide_label => true}, {:multiple => true})
+            span &nbsp;
+            = f.submit 'Save', :class => 'btn btn-sm btn-success'
+
+p &nbsp;
+
+.well
+  = bootstrap_form_tag :url => create_team_admin_company_path(@company) do |f|
+    .row
+      .col-xs-12.col-md-6
+        = f.text_field :name, :label => 'New team name'
+    = f.submit 'Create New Team', :class => 'btn btn-success'
+
+javascript:
+  $(".assign_team .form-control").select2();
+  $(".no_assign_team .form-control").select2();

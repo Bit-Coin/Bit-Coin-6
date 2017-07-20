@@ -1,0 +1,32 @@
+
+// Main Colors
+
+$ripple-blue-1: rgb(24, 190, 217); /* lightest */
+$ripple-blue-2: rgb(8, 78, 90); /* teal */
+
+$ripple-green:  rgb(0, 197, 46); /* bootstrap "success" */
+$ripple-gold: rgb(220, 150, 50); /* warning */
+$ripple-red: rgb(190, 13, 13); /* error and/or big fun */
+
+$ripple-grey-1: rgb(221, 234, 239); /* lightest */
+$ripple-grey-2: rgb(111, 147, 165); /* mids */
+$ripple-grey-3: rgb(0, 15, 25); /* black */
+
+
+// Secondary
+
+$ripple-blue:   rgb(24, 190, 217);
+$ripple-pink:   #FF426F;
+$ripple-orange: #FFC83C;
+
+$ripple-dark-red: #360502;
+
+.ripple-green { color: $ripple-green; }
+.ripple-green-bg, .company { background-color: $ripple-green; }
+.ripple-blue { color: $ripple-blue; }
+.ripple-blue-bg, .cohort { background-color: $ripple-blue; }
+.ripple-pink { color: $ripple-pink; }
+.ripple-pink-bg, .team { background-color: $ripple-pink; }
+.ripple-orange { color: $ripple-orange; }
+.ripple-orange-bg, .you { background-color: $ripple-orange; }
+

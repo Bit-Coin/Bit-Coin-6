@@ -1,0 +1,24 @@
+p &nbsp;
+
+table.table.table-striped
+  thead
+    th Invoices
+    th Date
+    th Quant
+    th Price
+    th Total
+    th Paid
+  tbody          
+    - invoices.ordered.each do |invoice|
+      tr 
+        td = invoice.stripe_invoice_id
+        td = invoice.date.to_time.strftime("%b&nbsp;%d,&nbsp;%Y").html_safe
+        td = invoice.quantity
+        td = number_to_currency(invoice.subscription.plan.price)
+        td 
+          b = number_to_currency(invoice.total)
+        td
+          - if invoice.paid
+            span.label.label-success PAID
+          - else
+            span.label.label-default UNPAID

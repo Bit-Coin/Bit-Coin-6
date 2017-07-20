@@ -1,0 +1,17 @@
+Style:
+  Enabled: false
+
+Metrics:
+  Enabled: false
+
+Performance:
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Lint/IneffectiveAccessModifier:
+  Enabled: false
+
+Lint/UselessAccessModifier:
+  Enabled: false

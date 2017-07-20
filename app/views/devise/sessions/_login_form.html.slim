@@ -1,0 +1,7 @@
+= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .field = f.email_field :email, autofocus: true
+  .field = f.password_field :password, autocomplete: "off",
+            value: Rails.env.development? ? Security::DEMO_PASSWORD : nil
+  - if devise_mapping.rememberable?
+    .field = f.check_box :remember_me
+  .actions = f.submit "Sign In", :class => 'btn btn-success'

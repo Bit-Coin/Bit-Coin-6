@@ -1,0 +1,53 @@
+p &nbsp;
+
+.pull-right
+  - if @company.subscriptions.active
+    = link_to 'Upgrade Subscription', upgrade_admin_company_subscription_path(@company, @company.subscriptions.active), :class => 'btn btn-success'
+  - else
+    = link_to 'New Subscription', new_admin_company_subscription_path(@company), :class => 'btn btn-success' 
+
+p &nbsp;
+
+table.table.table-striped
+  thead
+    th ID
+    th Plan
+    th State
+    th Start
+    th End
+    th Actions
+  tbody
+    - @company.subscriptions.ordered.each do |sub|
+      tr
+        td = sub.stripe_subscription_id || sub.id
+        td = sub.plan.name
+        td 
+          - if sub.active?
+            span.label.label-success ACTIVE
+          - else
+            span.label.label-default = sub.state.upcase
+        td = sub.start_at.to_date
+        td = (sub.end_at === Subscription::FOREVER) ? '' : sub.end_at.to_date
+        td
+          - if sub.active?
+            = link_to 'Edit', edit_admin_company_subscription_path(@company, sub), :class => 'btn btn-default'
+            span &nbsp; 
+            = link_to 'Cancel', admin_company_subscription_path(@company, sub), :class => 'btn btn-default', :method => 'DELETE'
+
+p &nbsp;
+
+table.table.table-striped
+  thead
+    th Date
+    th Plan
+    th Event
+    th Description
+  tbody          
+    - @company.subscription_events.ordered.each do |se|
+      tr 
+        td = se.created_at.to_date
+        td = se.eventable.plan.name
+        td = se.name
+        td = se.body['description']
+          
+          

@@ -1,0 +1,13 @@
+- if current_user.test_driver?
+  a.navbar-brand.js-navbar-brand(
+    data-toggle='tooltip'
+    data-placement='right'
+    title="Test Drive mode contains random demo data, so don't get hung up about your scores.
+      To eliminate demo data, request to be upgraded to Pilot Mode at help@ripplecrew.com."
+    href="#{root_path}")
+    | RIPPLE
+    - if current_user.test_driver?
+      span.badge.badge-info TEST DRIVE
+
+- else
+  = link_to "RIPPLE", root_path, class: 'navbar-brand js-navbar-brand'

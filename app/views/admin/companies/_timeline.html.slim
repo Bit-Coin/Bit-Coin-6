@@ -1,0 +1,20 @@
+p &nbsp;
+    
+.row
+  .col-xs-12
+    h3 Most Recent Events
+    table.table.table-striped
+      thead
+        tr
+          th Time
+          th Eventable
+          th Event Name
+          th User
+      tbody
+        - @company.events.limit(1000).order(id: :desc).each do |e|
+          - if e.user.present?
+            tr
+              td = e.created_at
+              td = "#{e.eventable_type} #{e.eventable_id}"
+              td: b = e.name
+              td = e.user.full_name

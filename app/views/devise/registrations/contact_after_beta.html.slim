@@ -1,0 +1,13 @@
+.row
+  .col-xs-12.col-md-6.col-md-offset-1
+  
+    h1 Thank you for your interest in Ripple!
+    p We have recorded your information
+
+    div Name: #{@resource.full_name}
+    div Email: #{@resource.email}
+    - unless @resource.pending_company_name == 'Unknown'
+      div Company: #{@resource.pending_company_name}
+
+    p style='margin-top:20px;' You will receive an email from us with account setup
+      instructions once we're out of beta.

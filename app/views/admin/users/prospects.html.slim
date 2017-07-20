@@ -1,0 +1,29 @@
+.row
+  .col-xs-12
+    h1 Prospective Customers
+
+    p They wanna Ripple!!!
+
+    table.table.table-striped
+      thead
+        tr
+          th Email
+          th Name
+          th Company
+          th
+      tbody
+        - @prospects.each do |c|
+          tr
+            td 
+              b = c.email
+              div: i = c.confirmed_at.present? ? 'Confirmed' : 'Unconfirmed'
+            td = c.full_name
+            td = c.pending_company_name
+            td.pull-right
+              = link_to 'Delete', admin_user_path(c), class: 'btn btn-sm btn-default',
+                  method: :delete, data: { confirm: "Permanently delete #{c.email}?" }
+              | &nbsp;
+              = link_to 'Maven', new_company_admin_user_path(c), class: 'btn btn-sm btn-info'
+              | &nbsp;
+              = link_to 'Test Drive', test_drive_admin_user_path(c), class: 'btn btn-sm btn-primary'
+              | &nbsp;

@@ -1,0 +1,35 @@
+.pull-right
+  .checkbox
+    label
+      input type='checkbox' name='comments' style='margin-bottom:20px;'
+        = " Also provide written comments to #{@survey.current_survey.receiver.first_name}"
+
+div style='height:50px;' &nbsp;
+
+#ceu
+  p style='margin-bottom:20px;' 
+    | Your comment will appear exactly the way you type it.  And remember - to keep 
+      the comment anonymous don’t use your name or expressions/wording that might 
+      signal to #{@survey.current_survey.receiver.first_name} you are providing the 
+      comment.
+
+  - 6.times do |i|
+    - id = "comment-container-#{i}"
+    .comment-container id=id
+      .row
+        .row-same-height
+          .col-xs-11.col-xs-height
+            = bootstrap_form_tag url: '#' do |f|
+              = f.select "select-for-comment-#{i}", [], 
+                  {label: 'Comment relates to'}, {class: 'select-for-comment'}
+              = f.text_area "comment-#{i}", hide_label: true,
+                  class: 'ceu-text',
+                  placeholder: 'Comments (255 character limit, 5 character minimum)',
+                  rows: 2
+              .pull-right.char-count 255
+
+          .col-xs-1.col-xs-height style='font-size:200%;position:relative;'
+            div style='height:33px;' &nbsp;
+            div: i.fa.fa-trash
+            div style='position:absolute;bottom:0;': i.fa.fa-plus
+      hr

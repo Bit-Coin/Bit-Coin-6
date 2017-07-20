@@ -1,0 +1,31 @@
+- name: free_trial_1
+  id: 1
+  price: 0.00 
+  interval: month
+  stripe_plan: false
+  metered: false
+  description: "Company RippleCrew Free Trial"
+- name: company_1
+  id: 2
+  price: 4.00
+  interval: month
+  stripe_plan: true
+  stripe_id: company_1
+  metered: true
+  description: "Company RippleCrew Monthly Metered Usage"
+- name: company_2
+  id: 3
+  price: 100.00
+  interval: month
+  stripe_plan: true
+  stripe_id: company_2
+  metered: false
+  description: "Company RippleCrew Fixed Price"
+- name: enterprise_1
+  id: 4
+  price: 0.00
+  interval: year
+  stripe_plan: false
+  metered: false
+  description: "Enterprise RippleCrew"
+

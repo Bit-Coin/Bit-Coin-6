@@ -1,0 +1,12 @@
+nav.navbar.navbar-default.navbar-fixed-top role='navigation'
+  .container
+    .hidden-md.hidden-lg.hidden-sm.pull-right.collapsed
+      ul.nav.navbar-nav.navbar-right
+        li = link_to 'Sign Out', destroy_user_session_path, method: :delete
+
+    .navbar-header
+      = render partial: 'shared/navbar_brand'
+
+    .collapse.navbar-collapse#full-navbar
+      ul.nav.navbar-nav.navbar-right
+        li = link_to 'Sign Out', destroy_user_session_path, method: :delete

@@ -1,0 +1,40 @@
+# * * * * *  command to execute
+# │ │ │ │ │
+# │ │ │ │ │
+# │ │ │ │ └───── day of week (0 - 6) (0 to 6 are Sunday to Saturday, or use names; 7 is Sunday, the same as 0)
+# │ │ │ └────────── month (1 - 12)
+# │ │ └─────────────── day of month (1 - 31)
+# │ └──────────────────── hour (0 - 23)
+# └───────────────────────── min (0 - 59)
+
+# We schedule these jobs to run hourly so we can detect
+# failures more quickly.  Every job is responsible for
+# checking Time.now and checking in with Dead Man's Snitch.
+
+watch:
+  class: 'Job::Watch'
+  cron: '3-59/10 * * * *' # every ten minutes on the 3's
+  args:
+  description: 'Looks for bad stuff'
+  queue: 'watch'
+
+remind:
+  class: 'Job::Remind'
+  cron: '34 * * * *' # every hour
+  args:
+  description: 'Notifies and reminds'
+  queue: 'surveys'
+
+create_surveys:
+  class: 'Job::CreateSurveys'
+  cron: '*/05 * * * *' # every five minutes
+  args:
+  description: 'Creates surveys'
+  queue: 'surveys'
+
+update_scores:
+  class: 'Job::UpdateScores'
+  cron: '*/10 * * * *' # every five minutes
+  args:
+  description: 'Calculates scores'
+  queue: 'scores'

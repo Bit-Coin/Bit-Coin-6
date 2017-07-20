@@ -1,0 +1,16 @@
+p &nbsp;
+
+.row
+  .col-xs-12.col-md-6.col-md-offset-1
+    
+    h2 Forgot your company domain?
+    p Enter your email address and we will send you a reminder email with login links to all of your Ripple Crews.
+    p &nbsp;
+    
+    = bootstrap_form_tag :url => remind_login_domain_path do |f|
+      = f.text_field :email
+      = f.submit 'Send Reminder Email', :class => 'btn btn-success'
+ 
+    p &nbsp;
+   
+    = render "devise/shared/links"

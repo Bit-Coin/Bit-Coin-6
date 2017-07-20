@@ -1,0 +1,28 @@
+p &nbsp;
+
+- @company.teams.includes(:members).each do |team|
+  h4 = "Team #{team.name}"
+  table.table.table-striped
+    thead: tr
+      th ID
+      th User
+      th Teams
+    tbody
+      - team.members.each do |user|
+        tr
+          td = user.id
+          td
+            div = user.full_name
+            div
+              small = user.email
+          td
+            = bootstrap_form_tag :url => assign_team_manager_admin_company_path(@company), :layout => :inline, :html => {:class => "assign_team_manager"} do |f|
+              = f.hidden_field :user_id, :value => user.id
+              = f.select(:team_id, user.company.teams.collect {|t| [t.name, t.id]}, {:selected => user.manage_teams.map(&:id), :hide_label => true}, {:multiple => true})
+              span &nbsp;
+              = f.submit 'Save', :class => 'btn btn-sm btn-success'
+
+p &nbsp;
+
+javascript:
+  $(".assign_team_manager .form-control").select2();

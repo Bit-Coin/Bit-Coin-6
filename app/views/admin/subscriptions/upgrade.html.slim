@@ -1,0 +1,27 @@
+
+h2 Subscription Payment Information
+
+.row
+  .col-xs-12.col-md-6
+    p &nbsp;
+    
+    .well
+      
+      = bootstrap_form_for(@payment, :url => transact_admin_company_subscription_path(@company, @subscription), :html => {:id => 'payment-form'}) do |f|
+  
+        .payment-errors
+ 
+        = f.collection_select :plan_id, Plan.stripe_plans, :id, :name
+ 
+        = f.text_field :card_number, 'data-stripe' => 'number' 
+        = f.text_field :cvc, 'data-stripe' => 'cvc'
+        = f.text_field :expiration_month, 'data-stripe' => 'exp-month'
+        = f.text_field :expiration_year, 'data-stripe' => 'exp-year'
+  
+        button.btn.btn-success type="submit" Upgrade Subscription
+  
+
+script type="text/javascript" src="https://js.stripe.com/v2/"
+
+javascript:
+  Ripple.makeStripeForm('#payment-form')

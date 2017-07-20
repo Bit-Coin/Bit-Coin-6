@@ -1,0 +1,11 @@
+.row
+  .col-xs-12.col-md-6.col-md-offset-1
+
+    h1 Thanks for registering
+    p A confirmation message was sent to #{@user.unconfirmed_email}.  If you don't 
+      see it right away, check your spam/promotions/social folders too.
+    
+    p Please add ripplecrew.com to your address book in order to receive our
+      emails in the future.
+
+    = link_to "Didn't receive the email?", new_user_confirmation_path

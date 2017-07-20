@@ -1,0 +1,21 @@
+survey_set_name,survey_series_id,self_survey_set_name,self_survey_series_id,characteristic_name,response_set_id,other_phrased,self_phrased
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is ambitious,I am ambitious
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is broad-minded,I am broad-minded
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is caring,I am caring
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,leadership_credibility_index,1,#{receiver.first_name} is competent,I am competent
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is cooperative,I am cooperative
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is courageous,I am courageous
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is dependable,I am dependable
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is determined,I am determined
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is fair-minded,I am fair-minded
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,leadership_credibility_index,1,#{receiver.first_name} is forward-looking,I am forward-looking
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,leadership_credibility_index,1,#{receiver.first_name} is honest,I am honest
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is imaginative,I am imaginative
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is independent,I am independent
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,leadership_credibility_index,1,#{receiver.first_name} is inspiring,I am inspiring
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is intelligent,I am intelligent
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is loyal,I am loyal
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is mature,I am mature
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is self-controlled,I am self-controlled
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is straightforward,I am straightforward
+Effective Admired Leader 20,5,Effective Admired Leader 20,6,general_credibility_index,1,#{receiver.first_name} is supportive,I am supportive

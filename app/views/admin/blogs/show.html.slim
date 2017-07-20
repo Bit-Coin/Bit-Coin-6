@@ -1,0 +1,27 @@
+.row
+  .hidden-xs.hidden-sm.col-md-1
+  .col-xs-12.col-md-12
+    h2 = @blog.title
+    span = link_to 'Edit', edit_admin_blog_path(@blog)
+    span  | 
+    span = link_to 'Back', admin_blogs_path
+    .row
+      .col-md-2
+        strong Description:
+      .col-md-6 = raw @blog.description
+    .row
+      .col-md-2
+        strong Author:
+      .col-md-6 = @blog.author
+    .row
+      .col-md-2
+        strong Image:
+      .col-md-6 = @blog.image
+    .row
+      .col-md-2
+        strong Published at:
+      .col-md-6 = @blog.published_at
+    .row
+      .col-md-2
+        strong State:
+      .col-md-6 = @blog.state

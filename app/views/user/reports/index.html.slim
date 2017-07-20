@@ -1,0 +1,210 @@
+.container
+  h3= @user.try(:full_name)
+.hidden-xs.hidden-sm
+  .container
+    - @all_cm_scores.each do |score_name, scores|
+      - @scores = scores; @score_name = score_name # hack
+      .scores
+        - if scores
+          = render partial: 'scores_desktop'
+        - else
+          = render partial: 'no_data_yet'
+
+.hidden-md.hidden-lg
+  .mobile-light-container
+    .container
+      - @all_cm_scores.each do |score_name, scores|
+        - @scores = scores; @score_name = score_name # double hack
+        .scores
+          - if @scores
+            = render partial: 'scores_mobile'
+          - else
+            = render partial: 'no_data_yet'
+
+p &nbsp;
+p &nbsp;
+
+.container
+  .row
+    .col-xs-12
+      p Your Ripple Effect Score (RES) is the average of all responses received to all of the “Ripple 50” questions from all respondents. (The RES is not the average of the five competency scores). Each competency score is the average of all responses received to the 10 questions specific to that competency. A total of #{@user.company.members.count} colleagues completed surveys for you. #{@user.is_self_survey? ? "You also completed a self-survey" : "You have not yet completed your self-survey"}.
+
+
+    - personal_score = @que_score_reporter.personal_score_for_question(@highest_score_question)
+    - company_score = @que_score_reporter.company_score_for_question(@highest_score_question)
+    - self_score = @que_score_reporter.self_score_for_question(@highest_score_question)
+    .detail-area.question class="
+          #{personal_score[:scores][:overall] != 0.0 ? 'scored' : 'not-scored'}
+          #{personal_score[:comments].any? ? 'with-comments' : 'no-comments'}
+          #{@highest_score_question.characteristic.name.titleize}"
+      .detail-row
+        .row
+          .col-md-11
+            .characteristic-label Highest Average Score Question
+            .char-name = personal_score[:question][:text]
+          .col-md-1
+
+        .row
+          .col-md-2
+            .box-score
+              .overall-score.personal-score-boxed = personal_score[:scores][:overall]
+          .col-md-2
+            .box-score
+              .overall-score.self-score-boxed = self_score[:scores][:overall]
+          .col-md-2
+            .box-score
+              .overall-score.company-score-boxed = company_score[:scores][:overall]
+
+          - (0..4).each do |i|
+            .col-md-1
+              .histogram
+                .bar-bg style="height: #{bg_hei(personal_score[:scores][:hist][i][1])}px"
+                .bar-fg-personal style="height: #{fg_hei(personal_score[:scores][:hist][i][1])}px"
+              .histogram-spacer
+              .histogram
+                .bar-bg style="height: #{bg_hei(company_score[:scores][:hist][i][1])}px"
+                .bar-fg-company style="height: #{fg_hei(company_score[:scores][:hist][i][1])}px"
+
+          .col-md-1
+            .num-surveys-container
+              .num-surveys-num = personal_score[:scores][:number]
+        .row
+          .col-md-2
+            .score-annotation YOUR AVG
+          .col-md-2
+            .score-annotation SELF SCORE
+          .col-md-2
+            .score-annotation COMPANY AVG
+          .col-md-1
+            .score-annotation 1
+          .col-md-1
+            .score-annotation 2
+          .col-md-1
+            .score-annotation 3
+          .col-md-1
+            .score-annotation 4
+          .col-md-1
+            .score-annotation 5
+          .col-md-1
+            .score-annotation #&nbsp;RESPs
+
+
+    - personal_score = @que_score_reporter.personal_score_for_question(@lowest_score_question)
+    - company_score = @que_score_reporter.company_score_for_question(@lowest_score_question)
+    - self_score = @que_score_reporter.self_score_for_question(@lowest_score_question)
+    .detail-area.question class="
+          #{personal_score[:scores][:overall] != 0.0 ? 'scored' : 'not-scored'}
+          #{personal_score[:comments].any? ? 'with-comments' : 'no-comments'}
+          #{@lowest_score_question.characteristic.name.titleize}"
+      .detail-row
+        .row
+          .col-md-11
+            .characteristic-label Lowest Average Score Question
+            .char-name = personal_score[:question][:text]
+          .col-md-1
+
+        .row
+          .col-md-2
+            .box-score
+              .overall-score.personal-score-boxed = personal_score[:scores][:overall]
+          .col-md-2
+            .box-score
+              .overall-score.self-score-boxed = self_score[:scores][:overall]
+          .col-md-2
+            .box-score
+              .overall-score.company-score-boxed = company_score[:scores][:overall]
+
+          - (0..4).each do |i|
+            .col-md-1
+              .histogram
+                .bar-bg style="height: #{bg_hei(personal_score[:scores][:hist][i][1])}px"
+                .bar-fg-personal style="height: #{fg_hei(personal_score[:scores][:hist][i][1])}px"
+              .histogram-spacer
+              .histogram
+                .bar-bg style="height: #{bg_hei(company_score[:scores][:hist][i][1])}px"
+                .bar-fg-company style="height: #{fg_hei(company_score[:scores][:hist][i][1])}px"
+
+          .col-md-1
+            .num-surveys-container
+              .num-surveys-num = personal_score[:scores][:number]
+        .row
+          .col-md-2
+            .score-annotation YOUR AVG
+          .col-md-2
+            .score-annotation SELF SCORE
+          .col-md-2
+            .score-annotation COMPANY AVG
+          .col-md-1
+            .score-annotation 1
+          .col-md-1
+            .score-annotation 2
+          .col-md-1
+            .score-annotation 3
+          .col-md-1
+            .score-annotation 4
+          .col-md-1
+            .score-annotation 5
+          .col-md-1
+            .score-annotation #&nbsp;RESPs
+
+      - @all_cm_scores.each do |score_name, scores|
+        - if scores
+          - if scores[:personal].length == 1 # componentless characteristic
+            - components = [scores[:personal][0]]
+          - else
+            - components = scores[:personal][1..(scores[:personal].length - 1)]
+          - components.each_with_index do |c, i|
+            - if c[:characteristic][:description].present?
+              - description = c[:characteristic][:description].split(",")
+              - measure = description.take(3).join(",")
+              - perceive = (description - description.take(3)).join(",")
+            p
+              | The 10 questions which make up the 
+              b #{c[:characteristic][:name].titleize} 
+              | competency are designed to measure how #{measure} you are. Do your colleagues perceive you as #{perceive}?
+
+
+javascript:
+  $(function() {
+
+    $(".member_id_team").hide();
+
+    $(".team_id").change(function() {
+      var team_id = $(this).val();
+      $(".member select").hide();
+      if (team_id){
+        $("#member_id_team_"+team_id).show();
+      }
+      else{
+        $(".member_id_all").show();
+      }
+
+    });
+
+    $('form.search select.user_id').val("#{@user.id}");
+
+    $('#team-report').click(function(){
+      window.location="/user/team-reports"
+    });
+
+    var duration = 500;
+    $('button[data-action="show-details"]').click(function(e) {
+      var char = $(this).data('char');
+      $('.detail-area .detail-row[data-char="' + char + '"]').slideDown({
+        duration: duration,
+        start: function () {
+          $('.overview-area .score-row[data-char="' + char + '"]').hide(duration);
+        }
+      });
+    });
+
+    $('button[data-action="hide-details"]').click(function(e) {
+      var char = $(this).data('char');
+      $('.detail-area .detail-row[data-char="' + char + '"]').slideUp({
+        duration: duration,
+        start:  function () {
+          $('.overview-area .score-row[data-char="' + char + '"]').show(duration);
+        }
+      });
+    });
+  });

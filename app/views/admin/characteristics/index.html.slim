@@ -1,0 +1,28 @@
+h1 Competency Models
+
+.pull-right = link_to 'New', new_admin_characteristic_path, class: 'btn btn-success'
+
+p Competency Models are the top-level dashboard sections and can have
+  unique question sets and scoring methods.  Data from different
+  Competency Models are not combined in calculating scores.
+
+table.table.table-striped
+  thead
+    tr
+      th
+  tbody
+    - @competencies.order(:name).each do |c|
+      tr
+        td 
+          div 
+            .pull-right
+              = link_to "<i class='fa fa-pencil'></i>".html_safe, edit_admin_characteristic_path(c)
+              = link_to "<i class='fa fa-trash'></i>".html_safe, admin_characteristic_path(c),
+                  method: :delete, data: { confirm: 'Delete?' }
+            h3
+              i.fa class="#{c.icon}"
+              = c.name.titleize
+            - if c.components.any?
+              div Component characteristics: #{c.components.map { |m| m.name.titleize }.join(", ")}
+            div Score name: #{c.score_name}
+            div Survey name: #{c.survey_name}

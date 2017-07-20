@@ -1,0 +1,39 @@
+- def fg_wid(s) (s*20).round end
+- def bg_wid(s) (100 - s*20).round end
+- def fg_hei(s) (s*100).round end
+- def bg_hei(s) (100 - s*100).round end
+
+/ Handle custom parent_characteristics, with or without component
+/ characteristics.
+- parent = @scores[:personal][0]
+- if @scores[:personal].length == 1 # componentless characteristic
+  - components = [@scores[:personal][0]]
+- else
+  - components = @scores[:personal][1..(@scores[:personal].length - 1)]
+
+- if components.length > 0
+  .score-row.ripple-effect-row
+    .row
+      .col-xs-8
+        .char-name.ripple-effect-name style='white-space:normal;' = parent[:characteristic][:score_name].html_safe
+      .col-xs-4
+        .pull-right
+          .overall-score.ripple-effect-score = parent[:scores][:overall]
+- components.each_with_index do |c, i|
+  .score-row data-char="#{c[:characteristic][:name]}"
+    .row
+      .col-xs-8
+        - if components.length > 0
+          .char-name style='white-space:normal;' = c[:characteristic][:name].titleize
+        - else
+          .char-name style='white-space:normal;' = c[:characteristic][:score_name].html_safe
+      .col-xs-4
+        .pull-right
+          .overall-score = c[:scores][:overall]
+
+p &nbsp;
+
+.row
+  .col-xs-12.col-md-5 
+    p Your #{@scores[:personal][0][:characteristic][:score_name].html_safe} was last updated on #{@scores[:published_at].strftime("%b&nbsp;%d,&nbsp;%Y").html_safe} and is calculated based on #{@scores[:total_responses]} responses.  You can also view your detailed scores for #{link_to('each individual question', dashboard_questions_path(cm_id: @scores[:cm_id]))}.
+    

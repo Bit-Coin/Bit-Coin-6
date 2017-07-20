@@ -1,0 +1,10 @@
+p
+  b Enter your team's Ripple Crew domain
+
+= bootstrap_form_tag :url => new_user_session_path do |f|
+  = hidden_field_tag "user[email]", params[:user][:email]
+  = hidden_field_tag "user[password]", params[:user][:password]
+  = hidden_field_tag "user[remember_me]", params[:user][:remember_me]
+  = f.text_field :domain, :hide_label => true, :append => '.ripplecrew.com'
+  = f.submit 'Continue', :class => 'btn btn-success'
+ 

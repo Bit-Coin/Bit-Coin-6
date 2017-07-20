@@ -1,0 +1,23 @@
+---
+- id: 1
+  description: "Never-Always"
+  values:
+    never: 1,
+    rarely: 2,
+    sometimes: 3,
+    often: 4,
+    always: 5
+- id: 2
+  description: "Yes/No"
+  values:
+    yes: 1,
+    no: 0
+- id: 3
+  description: "Strongly Disagree - Strongly Agree"
+  values:
+    strongly disagree: 1,
+    disagree: 2,
+    no opinion: 3,
+    agree: 4,
+    strongly agree: 5
+    

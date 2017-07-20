@@ -1,0 +1,12 @@
+h1 Job Queues
+
+table.table.table-striped
+  thead
+    tr
+      th
+      th
+      th
+  tbody
+    - @queues.each do |q|
+      tr
+        td = q

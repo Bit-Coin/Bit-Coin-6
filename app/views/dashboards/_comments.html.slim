@@ -1,0 +1,16 @@
+- general = comments.pluck(:response_id).uniq == [nil]
+table.table.table-striped
+  thead
+    tr
+      th width='15%' Comment
+      - unless general
+        th style='text-align:center;' width='10%' Score
+      th &nbsp;
+  tbody
+    - comments.each do |c|
+      tr
+        td.comment-label = c.created_at.strftime '%m/%d/%Y %H:%M'
+        - unless general
+          td style='text-align:center;' = c.response.score
+        td style='padding-left:20px;'
+          .comment-text = c.text

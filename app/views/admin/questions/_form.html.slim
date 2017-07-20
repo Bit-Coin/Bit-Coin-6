@@ -1,0 +1,11 @@
+- char_select = @question.characteristics_for_select
+- if char_select.any?
+  = f.select :characteristic_id, char_select, include_blank: true
+- else
+  = f.hidden_field :characteristic_id, value: @question.parent_characteristic.id
+= f.text_field :other_phrased, 
+    help: "Use '\#{receiver.first_name}' in your question like \"\#{receiver.first_name} picks up what I'm puttin' down\"",
+    autofocus: true
+= f.text_field :self_phrased, help: "E.g. \"I pick up what others are puttin' down\""
+= f.select :response_set_id, @question.response_sets_for_select
+= f.submit

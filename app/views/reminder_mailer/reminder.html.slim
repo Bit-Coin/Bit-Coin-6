@@ -1,0 +1,19 @@
+h1 You have open surveys
+
+- if @user.surveys.open.for_others.any?
+  p Your colleagues are waiting for feedback from you:
+
+  - @user.surveys.open.for_others.order(created_at: :desc).each do |s|
+    div #{s.receiver.full_name} #{' -- new!' if s.new?}
+
+- if @user.surveys.open.for_self.any?
+  p
+    = link_to "Complete your self-survey", "#{root_url}surveys/#{@user.surveys.open.for_self.last.id}/edit"
+- if @user.personal_scores.any?
+  p Your Ripple Effect Score was last updated #{@user.decorate.scores_updated_day}.
+- if @user.surveys.open.for_others.count > 1
+  p
+    = link_to 'Respond to open surveys', "#{root_url}surveys/next"
+- elsif @user.surveys.open.for_others.count == 1
+  p
+    = link_to "Respond to #{@user.surveys.open.for_others.last.receiver.first_name}'s survey", "#{root_url}surveys/#{@user.surveys.open.for_others.last.id}/edit"

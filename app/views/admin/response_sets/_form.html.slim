@@ -1,0 +1,8 @@
+.row
+  .col-md-9.col-md-offset-1.col-md-xs-12
+
+    = bootstrap_form_for [:admin, @rs] do |f|
+      = f.text_field :description
+      = f.text_field :values, help: "Ruby string hash format like '{\"label1\"=>\"1\",\"label2\"=>\"2\"}'"
+      = f.submit "Cancel"
+      = f.submit "Save"

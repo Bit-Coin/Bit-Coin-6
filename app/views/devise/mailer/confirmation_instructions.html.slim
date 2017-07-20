@@ -1,0 +1,7 @@
+p Welcome #{@email}!
+
+p Thank you for signing up for a Ripple account!
+
+p In order to complete your registration, please click on the link below:
+
+p = link_to 'Confirm my account', user_confirmation_url(@resource, confirmation_token: @token, host: @resource.host)

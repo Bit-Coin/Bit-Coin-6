@@ -1,0 +1,14 @@
+table.table.table-striped
+  thead
+    tr
+      th Surveyee
+      th Email
+      th Due In
+      th &nbsp;
+  tbody
+    - @surveys.each do |s|
+      tr
+        td = link_to s.receiver.full_name, edit_survey_path(s)
+        td = link_to s.receiver.email, edit_survey_path(s)
+        td class="#{s.past_due_td_class}" = s.due_in
+        td = link_to 'Respond >>', edit_survey_path(s), class: 'btn btn-success'

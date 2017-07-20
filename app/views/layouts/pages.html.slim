@@ -1,0 +1,25 @@
+doctype html
+html.full
+  head
+    title Ripple
+    = favicon_link_tag 'favicon.ico'
+    = favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png'
+    = favicon_link_tag 'apple-touch-icon-precomposed.png', rel: 'apple-touch-icon-precomposed', type: 'image/png'
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'pages'
+    = csrf_meta_tags
+    
+  body class="#{controller_name} #{action_name}"
+    .container
+      - if Ripple::CompanyContext.is_set? && current_user && tokenized?
+        = render 'shared/tokenized_navbar'
+      - elsif Ripple::CompanyContext.is_set? && current_user
+        = render 'shared/app_navbar'
+      - else
+        = render 'shared/public_navbar'
+    
+    = yield
+    
+    .container
+      = render 'shared/footer'

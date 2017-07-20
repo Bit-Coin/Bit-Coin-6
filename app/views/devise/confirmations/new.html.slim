@@ -1,0 +1,12 @@
+.row
+  .col-xs-12
+    h2 Resend confirmation instructions
+
+  .col-xs-12.col-md-6.col-md-offset-1
+    = bootstrap_form_for(resource, as: resource_name, url: user_confirmation_path(resource_name), html: { method: :post }) do |f|
+
+      /= devise_error_messages!
+      = f.email_field :email, autofocus: true, label: 'Your email'
+      = f.submit "Try again"
+
+    = render "devise/shared/links"

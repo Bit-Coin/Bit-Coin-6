@@ -1,0 +1,12 @@
+h1 Add new Maven to #{@company.name}
+
+.row
+  .col-md-6.col-md-offset-1.col-xs-12
+    = bootstrap_form_tag :url => update_maven_admin_companies_path(company_id: @company.id), :layout => :inline, :html => {:class => "no_assign_team"} do |f|
+      = f.select(:id, @company.users.active.collect {|u| [u.full_name, u.id]}, {:include_blank => true, :hide_label => true}, {:multiple => false})
+      span &nbsp;
+      = f.submit 'Save', :class => 'btn btn-sm btn-success'
+
+// Gotta set JS vars this way.  Can't interpolate instance vars in coffescript
+javascript:
+  company_id = "#{@company.id}"

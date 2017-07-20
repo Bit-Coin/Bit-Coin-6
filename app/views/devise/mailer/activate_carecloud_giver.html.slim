@@ -1,0 +1,24 @@
+- company_at_name = @user.company.decorate.name_for_emails({:strip_trailing_period => true, :prepend_at => true})
+- company_name = @user.company.decorate.name_for_emails({:strip_trailing_period => true, :prepend_at => false})
+- subj_full_name = @user.company.maven.full_name
+- subj_first_name = @user.company.maven.first_name
+
+p Dear #{@user.first_name}, 
+
+p You have been chosen to participate in a pilot program using Ripple#{company_at_name} to provide feedback for #{subj_full_name}.
+
+p Ripple improves employee self-awareness by enabling authentic and timely feedback among co-workers via web-based surveys. The goal of this project is to better understand how #{subj_first_name} is perceived by colleagues.
+
+p Your feedback for #{subj_first_name} will be gathered through two surveys: a standard 50-question Ripple Reflection Survey, and a customized 15-question survey created by#{company_name}. The process to complete these surveys is quick and easy. Your feedback will be completely anonymous.
+
+p To get started, simply click the link below (you may need to paste it into your browser), choose your account password, and complete your surveys.
+
+- url = edit_user_password_url(@user, reset_password_token: @token, host: @user.host)
+pre #{url}
+
+p If you get interrupted while completing a survey, your responses will be saved. You can always return to the survey by using your email and password to log back in at <a href="http://www.ripplecrew.com" target="_blank">www.ripplecrew.com</a>.
+
+p Should you experience any problems or have any questions about Ripple, do not hesitate to email us at <a href="mailto:support@ripplecrew.com">support@ripplecrew.com</a>.  A member of the Ripple team will quickly assist you.
+
+p Thank you,
+p Ripple Analytics

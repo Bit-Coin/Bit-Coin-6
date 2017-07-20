@@ -1,0 +1,27 @@
+p &nbsp;
+h2 Sample Ripple Reflection Survey &trade;
+
+.row
+  .col-xs-12.col-md-6
+    p &nbsp;
+    p Approximately every month, each of your respondents will receive a survey for you. 
+      Each month the questions will be slightly different.
+    p All responses are on a 1-5 scale ('Never' -> 'Always') and always anonymous.
+    p Each survey question contributes to your Reflection Score for one of the Big 5 behavioral characteristics.
+    p This sample survey shows a representative set of questions.
+
+    p = link_to 'Go back to inviting feedback', manage_invitations_path
+
+  .col-xs-12.col-md-6 
+    form.sample-survey
+      - SurveySet.active.first.questions.each do |q|        
+        div.survey-question = q.other_phrased.gsub('#{receiver.first_name}', current_user.first_name)
+        .btn-group.btn-group-justified aria-label="..." role="group"
+          - q.response_set.ordered_values.each do |key, value|
+            .btn-group role="group" style='padding-top:10px;'
+              button.btn.btn-default.response-button type="button"
+                div = key
+                div = value
+                      
+      p &nbsp;
+      p &nbsp;

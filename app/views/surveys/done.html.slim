@@ -1,0 +1,34 @@
+- if current_user.unregistered_giver?
+  .row
+    .col-md-6
+      h1 Thanks.
+      p Thanks for completing all your surveys! Would you like to ask your 
+        colleagues to give honest, anonymous feedback about you?  All we 
+        need is a little bit more information about you so that you can 
+        start inviting people to join your own Ripple crew.
+
+      = bootstrap_form_tag url: register_rippler_path(id: current_user.id), method: :put do |f|
+        = f.text_field :email, value: current_user.email, disabled: true
+        = f.text_field :company_name, value: current_user.company.name, disabled: true
+        = f.text_field :first_name, value: current_user.first_name, autofocus: true
+        = f.text_field :last_name, value: current_user.last_name
+        = f.password_field :password
+        = f.password_field :password_confirmation
+        = f.submit 'Start Rippling >>'
+
+
+- else # rippler
+  .row
+    .col-md-6
+      h1 Thank you!
+      h3 You have no open #{survey_name.pluralize} to complete at this time.
+
+      - if current_user.self_surveys.any?
+        p Completing your self-survey will give you a sense for how your perceptions of your own strengths and weaknesses compare to those of your colleagues.  Your self-survey scores don't count toward your overall scores, but you can include them on your Dashboard as a benchmark.
+        p = link_to 'Complete Self-Surveys', 
+            self_survey_path(user_email: current_user.email, user_token: current_user.authentication_token), 
+            class: 'btn btn-lg btn-primary'
+
+      - unless current_user.company.settings[:consultant_mode]
+        p Why not invite some of your colleagues to start Rippling? The more people who give and receive feedback, the more accurate and valuable everyone's Ripplecrew becomes.
+        p: a.btn.btn-lg.btn-primary href="#{manage_invitations_path}" Manage Your Invitations 

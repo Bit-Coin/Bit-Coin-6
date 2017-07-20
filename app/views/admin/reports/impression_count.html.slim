@@ -1,0 +1,15 @@
+.div
+  .row
+  .col-xs-12
+    h2 Impressions
+    p &nbsp;
+    table.table.table-striped
+      thead
+        tr
+          th width="25%" Action Name
+          th width="25%" Impression count
+      tbody
+        tr
+          td = Impression.first.action_name
+          td = Impression.count
+

@@ -1,0 +1,23 @@
+.row
+  .col-sm-12
+    h1 Sign Up for Ripple
+    p &nbsp;
+    
+.row
+  .col-xs-12.col-md-6.col-md-offset-1
+    
+    = bootstrap_form_for @user, url: register_email_path do |f|
+      - unless @user.errors.empty?
+        .alert.alert-danger
+          p
+            b Sorry, we couldn't sign you up
+          ul
+            - @user.errors.full_messages.each do |e|
+              li = e
+
+
+      p.help_text Try Ripple for FREE! No credit card required. Signup using your email and we'll contact you to setup your free account.
+
+      = f.email_field :email, autofocus: true
+      = f.email_field :email_confirmation, label: 'Confirm email'
+      = f.submit 'Sign Up', class: 'btn btn-success'

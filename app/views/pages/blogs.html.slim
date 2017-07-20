@@ -1,0 +1,21 @@
+.container.foreground.padded-for-navbar
+  .row
+   	- @blogs.each do |blog|
+      .post-outer
+        .post.index
+          .block-image
+            .thumb = link_to image_tag(blog.image), blog_path(blog)
+          article
+            font.retitle
+              h2.post-title.entry-title = link_to blog.title, blog_path(blog)
+            .date-header
+              #meta-post
+                a.timestamp-link href="#{blog_path(blog)}"
+                  abbr data-toggle="tooltip" data-placement="right" title="#{blog.published_at.strftime('%B %d, %Y')}" = blog.published_at.strftime('%B %d, %Y')
+                .resumo
+                  span = raw blog.description.truncate(300)
+
+javascript:
+   $(function(){
+    $("[data-toggle = 'tooltip']").tooltip();
+  });

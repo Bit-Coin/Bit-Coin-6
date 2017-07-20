@@ -1,0 +1,19 @@
+- submit_url = @blog.id.present? ? "/admin/blogs/#{@blog.id}" : "/admin/blogs"
+= bootstrap_form_for(@blog, url: submit_url, html: { multipart: true }) do |f|
+  - if @blog.errors.any?
+    #error_explanation
+      h2 #{pluralize(@blog.errors.count, "error")} prohibited this blog from being saved:
+      ul
+        - @blog.errors.full_messages.each do |message|
+          li = message
+  = f.text_field :title
+  = f.text_area :description, :class => 'ckeditor'
+  = f.text_field :author
+  = f.file_field :image
+  = f.datetime_select :published_at
+  = f.select :state, ["active", "inactive"]
+  = f.submit class: 'btn btn-success'
+javascript:
+  $('.ckeditor').ckeditor({
+    // optional config
+  });

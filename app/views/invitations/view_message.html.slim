@@ -1,0 +1,40 @@
+.row
+  .col-sm-12
+    p <i>This is the email your colleagues will receive inviting them to
+         give feedback:</i>
+
+.row
+  .col-sm-12
+    div From: <b>#{current_user.email}</b>
+    div To: <b>#{Faker::Internet.email}</b>
+
+    div style='margin-top:20px;' Subject:
+    p <b>Asking for feedback</b>
+
+    div
+      p Ever wonder what co-workers think about you but never say?  Frustrated with the antiquated evaluation 
+        process at your office?  Want timely, objective and honest information about how you are perceived at 
+        work?
+
+      p You’re not alone.  Your colleagues have answered these questions and are taking control of the 
+        employee review, analysis and evaluation process.  This is accomplished by joining RippleCrew.  
+
+      p A fellow colleague who has recently joined RippleCrew has recommended you join too for the following 
+        reasons: 
+
+      ol
+        li <b>Revolutionary.</b>  For the first time ever, RippleCrew members will see how they are 
+           perceived by those they work with – within and outside your company.
+
+        li <b>Anonymous.</b>  All of the information provided remains completely anonymous.  
+           Anonymity is Ripple’s #1 priority – without it, genuine and honest opinions cannot be shared.
+
+        li <b>Quick.</b> As a RippleCrew member, you will be asked to complete Ripple Reflection 
+           Surveys that will take no more than 25 seconds to complete and will provide you and co-workers with 
+           invaluable feedback.
+
+      p It’s easy to get started – click the button below:
+
+    = link_to 'Start Rippling!', '#', class: 'btn btn-lg btn-success', disabled: true
+
+    div style='margin-top:20px;' = link_to '<< Back', '/invitations/manage'

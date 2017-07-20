@@ -1,0 +1,17 @@
+- company_at_name = @user.company.decorate.name_for_emails({:strip_trailing_period => true, :prepend_at => false})
+
+p Dear #{@user.first_name}, 
+
+p Thank you for participating in the Ripple pilot at#{company_at_name}.
+
+p To get started, simply click the link below (you may need to paste it into your browser), choose your account password, and complete your self-survey. Once all of your colleagues have completed their surveys, you will be able to see your results (along with your self-survey scores) on your personal dashboard.
+
+- url = edit_user_password_url(@user, reset_password_token: @token, host: @user.host)
+pre #{url}
+
+p If you get interrupted while completing the survey, your responses will be saved. You can always return to the survey by using your email and password to log back in at <a href="http://www.ripplecrew.com" target="_blank">www.ripplercrew.com</a>.
+
+p Should you experience any problems or have any questions about Ripple, do not hesitate to email us at <a href = "mailto:support@ripplecrew.com">support@ripplecrew.com</a>.  A member of the Ripple team will quickly assist you.
+
+p Thank you,
+p Ripple Analytics

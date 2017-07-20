@@ -1,0 +1,31 @@
+.row
+  .hidden-xs.hidden-sm.col-md-1
+  .col-xs-12.col-md-6
+    h2 Update Profile
+    a href="/admin/users/edit_password/#{@user.id}" Change Password
+    p &nbsp;
+    
+    = bootstrap_form_for(@user, :url => "/admin/users/update", :html => { :method => :patch }) do |f|
+      - unless @user.errors.empty?
+        .alert.alert-danger
+          p
+            b Sorry, we couldn't update your profile
+          ul
+            - @user.errors.full_messages.each do |e|
+              li = e
+      
+      = f.hidden_field :user_id, :value => @user.id
+      = f.email_field :email, :disabled => true
+      - if @user.company.present?
+        = f.text_field :company, :value => @user.company.name, :disabled => true
+      = f.text_field :first_name
+      = f.text_field :last_name
+      - if @user.company.present?
+        = f.select(:team, @user.company.teams.map {|t| [t.name, t.id]}, {:selected => @user.manage_teams.map(&:id), :label => "Team Manager"}, {:multiple => true})
+      = f.submit "Update", :class => 'btn btn-success'
+  
+  .hidden-xs.hidden-sm.col-md-5
+
+
+javascript:
+  $( "#user_team" ).select2();

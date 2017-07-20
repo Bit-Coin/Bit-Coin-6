@@ -1,0 +1,156 @@
+p &nbsp;
+- @company.subscriptions.active_state.each do |sub|
+
+  h4 #{sub.plan.description} (#{sub.plan.name})
+  div #{number_to_currency(sub.plan.price)}/rippler/#{sub.plan.interval}, start_at: #{sub.start_at.to_date} end_at: #{sub.end_at.to_date}
+  - if sub.active?
+    span.label.label-success ACTIVE
+  - else
+    span.label.label-primary = sub.state.upcase
+
+  table.table.table-striped
+    thead: tr
+      th ID
+      th User
+      th Team
+      th Roles
+      th Period
+      th Last Login
+      th &nbsp;
+      th Access Development Tools
+      th Development Tools Info
+      th State
+    tbody
+      - sub.subscription_users.each do |su|
+        - if su.user.present?
+          tr
+            td = su.user.id
+            td
+              div
+                b = su.user.full_name
+                - if su.user.test_driver?
+                  | &nbsp;
+                  span.label.label-info Test Driver
+              div
+                small = su.user.email
+            td
+              div = su.user.teams.collect(&:name).join(", ") rescue ''
+              div
+                small = "#{su.user.type.humanize.upcase} / #{su.user.state.humanize.upcase}"
+            td
+              - su.user.user_roles.includes(:role).each do |ur|
+                div: small = " #{ur.surveyable_type} #{ur.role.name}".upcase
+            td
+              div
+                small = su.start_at.strftime("%b&nbsp;%d,&nbsp;%Y").html_safe
+              - if su.end_at != Subscription::FOREVER
+                small &nbsp; to &nbsp;
+                small = su.end_at.strftime("%b&nbsp;%d,&nbsp;%Y").html_safe
+            td
+              - if su.user.last_sign_in_at
+                small = su.user.last_sign_in_at.strftime("%b&nbsp;%d,&nbsp;%Y %H:%M").html_safe
+            td
+              = link_to 'Proxy', become_proxy_path(su.user.id), method: :post
+            td.text-center
+              = check_box_tag :access_development_tools, su.user.access_development_tools, su.user.access_development_tools, class: "dev_tools", data_id: su.user.id
+
+            td
+              button#openBtn.btn.btn-default.dev-tools-info data-toggle="modal" href="#myModal" data-user= "#{su.user.development_tools_info.to_json}" Show
+
+            td
+              = bootstrap_form_tag :url => change_user_state_admin_company_path(@company), :layout => :inline, :html => {:class => "assign_team_manager"} do |f|
+                = f.hidden_field :user_id, :value => su.user.id
+                = f.select(:state, User::STATES, {:selected => su.user.state, :hide_label => true}, {:multiple => false})
+                = f.submit 'Save', :class => 'btn btn-sm btn-success'
+
+
+
+  h4 Unsubscribed Users
+
+  table.table.table-striped
+    thead: tr
+      th ID
+      th User
+      th Type
+      th State
+      th Last Login
+      th &nbsp;
+    tbody
+      - @company.users.not_rippler.each do |user|
+        tr
+          td = user.id
+          td
+            div
+              b = user.full_name
+            div.small = user.email
+          td = user.type.humanize.capitalize
+          td = user.state.humanize.capitalize
+          td
+            - if user.last_sign_in_at
+              small = user.last_sign_in_at.strftime("%b&nbsp;%d,&nbsp;%Y %H:%M").html_safe
+          td
+            - if user.rippler?
+              = link_to 'Proxy', become_proxy_path(user.id), method: :post
+            - else
+              | N/A
+p &nbsp;
+
+h3 Bulk Add Users
+
+p Paste a CSV file of new users to create many new users at once. The users will be activated immediately, and notified by email.
+
+= bootstrap_form_tag :url => bulk_create_users_admin_company_path(@company) do |f|
+  .row
+    .col-xs-12.col-md-6
+      = f.text_area :csv, :label => 'CSV File', :placeholder => 'first_name,last_name,email,start_date,department,sex,age', :rows => 6
+    .col-xs-12.col-md-6
+      = f.select :team_id, @company.teams.collect {|p| [ p.name, p.id ] }, :include_blank => true, :label => 'Team'
+      = f.check_box :connect_maven, :label => 'Connect New Users to Maven/Team Manager'
+      = f.check_box :connect_all, :label => 'Connect All Users'
+  = f.submit 'Create Users', :class => 'btn btn-success'
+
+#myModal.modal.fade
+  .modal-dialog style="left:0;"
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"  ×
+        h3.modal-title Development Tools Info.
+      .modal-body
+        h5.text-center Hello. #{current_admin.full_name}
+        table#tblGrid.table.table-striped
+          thead#tblHead
+            tr
+              th Name
+              th visit Count
+          tbody
+
+        .form-group
+          .clearfix
+      .modal-footer
+        button.btn.btn-default data-dismiss="modal" type="button"  Close
+    /! /.modal-content
+  /! /.modal-dialog
+/! /.modal
+
+javascript:
+  $(function() {
+    $('.table-striped').on('click', '.dev_tools', function(){
+      var id = $(this).attr('data_id');
+      $.ajax({
+        url: '/admin/companies/update_development_tools',
+        method: 'post',
+        data: {
+          id: id
+        }
+      })
+    })
+
+    $('.dev-tools-info').on('click', function(){
+      var data = $(this).attr('data-user')
+      tbody = $('#tblGrid tbody').html('')
+      $.each(JSON.parse(data),function(key,value){
+        tbody.append("<tr><td>"+ key +"</td><td>"+ value +"</td></tr>");
+      })
+    })
+
+  });

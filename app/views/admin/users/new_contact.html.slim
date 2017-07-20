@@ -1,0 +1,52 @@
+.row
+  .col-xs-12
+    h1 Create New Prospect
+    p No email will be sent so make sure you get the prospect's information correct
+
+  .col-xs-12.col-md-6.col-md-offset-1
+    = bootstrap_form_tag url: "/admin/users/create_contact" do |f|
+      = f.text_field :first_name, label: 'First Name', autofocus: true
+      = f.text_field :last_name, label: 'Last Name'
+      = f.text_field :pending_company_name, label: 'Company Name'
+      = f.email_field :email, label: 'Email'
+      = f.email_field :email_conf, label: 'Confirm Email (must match)'
+
+      div &nbsp;
+      = f.submit 'Create Prospect', class: 'btn btn-success', id: 'submit'
+
+coffee:
+    $('#submit').on 'click', (e) ->
+      firstName = $('#first_name')
+      lastName = $('#last_name')
+      pendingCompanyName = $('#pending_company_name')
+      email1 = $('#email')
+      email2 = $('#email_conf')
+      hasError = false
+
+      if firstName[0].value == ''
+        $('.first_name').addClass('has-error')
+        hasError = true
+
+      if lastName[0].value == ''
+        $('.last_name').addClass('has-error')
+        hasError = true
+
+      if pendingCompanyName[0].value == ''
+        $('.pending_company_name').addClass('has-error')
+        hasError = true
+
+      if email1[0].value == ''
+        $('.email').addClass('has-error')
+        hasError = true
+
+      if email2[0].value == ''
+        $('.email').addClass('has-error')
+        hasError = true
+
+      if email1[0].value != email2[0].value
+        $('.email').addClass('has-error')
+        hasError = true
+
+      if hasError
+        alert('Both first and last names must be filled out, a company name must be specified, and email addresses must match')
+        e.preventDefault()

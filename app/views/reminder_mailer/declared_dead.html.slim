@@ -1,0 +1,4 @@
+p Ripple only works if users give timely and genuine feedback.  Your Ripple account has been inactive for
+  #{@user.company.settings[:weeks_until_invitations_expire] * 7} days.  Your co-workers want you to participate but we realize sometimes events occur (travel, projects, personal) that could result in prolonged inactivity.  If you’ve experience such an event, we look forward to hearing from you in the future.  If you’d like to start giving valuable feedback now, please click
+= link_to 'Give Feedback', "#{root_url}surveys/next"
+

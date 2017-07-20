@@ -1,0 +1,94 @@
+{
+  "object": "customer",
+  "created": 1429542680,
+  "id": "cus_65sJWAifKqNnhS",
+  "livemode": false,
+  "description": "Acme Demo, Inc.",
+  "email": "demo+ceo@ripplecrew.com",
+  "delinquent": false,
+  "metadata": {
+    "company_id": "1",
+    "owner_id": "1",
+    "first_name": "Daryl",
+    "last_name": "Boxwood"
+  },
+  "subscriptions": {
+    "object": "list",
+    "total_count": 1,
+    "has_more": false,
+    "url": "/v1/customers/cus_65sJWAifKqNnhS/subscriptions",
+    "data": [
+      {
+        "id": "sub_65sJapzV7S7MAX",
+        "plan": {
+          "interval": "month",
+          "name": "Company RippleCrew",
+          "created": 1429050134,
+          "amount": 400,
+          "currency": "usd",
+          "id": "company_1",
+          "object": "plan",
+          "livemode": false,
+          "interval_count": 1,
+          "trial_period_days": null,
+          "metadata": {
+          },
+          "statement_descriptor": "Ripple Analytics Inc"
+        },
+        "object": "subscription",
+        "start": 1429542680,
+        "status": "active",
+        "customer": "cus_65sJWAifKqNnhS",
+        "cancel_at_period_end": false,
+        "current_period_start": 1429542680,
+        "current_period_end": 1432134680,
+        "ended_at": null,
+        "trial_start": null,
+        "trial_end": null,
+        "canceled_at": null,
+        "quantity": 7,
+        "application_fee_percent": null,
+        "discount": null,
+        "tax_percent": null,
+        "metadata": {
+        }
+      }
+    ]
+  },
+  "discount": null,
+  "account_balance": 0,
+  "currency": "usd",
+  "sources": {
+    "object": "list",
+    "total_count": 1,
+    "has_more": false,
+    "url": "/v1/customers/cus_65sJWAifKqNnhS/sources",
+    "data": [
+      {
+        "id": "card_15tgyUAJkB8dJrsDuymCFYxc",
+        "object": "card",
+        "last4": "4242",
+        "brand": "Visa",
+        "funding": "credit",
+        "exp_month": 10,
+        "exp_year": 2019,
+        "country": "US",
+        "name": null,
+        "address_line1": null,
+        "address_line2": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "address_country": null,
+        "cvc_check": "pass",
+        "address_line1_check": null,
+        "address_zip_check": null,
+        "dynamic_last4": null,
+        "metadata": {
+        },
+        "customer": "cus_65sJWAifKqNnhS"
+      }
+    ]
+  },
+  "default_source": "card_15tgyUAJkB8dJrsDuymCFYxc"
+}

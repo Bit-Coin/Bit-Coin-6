@@ -1,0 +1,33 @@
+.container.foreground.padded-for-navbar
+  .row
+    .col-md-8#main-wrapper
+      .main#main
+        .post-outer
+          .post
+            div itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting"
+              .post-head
+                h1.post-title.entry-title itemprop="name headline" = @blog.title
+              .post-meta
+                span.post-author.vcard
+                  span itemprop="name" = @blog.author
+                span.post-timestamp
+                  a.timestamp-link href="#{blog_path(@blog)}"
+                    abbr data-toggle="tooltip" data-placement="right" title="#{@blog.published_at.strftime('%B %d, %Y')}" = @blog.published_at.strftime('%B %d, %Y')
+              article
+                .post-body.entry-content
+                  = image_tag(@blog.image)
+                  p
+                  div = raw @blog.description
+    .col-md-4#sidebar-wrapper
+      .sidebar.ready-widget.section#sidebar2
+        .widget
+          .widget-title
+            h2.title Recent Posts
+          .widget-content
+            - Blog.all.each do |blog|
+              .row
+                .recentposts
+                  .col-md-4 = link_to image_tag(blog.image), blog_path(blog)
+                  .col-md-8
+                    .post-panel
+                      .rcp-title = link_to blog.title, blog_path(blog)

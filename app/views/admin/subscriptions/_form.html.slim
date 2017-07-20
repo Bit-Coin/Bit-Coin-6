@@ -1,0 +1,18 @@
+= bootstrap_form_for [:admin, @company, @subscription] do |f|  
+
+  - unless @subscription.errors.empty?
+    .alert.alert-danger
+      p
+        b Sorry, we couldn't save the subscription
+      ul
+        - @subscription.errors.full_messages.each do |e|
+          li = e
+
+  = f.collection_select :plan_id, Plan.all, :id, :name
+  = f.select :state, Subscription::STATES
+  = f.date_field :start_at
+  = f.date_field :end_at
+
+  = f.submit "Save", :class => 'btn btn-success'
+  
+  

@@ -1,0 +1,21 @@
+h1 Response Sets
+
+.pull-right = link_to "New", new_admin_response_set_path, class: 'btn btn-success'
+p Response Sets are the labels and numbers that define the range
+  of possible answers to a survey question.
+
+table.table.table-striped
+  thead
+    tr
+      th Description
+      th Values
+      th &nbsp;
+  tbody
+    - @response_sets.order(:description).each do |rs|
+      tr
+        td = rs.description
+        td = rs.values.to_s
+        td
+          = link_to "<i class='fa fa-pencil'></i>".html_safe, edit_admin_response_set_path(rs)
+          = link_to "<i class='fa fa-trash'></i>".html_safe, admin_response_set_path(rs),
+              method: :delete, data: { confirm: 'Delete?' }

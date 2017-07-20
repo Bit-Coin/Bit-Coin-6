@@ -1,0 +1,34 @@
+h1 Component Characteristics for #{@cm.name}
+
+.row
+  .col-md-8.col-md-offset-1
+    h4 Existing Component Characteristics
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          th Description
+          th &nbsp;
+      tbody
+        - @cm.components.each do |c|
+          tr
+            td = c.name
+            td = c.description
+            td
+              i.fa.fa-pencil
+              = link_to "<i class='fa fa-trash'></i>".html_safe, admin_characteristic_path(c),
+                  method: :delete, confirm: 'Delete?'
+
+.row
+  .col-md-6.col-md-offset-1.col-xs-12
+    = bootstrap_form_for [:admin, @cm.components.build] do |f|
+      h4 Add Component
+      = f.hidden_field :parent_characteristic_id, value: @cm.id
+      = f.text_field :name
+      = f.text_field :description
+
+      = submit_tag 'Cancel'
+      = submit_tag 'Add'
+
+      p &nbsp;
+      = link_to "Manage Questions", questions_admin_characteristic_path(@cm)

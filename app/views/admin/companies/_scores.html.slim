@@ -1,0 +1,40 @@
+p &nbsp;
+
+h3 Newest Published Company Scores 
+
+- if @company.main_scores_for_company.published.any?
+  h4 = @company.main_scores_for_company.published.last.published_at
+  table.table.table-striped
+    thead: tr
+      th Characteristic
+      th N
+      th Mean
+      th Median
+      th StdDev
+      th Mode
+      th Range
+      th Variance
+      th Q1
+      th Q2
+      th Q3
+      th Max
+      th Min
+
+    tbody
+      - @company.main_scores_for_company.published.order(published_at: :desc).each do |score|
+        tr
+          td = score.characteristic.name.upcase
+          td = score.number
+          td = '%.2f' % score.mean
+          td = score.median
+          td = '%.2f' % score.standard_deviation
+          td = score.mode
+          td = score.range
+          td = '%.2f' % score.variance
+          td = score.q1
+          td = score.q2
+          td = score.q3
+          td = score.max
+          td = score.min
+- else
+  p No scores for this company yet.

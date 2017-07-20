@@ -1,0 +1,69 @@
+.pull-right
+
+h1 = @company.name
+p &nbsp;
+
+div role="tabpanel" id="tabs"
+  ul class="nav nav-tabs" role="tablist"
+    li role="presentation" class="active"
+      a href="#users" role="tab" data-toggle="tab" Users
+    li role="presentation"
+      a href="#teams" role="tab" data-toggle="tab" Teams
+    li role="presentation"
+      a href="#team_managers" role="tab" data-toggle="tab" Team Managers
+    li role="presentation"
+      a href="#company_maven" role="tab" data-toggle="tab" Maven
+    li role="presentation"
+      a href="#executives" role="tab" data-toggle="tab" Executive
+    li role="presentation"
+      a href="#survey_plans" role="tab" data-toggle="tab" Survey Plans
+    li role="presentation"
+      a href="#subscriptions" role="tab" data-toggle="tab" Subscriptions
+    li role="presentation"
+      a href="#invoices" role="tab" data-toggle="tab" Invoices
+    li role="presentation"
+      a href="#survey_series" role="tab" data-toggle="tab" Survey Series
+    li role="presentation"
+      a href="#surveys" role="tab" data-toggle="tab" Surveys
+    li role="presentation"
+      a href="#scores" role="tab" data-toggle="tab" Scores
+    li role="presentation"
+      a href="#timeline" role="tab" data-toggle="tab" Timeline
+    li role="presentation"
+      a href="#settings" role="tab" data-toggle="tab" Settings
+    li role="presentation"
+      a href="#connect_users" role="tab" data-toggle="tab" Connect Users
+    li role="presentation"
+      a href="#generate_self_survey" role="tab" data-toggle="tab" Generate self survey
+
+  .tab-content
+    .tab-pane.active role="tabpanel" id="users"
+      = render :partial => 'admin/companies/users'
+    .tab-pane role="tabpanel" id="teams"
+      = render :partial => 'admin/companies/teams'
+    .tab-pane role="tabpanel" id="team_managers"
+      = render :partial => 'admin/companies/team_managers'
+    .tab-pane role="tabpanel" id="company_maven"
+      = render :partial => 'admin/companies/company_maven'
+    .tab-pane role="tabpanel" id="survey_plans"
+      = render :partial => 'admin/companies/survey_plans'
+    .tab-pane role="tabpanel" id="subscriptions"
+      = render :partial => 'admin/companies/subscriptions'
+    .tab-pane role="tabpanel" id="invoices"
+      = render :partial => 'admin/companies/invoices'
+    .tab-pane role="tabpanel" id="survey_series"
+      = render :partial => 'admin/companies/survey_series'
+    .tab-pane role="tabpanel" id="surveys"
+      = render :partial => 'admin/companies/surveys'
+    .tab-pane role="tabpanel" id="scores"
+      = render :partial => 'admin/companies/scores'
+    .tab-pane role="tabpanel" id="timeline"
+      = render :partial => 'admin/companies/timeline'
+    .tab-pane role="tabpanel" id="settings"
+      = render :partial => 'admin/companies/settings'
+    .tab-pane role="tabpanel" id="connect_users"
+      = render :partial => 'admin/companies/connect_users'
+    .tab-pane role="tabpanel" id="generate_self_survey"
+      = render :partial => 'admin/companies/generate_self_survey'
+    .tab-pane role="tabpanel" id="executives"
+      = render :partial => 'admin/companies/executives'

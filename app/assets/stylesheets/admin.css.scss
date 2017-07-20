@@ -1,0 +1,27 @@
+@import 'colors';
+@import 'admin-report';
+
+body.admin {
+  .header { 
+    font-weight: bold;
+    padding: 0px;
+    margin: 10px 0px 10px 0px;
+    border-bottom: 1px solid $ripple-grey-3;
+  }
+}
+
+body.messages {
+  .message {
+    margin: 10px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
+    border-bottom: 1px solid $ripple-grey-1;
+
+    .history {
+      margin-top: 10px;
+    }
+  }
+}
+
+.toggle.btn.btn-default{
+  width: 60% !important;
+}

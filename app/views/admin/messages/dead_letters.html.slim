@@ -1,0 +1,27 @@
+.row
+  .col-sm-12
+    h1 Dead Letters
+    p Bouncing and unsubscribed emails
+    div = link_to 'Sendgrid Activity Log', 'https://sendgrid.com/logs/index', target: '_blank'
+
+.row.header
+  .col-sm-1 id
+  .col-sm-2 created_at
+  .col-sm-3 uuid
+  .col-sm-2 sender
+  .col-sm-4 bouncing or unsubscribed recipient
+
+- @messages.each do |m|
+  .message
+    .row
+      .col-sm-1 = m.id
+      .col-sm-2 = m.created_at.to_s[0..15]
+      .col-sm-3 = m.uuid
+      .col-sm-2 style='word-break: break-all;' = m.sender
+      .col-sm-4 style='word-break: break-all;font-weight:bold;' = m.recipient
+
+    .row.history
+      .col-sm-12
+        ul
+          - m.events.order(created_at: :desc).each do |e|
+            li = e.type.upcase + ' ' + e.created_at.to_s

@@ -1,0 +1,15 @@
+.row
+  .col-xs-12
+    h3 System Events
+    table.table.table-striped
+      thead
+        tr
+          th Time
+          th Event Name
+          th Details
+      tbody
+        - @events.order(id: :desc).each do |e|
+          tr
+            td = e.created_at
+            td: b = e.name
+            td = e.body

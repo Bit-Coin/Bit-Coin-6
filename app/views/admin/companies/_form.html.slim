@@ -1,0 +1,25 @@
+.row
+  .col-sm-6
+    = bootstrap_form_for [:admin, @company] do |f|
+      = f.text_field :name
+      = f.text_field :domain
+      = f.text_field :ripple_api_key
+      = f.text_field :ripple_api_token
+      = f.submit class: 'btn btn-lg btn-success'
+
+- unless @company.id.blank?
+  hr
+  .row
+    .col-sm-6
+      .pull-right = link_to 'New', new_admin_team_path, class: 'btn btn-primary', disabled: true
+      h1 Teams for #{@company.name}
+
+      table.table.table-striped
+        thead
+          tr
+            th
+            th
+        tbody
+          - @company.teams.order(:name).each do |t|
+            tr
+              td = t.name

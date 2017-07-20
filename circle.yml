@@ -1,0 +1,8 @@
+machine:
+  hosts:
+    dev.ripplecrew.com: 127.0.0.1
+    acme.dev.ripplecrew.com: 127.0.0.1
+test:
+  override:
+    - bundle exec rake test:unit
+    - bundle exec rake test:features

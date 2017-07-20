@@ -1,0 +1,17 @@
+<div class='row'>
+<div class='col-xs-12 col-md-6 col-md-offset-1'>
+<h2>Forgot your password?</h2>
+
+<%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= flash_messages %>
+
+  <div class="field">
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Send me reset password instructions", :class => 'btn btn-success' %>
+  </div>
+<% end %>
+
+</div></div>

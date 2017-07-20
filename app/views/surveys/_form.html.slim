@@ -1,0 +1,34 @@
+- if @survey.current_survey.self_survey?
+  .self-survey-instructions
+    p Your self-survey scores will be compared to the feedback others give
+      about you, as well as your overall company averages. You can come back
+      to finish this survey at any time. Your answers are saved immediately, but
+      you can change them at any point up until you submit the entire survey.
+    p From time to time you will be asked to complete a new self-survey. When you
+      answer a question about yourself that you have answered before, the new
+      answer will replace your previous answer.
+
+hr
+- @survey.current_survey.responses.includes({question: :response_set}).order(:id).each do |r|
+
+  .question
+    .question-text id="question-for-response-#{r.id}"
+      - if @survey.current_survey.self_survey?
+        h4 = r.question.self_phrased + '.'
+      - else
+        - question = r.question.personalized_text_for(@survey.current_survey.receiver) + '.'
+        h4 = question
+        - @select_options << [question, r.id] # rather than building it twice
+
+    .btn-group.btn-group-justified aria-label="..." role="group"
+      - r.question.response_set.ordered_values.each do |key, value|
+        .btn-group role="group" style='padding-top:10px;'
+          button.btn.btn-default.response-button( class="#{key} #{response_button_class(r, value)}" 
+            type="button" id="#{r.id}_#{value}")
+            div = key
+            div = value
+
+  hr
+
+- if @survey.current_survey.config['allow_comments']
+  = render 'ceu'

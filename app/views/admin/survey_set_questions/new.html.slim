@@ -1,0 +1,13 @@
+h1 Link Question to Survey Set
+
+.row
+  .col-md-6.col-md-offset-1.col-xs-12
+    = bootstrap_form_for [:admin, @ssq] do |f|
+      = f.hidden_field :survey_set_id, value: @ssq.survey_set_id
+      = f.text_field :ss_name, value: @ssq.survey_set.survey_series.name, disabled: true,
+          label: 'Survey Series Name'
+      = f.text_field :sset_name, value: @ssq.survey_set.name, disabled: true, label: 'Survey Set Name'
+      - questions = @ssq.survey_set.survey_series.parent_characteristic.all_questions
+      = f.select :question_id, questions.order(:other_phrased).map { |q| [q.other_phrased, q.id] },
+          include_blank: true
+      = f.submit "Link"

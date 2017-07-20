@@ -1,0 +1,374 @@
+@import 'colors';
+
+.row.jumbotron {
+  background-color: #FFF6BF;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.widget {
+  border: 0px solid black;
+  position: relative;
+
+  .chart {
+    margin: 25px 0px 25px 0px;
+    padding-right: 40px;
+    vertical-align: top;
+    border: 0px solid black;
+
+    .description {
+      padding-bottom: 5px;
+      font-style: italic;
+    }
+  }
+  .swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 8px 0 0;
+  }
+  .label {
+    display: inline-block;
+  }
+  .line {
+    display: inline-block;
+    margin: 0 0 0 0px;
+  }
+  #legend {
+    text-align: center;
+  }
+  .text {
+    vertical-align: top;
+    .spacer { height: 20px; }
+  }
+}
+
+.rickshaw_legend {
+  background: none;
+  color: black;
+}
+
+.text-vertical {
+  /* Safari */
+  -webkit-transform: rotate(-90deg);
+
+  /* Firefox */
+  -moz-transform: rotate(-90deg);
+
+  /* IE */
+  -ms-transform: rotate(-90deg);
+
+  /* Opera */
+  -o-transform: rotate(-90deg);
+}
+
+#res {
+  th { color: white; }
+  td { width: 25%; font-weight: bold; }
+}
+
+#datatable {
+  th { font-size: 90%; }
+  td {
+    font-size: 90%;
+    text-align: right;
+  }
+  .component-row {
+    button {
+      width: 100%;
+      color: white;
+      border: 1px solid black;
+      background-color: #aaa;
+    }
+    .selected {
+      color: black;
+      background-color: #fff;
+    }
+  }
+}
+
+#chart {
+  .radar-chart-serie0 { stroke: $ripple-green; fill: $ripple-green;}
+  .radar-chart-serie1 { stroke: $ripple-blue; fill: $ripple-blue;}
+  .radar-chart-serie2 { stroke: $ripple-pink; fill: $ripple-pink;}
+  .radar-chart-serie3 { stroke: $ripple-orange; fill: $ripple-orange;}
+
+  .radar-chart-polygon0 { stroke: $ripple-green; fill: transparent; }
+  .radar-chart-polygon1 { stroke: $ripple-blue; fill: transparent; }
+  .radar-chart-polygon2 { stroke: $ripple-pink; fill: transparent; }
+  .radar-chart-polygon3 { stroke: $ripple-orange; fill: $ripple-orange; }
+}
+
+/* New */
+
+body {
+
+  nav.navbar.navbar-default {
+    margin-bottom: 0px;
+  }
+
+  .comments {
+    font-family: 'Lato';
+  }
+
+  .general-comments {
+    padding-top: 30px;
+    h1 {
+      color: $ripple-grey-3;
+      font-size: 26px;
+      font-family: 'Lato';
+      font-weight: 300;
+    }
+  }
+
+  .light-container, .white-container {
+    margin: 0px;
+    padding: 15px 10px 15px 10px;
+
+    p {
+      color: $ripple-grey-3;
+      font-family: 'Lato';
+    }
+    h3, h4, h5 {
+      font-family: 'Lato';
+      color: $ripple-grey-3;
+    }
+  }
+
+  .light-container {
+    background-color: $ripple-grey-1;
+  }
+
+  .white-container {
+    background-color: #ffffff;
+  }
+
+  .mobile-light-container {
+    margin: 0px;
+    padding: 5px;
+    background-color: $ripple-grey-1;
+  }
+
+  .scores {
+    padding: 20px 0px 20px 0px;
+    color: $ripple-grey-3;
+
+    .score-row {
+      height: 60px;
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+      margin: 0px 0px 3px 0px;
+    }
+
+    .ripple-effect-row {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .characteristic-label {
+      font-family: 'Lato';
+      color: $ripple-grey-2;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .char-name {
+      font-family: 'Lato';
+      color: $ripple-grey-3;
+      font-size: 24px;
+      font-weight: 300;
+      white-space: wrap;
+    }
+
+    .ripple-effect-name {
+      font-weight: 400;
+    }
+
+    .overall-score {
+      font-size: 32px;
+      font-weight: 400;
+    }
+
+    .ripple-effect-score {
+      font-weight: 700;
+    }
+
+    .gauge {
+      display: inline-block;
+      border-style: solid;
+      border-color: $ripple-grey-2;
+      border-width: 1px;
+      border-radius: 2px;
+      width: 100%;
+      height: 40px;
+
+      .bar-bg {
+        display: inline-block;
+        background-color: $ripple-grey-1;
+        height: 38px;
+      }
+      .bar-fg {
+        display: inline-block;
+        background-color: #ffcc33;
+        height: 38px;
+      }
+
+      .ripple-bar-bg {
+        display: inline-block;
+        background-color: $ripple-grey-1;
+        height: 38px;
+      }
+      .ripple-bar-fg {
+        display: inline-block;
+        background-color: $ripple-blue-1;
+        height: 38px;
+      }
+    }
+
+    .small {
+      margin: 10px 0px 0px 10px;
+    }
+
+  }
+
+  .detail-area {
+
+    .detail-row {
+      padding: 20px 0px 20px 0px;
+      color: $ripple-grey-3;
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 5px;
+      margin: 0px 0px 3px 0px;
+    }
+
+    .box-score {
+      text-align: center;
+      padding: 30px 0px 0px 0px;
+    }
+
+    .char-detail{
+      padding: 30px 0px 0px 0px;
+    }
+
+    .personal-score-boxed {
+      display: inline-block;
+      background-color: #ffcc33;
+      padding: 10px;
+      height: 65px;
+      border-radius: 3px;
+    }
+
+    .company-score-boxed {
+      display: inline-block;
+      background-color: #aaaaaa;
+      color: #ffffff;
+      padding: 10px;
+      height: 65px;
+      border-radius: 3px;
+    }
+
+    .self-score-boxed {
+      display: inline-block;
+      background-color: #ffffff;
+      color: #444444;
+      padding: 10px;
+      height: 65px;
+      border-radius: 3px;
+      border: solid 1px #444444;
+    }
+
+    .score-annotation {
+      font-size: 12px;
+      font-weight: bold;
+      padding-top: 10px;
+      text-align: center;
+      border-top: solid 1px $ripple-grey-3;
+    }
+
+    .histogram {
+      width: 20px;
+      display: inline-block;
+
+      .bar-bg {
+        width: 100%;
+      }
+
+      .bar-fg-personal {
+        width: 100%;
+        background-color: #ffcc33;
+      }
+
+      .bar-fg-company {
+        width: 100%;
+        background-color: #aaaaaa;
+      }
+    }
+
+    .histogram-spacer {
+      width: 5px;
+      display: inline-block;
+    }
+
+    .num-surveys-container {
+      height: 110px;
+      position: relative;
+
+      .num-surveys-num {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        bottom: 0px;
+        padding: 5px;
+        font-weight: bold;
+        color: #666666;
+      }
+    }
+  }
+
+  /* Mobile adjustments */
+
+  .mobile-light-container {
+    .scores {
+      .score-row, .ripple-effect-row {
+        padding: 5px 10px 5px 10px;
+        height: inherit;
+      }
+      .char-name {
+        font-size: 24px;
+        font-weight: 300;
+      }
+      .ripple-effect-name {
+        font-weight: 400;
+      }
+      .overall-score {
+        font-size: 24px;
+        color: $ripple-blue-2;
+      }
+    }
+    .small {
+      font-size: 11px;
+    }
+  }
+
+  .glyphicon.incdec{
+    font-size:14px;
+  }
+
+  .glyphicon-arrow-up{
+    color:green;
+  }
+
+  .glyphicon-arrow-down{
+    color:red;
+  }
+
+}
+
+#myModel
+{
+  .modal-dialog{
+    left: 0 !important;
+  }
+}
+

@@ -1,0 +1,8 @@
+p Great news! Ripple has gathered enough information to generate your initial Ripple Effect Score.   Your Ripple Effect Score (RES) is calculated using all the ratings given by all the people who have completed Reflection Surveys about you.  In short, your colleagues want you to know how they perceive you.  Click #{link_to 'here', dashboard_url(host: @user.company.host)} to see your Ripple Dashboard, which includes your overall RES and your scores on each of the individual Competencies.
+
+p = link_to 'See your Ripple Effect Score', dashboard_url(host: @user.company.host)
+
+- if @user.surveys.for_others.open.any?
+  p Remember that the more people who give and receive feedback, the better Ripple gets for everybody. You have #{@user.surveys.for_others.open.count} open Reflection Surveys to complete for your colleagues.  They would appreciate you taking a few seconds to complete these open surveys so that their Ripple Effect Scores can be as accurate as possible.  Click #{link_to 'here', next_survey_url(host: @user.company.host)} to complete your open surveys.  Thank you!
+
+  p = link_to 'Complete your surveys', next_survey_url(host: @user.company.host)

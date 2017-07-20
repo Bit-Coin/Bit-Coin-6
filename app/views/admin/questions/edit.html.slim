@@ -1,0 +1,4 @@
+h1 Edit Question for #{@question.characteristic.name}
+
+= bootstrap_form_for @question, url: admin_question_path(@question), method: :put do |f|
+  = render 'form', f: f

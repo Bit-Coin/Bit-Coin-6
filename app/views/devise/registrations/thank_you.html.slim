@@ -1,0 +1,27 @@
+.row
+  .col-xs-12
+    h1 Thank you for registering.
+    p We will contact you as soon as a spot opens up
+      in our private beta.
+
+    p We have recorded your information as
+
+.row
+  .col-xs-12.col-md-6.col-md-offset-1
+    form
+      .form-group
+        label.control-label Email
+        input.form-control value="#{@user.email}" disabled='disabled'
+
+      .form-group
+        label.control-label Name
+        input.form-control value="#{@user.full_name}" disabled='disabled'
+
+      - if @user.pending_company_name != 'Unknown'
+        .form-group
+          label.control-label Company
+          input.form-control value="#{@user.pending_company_name}" disabled='disabled'
+
+.row
+  .col-xs-12.col-md-6.col-md-offset-1
+    = link_to 'Go to homepage', root_path

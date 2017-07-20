@@ -1,0 +1,12 @@
+.field#company_typeahead
+  .form-group
+    label.control-label
+      | Your company 
+      span.not_your_company 
+        | (
+        a#not_your_company href='#' not your company?
+        | )
+    input.form-control.typeahead#user_company(
+     name='user[company_name]' type='text'
+     value="#{@user.company.try(:name)}" disabled='disabled')
+    input type='hidden' name='user[company_id]'

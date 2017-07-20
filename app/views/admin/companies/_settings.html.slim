@@ -1,0 +1,13 @@
+p &nbsp;
+
+= bootstrap_form_tag :url => update_config_admin_company_path(@company) do |f|
+  .row
+    .col-xs-12.col-md-6
+      = f.text_field :months_between_self_surveys, :value => @settings[:months_between_self_surveys]
+      = f.text_field :weeks_with_weekly_surveys, :value => @settings[:weeks_with_weekly_surveys]
+      = f.check_box :spoof_receiver_email, :checked => @settings[:spoof_receiver_email]
+      = f.check_box :accelerated_surveys, :checked => @settings[:accelerated_surveys]
+      = f.check_box :hyperspeed, :checked => @settings[:hyperspeed]
+      = f.check_box :consultant_mode, :checked => @settings[:consultant_mode]
+      = f.check_box :access_development_tools, :checked => @settings[:access_development_tools]
+      = f.submit 'Save Settings', :class => 'btn btn-success'

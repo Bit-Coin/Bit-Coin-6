@@ -1,0 +1,4 @@
+h1 New Question for #{@question.parent_characteristic.name}
+
+= bootstrap_form_for @question, url: '/admin/questions', method: :post do |f|
+  = render 'form', f: f

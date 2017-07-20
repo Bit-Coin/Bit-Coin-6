@@ -1,0 +1,68 @@
+.row
+  .col-md-6.col-xs-12.col-md-offset-1
+    = bootstrap_form_for [:admin, @cm] do |f|
+        = f.text_field :name, autofocus: true, label: 'Competency model name'
+        = f.text_field :score_name
+        = f.text_field :survey_name
+        i class="fa #{@cm.icon}" style="font-size:60px;"
+        = f.text_field :icon, help: "FontAwesome 4.3 icon name prepended with 'fa-' as in 'fa-trash'"
+
+        p &nbsp;
+        = f.submit "Cancel", style: 'margin-right:5px;'
+        = f.submit "Save", style: 'margin-right:5px;'
+
+    p &nbsp;
+
+    .pull-right 
+      - if @cm.persisted?
+        = link_to "Add", component_admin_characteristic_path(@cm), class: 'btn btn-success'
+      - else
+        a.btn.btn-success disabled='disabled' href='' Add
+    h4 Component Characteristics
+
+    - if @cm.components.any?
+      table.table.table-striped
+        thead
+          tr
+            th Name
+            th Description
+            th &nbsp;
+        tbody
+          - @cm.components.each do |com|
+            tr
+              td = com.name
+              td = com.description
+              td
+                = link_to "<i class='fa fa-pencil'></i>".html_safe, edit_component_admin_characteristic_path(com)
+                = link_to "<i class='fa fa-trash'></i>".html_safe, admin_characteristic_path(com),
+                    method: :delete, data: { confirm: "Delete?" }
+    - else
+      p None
+
+    p &nbsp;
+
+.row
+  .col-md-11.col-md-offset-1.col-xs-12
+    .pull-right 
+      - if @cm.persisted?
+        = link_to "Add", new_admin_question_path(cm: @cm.id), class: 'btn btn-success'
+      - else
+        a.btn.btn-success disabled='disabled' href='' Add
+    h4 Questions
+
+    table.table.table-striped
+      thead
+        tr
+          th Characteristic
+          th Other Phrased
+          th Response Set
+      tbody
+        - @cm.all_questions.each do |q|
+          tr
+            td = q.characteristic.name
+            td = q.other_phrased
+            td = q.response_set.description
+            td
+              = link_to "<i class='fa fa-pencil'></i>".html_safe, edit_admin_question_path(q)
+              = link_to "<i class='fa fa-trash'></i>".html_safe, admin_question_path(q),
+                  method: :delete, data: { confirm: 'Delete?' }

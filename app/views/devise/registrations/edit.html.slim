@@ -1,0 +1,29 @@
+.row
+  .col-xs-12.col-md-6.col-md-offset-1
+  
+    = bootstrap_form_for(resource, as: resource_name, \
+        url: registration_path(resource_name), html: { method: :put }) do |f|
+
+      = devise_error_messages!
+
+      .field
+        = f.email_field :email, disabled: true
+        = f.text_field :company, value: resource.company.name, disabled: true
+        = f.text_field :first_name
+        = f.text_field :last_name
+        // = f.date_field :hire_date
+        // = f.text_field :cohort, disabled: true
+        // = f.text_field :team, value: resource.team.name, disabled: true
+        // - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          // div Currently waiting confirmation for: #{resource.unconfirmed_email}
+        // = f.phone_field :mobile_phone, value: resource.mobile_phone.try(:phony_formatted)
+        // = f.check_box :use_sms, label: "Notify me of new surveys using SMS instead of email"
+        // = f.password_field :password, autocomplete: "off", label: 'New Password'
+        // = f.password_field :password_confirmation, autocomplete: "off", label: 'New Password Confirmation'
+        p Enter current password to update
+        = f.password_field :current_password, autocomplete: "off"
+
+      .actions
+        = f.submit "Update"
+
+      = link_to "Back", :back

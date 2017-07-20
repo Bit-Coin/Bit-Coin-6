@@ -1,0 +1,43 @@
+link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet" /
+script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"
+br
+p = "#{@company.name}'s Executives"
+
+p id="flash_user" display="none"
+
+div= link_to 'Add Executive', new_executive_admin_company_path,
+    class: 'btn btn-success pull-right'
+br
+- if @company.users.active.executives.present?
+  table.table.table-striped
+    thead
+      tr
+        th ID
+        th Name
+        th Email
+        th Type
+        th Feedback Type
+    tbody
+      - @company.users.active.executives.each do |user|
+        tr
+          td = user.id
+          td
+            div = user.full_name
+
+          td
+            div = user.email
+          td
+            div = user.type
+          td
+            = form_tag set_feedback_option_admin_user_path(user.id), method: :post, remote: true
+              div.col-md-5
+                div.pull-left= check_box_tag 'type[]', 'giver', user.feedback_type.try(:include?, 'giver')
+                div Give Only
+              div.col-md-5
+                div.pull-left= check_box_tag 'type[]', 'receiver', user.feedback_type.try(:include?,'receiver')
+                div Receive Only
+              div.col-md-2
+                = submit_tag 'Save', class: "btn btn-success pull-right"
+- else
+  br
+  h4.text-warning Executive is not available

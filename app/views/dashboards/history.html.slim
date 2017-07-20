@@ -1,0 +1,35 @@
+= javascript_include_tag "highcharts-custom"
+.hidden-xs.hidden-sm
+  .light-container
+    .container
+        .row
+          .form-group
+            .col-md-2
+            .clearfix
+        - if @scores.first[:data].blank?
+          h3 You did not generate any scores between the selected timeframe.
+        - else
+          #container
+javascript:
+  $(function () {
+    var scores = #{@scores.to_json.html_safe};
+    var dates = #{@dates.to_json.html_safe};
+    $('#container').highcharts({
+      chart: {
+      },
+      title: {
+        text: 'Score History'
+      },
+      xAxis: {
+        categories: dates,
+        lineWidth: 0,
+        tickLength: 0,
+      },
+      yAxis: {
+        title: {
+          text: 'Score'
+        }
+      },
+      series: scores
+    });
+  });

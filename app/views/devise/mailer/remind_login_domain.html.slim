@@ -1,0 +1,13 @@
+p Hi #{@email}!
+
+p Here are the login links for your Ripple Crews.
+
+- @users.each do |user|
+  p 
+    b = user.company.name
+  p
+    - url = login_url(:host => user.company.host)
+    = link_to url, url
+  
+p Thank you,
+p Ripple Analytics

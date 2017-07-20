@@ -1,0 +1,16 @@
+.row
+  .col-xs-12
+    h1 Create Company for #{@maven.email}
+    p #{@maven.full_name} will be the root user for
+
+  .col-xs-12.col-md-6.col-md-offset-1
+    = bootstrap_form_tag url: "/admin/users/#{@maven.id}/create_company" do |f|
+      = f.text_field :name, value: suggested_company_name(@maven),
+          label: 'Company Name', autofocus: true
+      = f.text_field :domain, placeholder: 'example.com',
+          help: 'Leave blank for personal crews (not company-sponsored)'
+      = f.text_field :stub, placeholder: suggested_company_stub(@maven),
+          help: 'Subdomain for company site'
+     
+      div &nbsp;
+      = f.submit 'Create New Company', :html => {:class => 'btn btn-success'}

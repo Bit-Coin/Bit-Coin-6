@@ -1,0 +1,13 @@
+business_time:
+  beginning_of_workday: 8:34 am
+  end_of_workday: 5:34 pm
+  holidays:
+    - Jan 01, 2010
+    - July 4th, 2010
+    - December 25th, 2010
+  work_week:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri

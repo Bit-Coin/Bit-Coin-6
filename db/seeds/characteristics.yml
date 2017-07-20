@@ -1,0 +1,35 @@
+- name: Ripple Effect
+  id: 1
+  score_name: Ripple Effect Score&trade;
+  survey_name: Ripple Reflection Survey
+  icon: fa-bullseye
+- name: curious
+  id: 2
+  parent_characteristic_id: 1
+  description: Inquisitive, Open Minded, Imaginative, Creative
+  icon: fa-question-circle
+- name: conscientious
+  id: 3
+  parent_characteristic_id: 1
+  description: Hard Working, Persevering, Organized, Responsible
+  icon: fa-tasks
+- name: committed
+  id: 4
+  parent_characteristic_id: 1
+  description: Engaged, Sociable, Colloquial, Assertive
+  icon: fa-anchor
+- name: cooperative
+  id: 5
+  parent_characteristic_id: 1
+  description: Amiable, Sympathetic, Empathetic, Personable
+  icon: fa-group
+- name: consistent
+  id: 6
+  parent_characteristic_id: 1
+  description: Poised, Self-Confident, Steady, Calm Cool and Collected
+  icon: fa-clock-o
+- name: Performance
+  id: 7
+  score_name: Performance Score
+  survey_name: Performance Survey
+  icon: fa-flag-checkered

@@ -1,0 +1,10 @@
+p &nbsp;
+= bootstrap_form_tag :url => generate_self_survey_admin_company_path(@company), :layout => :inline, :html => {:class => "assign_team_manager"} do |f|
+  = f.select(:user_id, @users.collect {|u| [u.email, u.id]}, {:selected => "", :hide_label => true}, {:multiple => true})
+  span &nbsp;
+  = f.submit 'Save', :class => 'btn btn-sm btn-success'
+
+p &nbsp;
+
+javascript:
+  $(".assign_team_manager .form-control").select2();

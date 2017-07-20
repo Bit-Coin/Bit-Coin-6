@@ -1,0 +1,88 @@
+- def fg_wid(s) (s*20).round end
+- def bg_wid(s) (100 - s*20).round end
+- def fg_hei(s) (s*100).round end
+- def bg_hei(s) (100 - s*100).round end
+
+- @score_reporter.questions.each do |question|
+  - personal_score = @score_reporter.personal_score_for_question(question)
+  - company_score = @score_reporter.company_score_for_question(question)
+  - self_score = @score_reporter.self_score_for_question(question)
+  .detail-area.question class="
+        #{personal_score[:scores][:overall] != 0.0 ? 'scored' : 'not-scored'} 
+        #{personal_score[:comments].any? ? 'with-comments' : 'no-comments'}
+        #{question.characteristic.name.titleize}
+      "
+    .detail-row
+      .row
+        .col-md-11
+          .characteristic-label = question.characteristic.name.humanize.upcase
+          //.char-name = personal_score[:question][:text] + question.id.to_s
+          .char-name = question.characteristic.description
+        .col-md-1
+          
+      .row
+        .col-md-2
+          .box-score
+            .overall-score.personal-score-boxed = personal_score[:scores][:overall]
+        .col-md-2
+          .box-score
+            .overall-score.self-score-boxed = self_score[:scores][:overall]
+        .col-md-2
+          .box-score
+            .overall-score.company-score-boxed = company_score[:scores][:overall]
+          
+        - (0..4).each do |i|
+          .col-md-1            
+            .histogram
+              .bar-bg style="height: #{bg_hei(personal_score[:scores][:hist][i][1])}px"
+              .bar-fg-personal style="height: #{fg_hei(personal_score[:scores][:hist][i][1])}px"
+            .histogram-spacer
+            .histogram
+              .bar-bg style="height: #{bg_hei(company_score[:scores][:hist][i][1])}px"
+              .bar-fg-company style="height: #{fg_hei(company_score[:scores][:hist][i][1])}px"
+        
+        .col-md-1 
+          .num-surveys-container
+            .num-surveys-num = personal_score[:scores][:number]
+      .row
+        .col-md-2
+          .score-annotation YOUR AVG
+        .col-md-2
+          .score-annotation SELF SCORE
+        .col-md-2
+          .score-annotation COMPANY AVG
+        .col-md-1
+          .score-annotation 1
+        .col-md-1
+          .score-annotation 2
+        .col-md-1
+          .score-annotation 3
+        .col-md-1
+          .score-annotation 4
+        .col-md-1
+          .score-annotation 5
+        .col-md-1
+          .score-annotation #&nbsp;RESPs
+      .row
+        .col-md-12
+          .char-detail
+            h5
+              b Your #{question.characteristic.name.humanize} score of #{personal_score[:scores][:overall]} 
+              | is the average of all the ratings given by all your colleagues on the #{question.characteristic.questions.count} questions corresponding to this competency. Likewise, your self-score for this competency is the average of your #{question.characteristic.questions.count} self-survey ratings for the same questions. Overall, your self-rating tracks the average of your colleagues’ ratings reasonably well for this competency.
+
+            - if @score_reporter.highest_scores(question).any?
+              p
+                b Your highest scores on questions in this competency were:
+                - @score_reporter.highest_scores(question).each do |score|
+                    li = score
+
+            - if @score_reporter.lower_scores(question).any?
+              p
+                b You received lower scores on the following questions:
+                - @score_reporter.lower_scores(question).each do |score|
+                    li = score
+
+      - if personal_score[:comments].any?
+        .row.comments style='padding-top: 9px;'
+          .col-xs-12
+            = render partial: 'comments', locals: {comments: personal_score[:comments]}

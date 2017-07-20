@@ -1,0 +1,21 @@
+h1 Questions
+
+p Things that are asked...
+
+table.table.table-striped
+  thead
+    tr
+      th ID
+      th Characteristic
+      th Response Set
+      th Question
+      th Responses
+  tbody
+    - @questions.each do |q|
+      tr
+        td = q.id
+        td = q.characteristic.name
+        td = q.response_set.description
+        td = q.other_phrased
+        td = link_to 'view', check_responses_admin_question_path(q)
+p &nbsp;

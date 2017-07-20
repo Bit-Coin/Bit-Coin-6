@@ -1,0 +1,27 @@
+<% company_at_name = @user.company.decorate.name_for_emails({:strip_trailing_period => true, :prepend_at => true}) %>
+<% company_name = @user.company.decorate.name_for_emails({:strip_trailing_period => true, :prepend_at => false}) %>
+<% subj_full_name = @user.company.maven.full_name %>
+<% subj_first_name = @user.company.maven.first_name %>
+
+Dear <%= @user.first_name %>, 
+
+I have recently signed up to use Ripple: a peer-to-peer networking application that empowers people to become more self-aware by sharing authentic and honest feedback with their colleagues.
+
+This information is collected through a series of short, web-based surveys (Reflection Surveys). The process is quick and completely anonymous. A group of people at<%= company_name %> have been chosen to participate in a free trial of Ripple. My goal is to better understand how I am perceived by my coworkers. I'd like you to participate in this project by giving me feedback through Ripple.
+
+At the beginning of the trial program, you (and the other participants I have invited from<%= company_name %>) will each complete a 50-question Reflection Survey about me. These are short questions looking for your gut reaction -- don't overthink things. This survey should take you about 5 minutes to complete. At the bottom of the survey you will find a box that you can check if you'd like to provide written comments about any of the specific questions, or any general comments regarding your overall impression of the survey.
+
+After everyone completes the initial 50-question survey, every week you will receive a new, shorter survey. This may be a 5-question Ripple Reflection Survey about me, or a custom survey about<%= company_name %>'s operating principles. These weekly surveys should only take you about 20-30 seconds to complete. Your feedback will provide me invaluable insight and empower me to make appropriate changes in my work habits.
+
+To get started, simply click the link below (you may need to paste it into your browser), choose a password for your Ripple account, and complete the initial 50-question Reflection Survey. Remember, your feedback is completely anonymous.
+
+<% url = edit_user_password_url(@user, reset_password_token: @token, host: @user.host) %>
+<%= url %>
+
+If you get interrupted while completing a survey, your responses will be saved. You can always return to the survey by using your email address and password to log back in at www.ripplecrew.com. (Each survey email also has a link that will take you directly to that survey.)
+
+Should you experience any problems or have any questions about Ripple, please email support@ripplecrew.com. A member of the Ripple team will quickly assist you.
+
+Thank you in advance for your participation and your feedback.
+
+<%= subj_first_name %>

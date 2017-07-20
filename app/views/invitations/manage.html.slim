@@ -1,0 +1,122 @@
+= javascript_include_tag 'invitations'
+javascript:
+  Ripple.givers = #{@givers};
+
+.flash-messages
+
+.row
+  .col-xs-12
+
+    h2 Invite Feedback
+    
+    .invitation-form-container
+      - if current_user.receiver_survey_plans.count < Ripple::Globals::MIN_SURVEYS_FOR_SCORES
+        p Enter the email address of a person from whom you would like to receive feedback. We recommend that you solicit feedback from at least #{Ripple::Globals::MIN_SURVEYS_FOR_SCORES} colleagues.
+      - else
+        p Enter the email address of a person from whom you would like to receive feedback. There is no limit on the number of people you can invite.
+      
+    .well
+      .row
+        .col-xs-2 To:
+        .col-xs-10
+          .form-group.has-feedback
+            = text_field_tag 'giver1', nil, class: 'form-control email not-persisted', autofocus: true,
+              placeholder: "someone@example.com", data: { giver_id: '' }
+      .row
+        .col-xs-2 Text:
+        .col-xs-10 style="font-size: 12px; line-height: 18px"
+          p Dear colleague,
+
+          p I recently signed up for Ripple: a peer-to-peer networking application empowering co-workers to share authentic and honest feedback with their colleagues. This information is collected through a series of short web-based surveys (Reflection Surveys). A typical survey takes no more than 20-30 seconds to complete. The process is quick, easy, and completely anonymous.
+          
+        .row
+          .col-xs-2
+          .col-xs-10
+            button.btn.btn-md.btn-primary Send Invitation
+          
+    p #{link_to 'See a sample survey', 'sample_survey'} 
+    p &nbsp;
+    
+  .col-xs-12.col-md-6.pending-invitations
+    
+    - sp_scope = current_user.receiver_survey_plans.undeleted.not_active
+    - if sp_scope.any?
+      table.table.table-striped
+        thead
+          th colspan="2"
+            b Pending Invitations &nbsp;
+            span.label.label-warning = sp_scope.count
+          th
+        tbody
+          - sp_scope.sorted_for_view.each do |sp|
+            tr data-state="#{sp.state}"
+              td = sp.decorate.state_icon.html_safe
+              td
+                div 
+                  b = sp.decorate.truncated_giver_email
+                .state-details = sp.decorate.state_details.html_safe
+              td
+                .btn-group
+                  button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" 
+                    i class="fa fa-cog"
+                    span class="caret"
+                  ul class="dropdown-menu" role="menu" style="cursor:pointer;"
+                    li
+                      a.resend_invitation id="invitation_resend_#{sp.id}" 
+                        i.fa.fa-share-square-o
+                        span Resend Invitation
+                    li.divider
+                    li
+                      a.deactivate_invitation id="invitation_#{sp.id}" data-giver-id="#{sp.giver_id}"
+                        i.fa.fa-trash
+                        span Delete Invitation
+              
+    p &nbsp;
+    
+    
+  .col-xs-12.col-md-6.active-invitations
+  
+    - sp_scope = current_user.receiver_survey_plans.undeleted.active
+    - if current_user.receiver_survey_plans.active.any?
+      table.table.table-striped
+        thead
+          th colspan="2"
+            b Your Ripplecrew &nbsp;
+            span.label.label-success = sp_scope.count
+          th
+        tbody
+          - sp_scope.sorted_for_view.each do |sp|
+            tr data-state="#{sp.state}"
+              td = sp.decorate.state_icon.html_safe
+              td
+                b = sp.decorate.truncated_giver_email
+                .state-details
+                  span.label.label-success = sp.decorate.relationship_type_label
+                  span &nbsp; &nbsp;
+                  span = sp.decorate.state_details.html_safe
+                  
+                .edit-relationship id="edit_relationship_#{sp.id}" style="display: none;"
+                  p &nbsp;
+                  p This person is my:
+                  = bootstrap_form_for(sp, :url => invitation_path(sp), :html => {:class => 'form form-inline'}) do |f|
+                    = f.select :relationship_type, current_user.relationship_type_options, :hide_label => true,
+                      :selected => sp.relationship_type ? sp.relationship_type.capitalize : 'Colleague'
+                    span &nbsp;
+                    = f.submit "Save", :class => 'btn btn-success'
+                  p &nbsp;
+              td
+                .btn-group
+                  button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" 
+                    i class="fa fa-cog"
+                    span class="caret"
+                  ul class="dropdown-menu dropdown-menu-right" role="menu" style="cursor:pointer;"
+                    li
+                      a.invitation-edit id="invitation_edit_#{sp.id}" 
+                        i.fa.fa-user
+                        span Edit Relationship
+                    li.divider
+                    li
+                      a.deactivate_invitation id="invitation_#{sp.id}" data-giver-id="#{sp.giver_id}"
+                        i.fa.fa-trash
+                        span Delete Invitation
+              p

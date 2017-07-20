@@ -1,0 +1,7 @@
+.row
+  .col-sm-12
+    h1 Reminder Status
+
+    p Showing users for companies of type 'pilot' or 'client'.
+
+    = render partial: 'shared/datatable', locals: { table: @table }

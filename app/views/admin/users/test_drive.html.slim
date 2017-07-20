@@ -1,0 +1,23 @@
+.row
+  .col-xs-12
+    h1 Test Drive for #{@driver.full_name} (#{@driver.email})
+    p #{@driver.full_name} will be added to #{@company.name} as a test driver
+
+  .col-xs-12.col-md-6.col-md-offset-1
+    h4 Note: Any changes that you make on this form will overwrite the user's submitted info!
+    = bootstrap_form_tag url: "/admin/users/#{@driver.id}/connect_test_driver" do |f|
+      = f.text_field :first_name, value: @driver.first_name,
+          label: 'First Name', autofocus: true
+      = f.text_field :last_name, value: @driver.last_name,
+          label: 'Last Name'
+      = f.text_field :email, value: @driver.email,
+          label: 'E-Mail (cannot be changed)', disabled: 'disabled'
+
+      div &nbsp;
+      = f.form_group :autoinvite_core_team
+        div = f.check_box :autoinvite_core_team, 
+              label: 'Automatically connect this test driver to the core team (:autoinvite_core_team)',
+              checked: true
+
+      div &nbsp;
+      = f.submit 'Start Test Drive'

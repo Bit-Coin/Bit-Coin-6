@@ -1,0 +1,7 @@
+---
+- id: 1
+  name: "colleague"
+  description: "Colleague"
+- id: 2
+  name: "project_owner"
+  description: "Full project admin control"

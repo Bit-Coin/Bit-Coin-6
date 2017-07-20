@@ -1,0 +1,190 @@
+= javascript_include_tag "highcharts-custom"
+
+- if current_user.is_team_leader?
+  form.inline.search target=user_team_reports_path
+    .row
+      .col-xs-12.col-md-4
+        .form-group
+          label.control-label for='team' Team
+          select.form-control.team_id name='team_id'
+            option value='' All
+            - current_user.manage_teams.each do |team|
+              option value="#{team.id}" = team.name
+      .col-sm-12.col-md-4
+        .form-group
+          div &nbsp;
+          input.btn.btn-success type='submit' value='Search'
+  p &nbsp;
+
+p &nbsp;
+
+.div id="leaderboard"
+  .row
+  .col-xs-12
+    h3 Leaderboard
+    table.table.table-striped
+      thead
+        tr
+          th width="5%" Ripple Effect Score
+          th width="5%" ID
+          th width="15%" Name
+          th width="10%" Survey Plans
+          th width="10%" Open Surveys
+          th width="10%" Self-Survey?
+          th width="10%" Other-Surveys
+          th width="20%" Last Activity
+          th width="15%" Last Reminder
+      tbody
+        - @leaderboard.each do |l|
+          tr
+            td = l[:ripple_effect_score]
+            td = l[:user_id]
+            td
+              a href="/user/reports?user_id=#{l[:user_id]}&team=true" target="_blank" = l[:user_name]
+            td = l[:sp_count]
+            td = l[:os_count]
+            td = l[:sf_count]
+            td = l[:sc_count]
+            td = l[:last_activity]
+            td = l[:last_reminded]
+
+p &nbsp;
+
+.div id="container1"
+
+p &nbsp;
+
+.div id="container2"
+
+javascript:
+  $(function () {
+
+    $('form.search select.team_id').val("#{@team_id}");
+
+    $('#container1').highcharts({
+      chart: {
+        type: 'bar'
+      },
+      title: {
+        text: 'Sample Score Distribution'
+      },
+      xAxis: {
+        categories: ['RES', 'Curious', 'Conscientious', 'Committted', 'Cooperative', 'Consistent'],
+        lineWidth: 0,
+        tickLength: 0,
+      },
+      yAxis: {
+        title: {
+          text: 'Average Score'
+        }
+      },
+      series: [{
+        name: 'Company',
+        data: [ 3.5, 3.4, 2.8, 3.9, 4.2, 3.3 ]
+      }, {
+        name: 'Global',
+        data: [ 3.8, 3.3, 3.2, 3.6, 3.8, 4.2 ]
+      }]
+    });
+
+    $('#container2').highcharts({
+      chart: {
+        type: 'line'
+      },
+      title: {
+        text: 'Sample Surveys by Hour'
+      },
+      subtitle: {
+        text: 'With Spiffy Gradient'
+      },
+      xAxis: {
+        type: 'datetime', 
+        labels: {
+          formatter: function() {
+            return Highcharts.dateFormat('%I:%M %P', this.value);
+          }
+        },
+        gridLineDashStyle: 'dot',
+        gridLineWidth: 1,
+        tickInterval: 60 * 60 * 1000,
+        lineWidth: 3,
+        lineColor: '#92A8CD',
+        tickWidth: 3,
+        tickLength: 6,
+        tickColor: '#92A8CD'
+      },
+      yAxis: {
+        title: {
+          text: null
+        },
+        tickInterval: 10,
+        minorTickInterval: 5,
+        minorGridLineColor: '#ADADAD',
+        minorGridLineDashStyle: 'dashdot',
+        gridLineColor: '#8AB8E6',
+        alternateGridColor: {
+          linearGradient: {
+            x1: 0, y1: 1,
+            x2: 1, y2: 1
+          },
+          stops: [ 
+            [ 0.0, '#FAFCFF' ],
+            [ 0.5, '#F5FAFF' ],
+            [ 0.8, '#E0F0FF' ], 
+            [ 1.0, '#D6EBFF' ]
+          ]
+        },
+        lineWidth: 2,
+        lineColor: '#92A8CD',
+        tickWidth: 3,
+        tickLength: 6,
+        tickColor: '#92A8CD',
+        minorTickLength: 3,
+        minorTickWidth: 1,
+        minorTickColor: '#D8D8D8',
+        plotLines: [{
+          value: 2606,
+          width: 2,
+          color: '#821740',
+          label: {
+            x: 25,
+            text: 'Lowest: 2606',
+            style: {
+              color: '#898989'
+            },
+          },
+          zIndex: 1
+        }, {
+          value: 2639,
+          width: 2,
+          color: '#4A9338',
+          label: {
+            x: 130,
+            text: 'Highest: 2639',
+            style: {
+              color: '#898989'
+            },
+          },
+          zIndex: 1
+        }]
+      },
+      legend: {
+        enabled: false
+      },
+      credits: {
+        enabled: false
+      },
+      series: [{
+        name: 'Surveys',
+        color: '#4572A7',
+        pointStart: Date.UTC(2012, 4, 11, 9, 30),
+        pointInterval: 30 * 60 * 1000,
+        data: [ 2606, 2622, 2636, 2637, 2639,
+                2637, 2633, 2632, 2632, 2632,
+                2630, 2626, 2624, 2615 ]
+      }]
+    });
+
+  });
+
+

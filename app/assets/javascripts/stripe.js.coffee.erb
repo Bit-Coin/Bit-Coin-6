@@ -1,0 +1,35 @@
+
+# Requires stripe.js to be included on the page.
+# This method hijacks a payment form, and first submits payment info to stripe.
+# It obtains a stripe_token and instead posts that to its original action url.
+
+Ripple.makeStripeForm = (selector) ->
+  
+  STRIPE_PUBLISH_KEY = "<%= ENV['STRIPE_PUBLISH_KEY'] || 'pk_test_U1caXlQklMMLn76n4Ut0yDRS' %>"
+  Stripe.setPublishableKey(STRIPE_PUBLISH_KEY)
+  
+  $form = $(selector);
+  
+  stripeResponseHandler = (status, response) ->  
+    if response.error
+      # Show the errors on the form
+      msgEl = $('<div class="alert alert-danger" role="alert"></div>').text(response.error.message)
+      $form.find('.payment-errors').empty().append(msgEl)
+      $form.find('button').prop('disabled', false)
+    else
+      # response contains id and card, which contains additional card details
+      token = response.id
+      # Insert the token into the form so it gets submitted to the server
+      $form.append($('<input type="hidden" name="stripe_token" />').val(token))
+      $form.find('input[type=text]').val('')
+      $form.get(0).submit()
+
+  $form.on 'submit', (event) ->
+    $form.find('button').prop('disabled', true) # Disable submit
+    Stripe.card.createToken({
+       number: $form.find('#payment_card_number').val(),
+       cvc: $form.find('#payment_cvc').val(),
+       exp_month: $form.find('#payment_expiration_month').val(),
+       exp_year: $form.find('#payment_expiration_year').val()
+    }, stripeResponseHandler)
+    false # Stop submit

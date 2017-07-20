@@ -1,0 +1,305 @@
+.row.reflection_survey
+
+  .col-sm-12
+    p #{current_user.first_name || current_user.email}, you are completing #{indefinite_article(@survey.parent_characteristic.survey_name)} for
+    .receiver_name
+      - if @survey.current_survey.self_survey?
+        h1 Yourself
+      - else
+        h1 = @survey.current_survey.receiver.full_name
+      h5 = @survey.current_survey.receiver.email
+
+    - if @survey.current_survey.survey_plan.new_plan?
+      div style='margin-top:5px;' 
+        = link_to "Don't know #{@survey.current_survey.receiver.first_name}?",
+          decline_survey_path(@survey.current_survey,
+            user_email: @survey.current_survey.giver.email,
+            user_token: @survey.current_survey.giver.authentication_token),
+          class: '', method: :put
+
+    .flash-messages
+
+    = render 'form'
+
+.row.reflection_survey id="#{@survey.current_survey.id}"
+  .col-sm-12
+    .pull-right.footer-buttons
+      - if tokenized?
+        - params = {user_email: @survey.current_survey.giver.email,
+            user_token: @survey.current_survey.giver.authentication_token}
+      - else
+        - params = {}
+      = form_tag(complete_survey_path(@survey.current_survey, params), 
+          method: :put, id: 'complete_form') do
+        = hidden_field_tag 'hidden_comments_input'
+        button( form='complete_form' type='submit' class='btn btn-success btn-lg btn-done' 
+          id='big_survey_button')
+          = big_survey_button_text.html_safe
+
+coffee:
+  ceu = $('#ceu') # Comment Entry Unit
+  window.runningRequests = [] # for de-bouncing
+
+  # Change event if you put turbolinks back!
+  $(document).on 'ready', ->
+    disableBigButton() unless fullyAnswered()
+    ceu.hide() # TODO show if there are some in progress?
+
+    # Handle response button click
+    $('.response-button').on 'click', (e) ->
+      e.preventDefault()
+
+      # grab needed dom elements
+      clickedButton = this
+      previouslySelectedButton = $(clickedButton).closest('.btn-group').siblings().find('.selected')[0]
+      previouslyErroredButton = $(clickedButton).closest('.btn-group').siblings().find('.error')[0]
+      spinnerContainer = $(clickedButton).closest('.question').find('.ajax-spinner')[0]
+      spinnerDiv = $(spinnerContainer).find('.spinner')[0]
+      icon = $(spinnerDiv).find('.fa')
+      spinnerText = $(spinnerDiv).find('.tiny')
+
+      # get data
+      [responseId, responseValue] = clickedButton.id.split('_')
+
+      # de-bounce
+      return if window.runningRequests.containsArray([responseId, responseValue]) > -1
+
+      # spin/work
+      $(spinnerContainer).show()
+      $(spinnerDiv).show().removeClass('hidden').removeClass('success').addClass('working')
+      $(icon).removeClass('fa-check').addClass('fa-spinner', 'fa-spin')
+      $(spinnerText).hide()
+
+      # post
+      window.runningRequests.push([responseId, responseValue])
+      result = $.ajax
+        url: '/api/v1/survey_response',
+        method: 'post',
+        data:
+          id: responseId
+          response: { score: responseValue }
+          user_email: $('body').data('user-email')
+          user_token: $('body').data('user-token')
+        success: (data, status, xhr) ->
+          $(previouslySelectedButton).removeClass('selected')
+          $(previouslyErroredButton).removeClass('error')
+          $(clickedButton).removeClass('not-selected').addClass('selected')
+          $(spinnerDiv).removeClass('working').removeClass('error').addClass('success')
+          $(icon).removeClass('fa-spinner fa-spin fa-exclamation-triangle').addClass('fa-check')
+          $(spinnerText).show().text('Saved')
+          setTimeout(clearRequest, 500, [responseId, responseValue]) # hard to test
+          enableBigButton() if fullyAnswered()
+        error: (xhr, status, message) ->
+          $(previouslySelectedButton).removeClass('selected')
+          $(previouslyErroredButton).removeClass('error')
+          $(clickedButton).addClass('error')
+          $(spinnerDiv).removeClass('working').addClass('error')
+          $(icon).removeClass('fa-spinner fa-spin').addClass('fa-exclamation-triangle')
+          $(spinnerText).show().text('Error')
+          location.reload()
+
+    # Next/Finish button
+    $('.btn-done').click (e) ->
+      # HACK until we figure out capy/poltergeist setTimeout() test magic
+      if Ripple.globals.railsEnv != 'test' && window.runningRequests.length > 0
+        e.preventDefault()
+        alert("Not all responses have been recorded yet. Please try again.")
+      else
+        $('#hidden_comments_input').val(JSON.stringify(getCommentData()))
+
+    ########### CEU-related ##################
+    $("input[name='comments']").on 'change', ->
+      if this.checked
+        this.disabled = true
+        refreshSelectOptions()
+        showCEU()
+        showComment(0)
+      else
+        hideCEU()
+
+    $('textarea.ceu-text').on 'keyup', (e) ->
+      if noEmptyComments() && allQuestionsAnswered()
+        enableBigButton() 
+      else
+        disableBigButton()
+      counterEl = this.parentElement.parentElement.lastChild
+      limitText(this, counterEl, 255)
+
+    $('.fa-plus').on 'click', ->
+      showComment(elPosition(this) + 1)
+      hidePlus(elPosition(this))
+
+    $('.fa-trash').on 'click', ->
+      if confirm 'Delete comment?'
+        hideComment(elPosition(this), ->
+          if commentCount() == 0
+            hideCEU()
+            $("input[name='comments']").prop('checked', false).prop('disabled', false)
+            enableBigButton() if fullyAnswered()
+          else
+            enableBigButton() if fullyAnswered() && noEmptyComments()
+        )
+
+    $('.select-for-comment').on 'change', ->
+      refreshSelectOptions()
+
+    ###########################################
+
+  ###### Helpers #######
+
+  questionCount = ->
+    $('.question-text').length
+
+  answerCount = ->
+    $('.selected').length
+
+  allQuestionsAnswered = ->
+    questionCount() - answerCount() == 0
+
+  selfSurvey = ->
+    $(".receiver_name:contains('Yourself')").length > 0
+
+  fullyAnswered = ->
+    answerCount() == questionCount()
+
+  disableBigButton = ->
+    $('#big_survey_button').attr('disabled', 'disabled')
+
+  enableBigButton = ->
+    $('#big_survey_button').removeAttr('disabled')
+
+  showCEU = ->
+    showComment(0)
+    ceu.show('slow', ->
+      disableBigButton()
+    )
+
+  hideCEU = ->
+    ceu.hide('slow')
+
+  showComment = (position) ->
+    commentContainer(position).show('slow')
+    disableBigButton()
+    refreshSelectOptions()
+    if position == 5
+      hidePlus(5)
+    else
+      showPlus(position)
+
+  # really should be sliceComment
+  hideComment = (position, after) ->
+    commentEl = commentContainer(position)
+    commentTextEl = commentTextarea(position)[0]
+    commentTextEl.value = ''
+    commentTextEl.parentElement.parentElement.lastChild.innerHTML = '255'
+    commentEl.hide('slow', ->
+      unless commentCount() == 0
+        moveToPosition(commentEl, position, 6) # one past the end
+        shiftUp(position) # move those below the gap up one
+        refreshSelectOptions()
+        showPlus(lastVisibleComment())
+      after()
+    )
+
+  elPosition = (element) ->
+    parseInt($(element).closest('.comment-container')[0].id.split('-')[2])
+
+  commentContainer = (position) ->
+    $('#comment-container-' + position)
+
+  commentSelect = (position) ->
+    $('#_select-for-comment-' + position)
+
+  commentTextarea = (position) ->
+    $('#comment-' + position)
+
+  commentCount = ->
+    $('.comment-container:visible').length
+
+  lastVisibleComment = ->
+    commentCount() - 1
+
+  limitText = (inputElement, counterElement, charLimit) ->
+    if inputElement.value.length > charLimit
+      inputElement.value = inputElement.value.substring(0, charLimit)
+    else
+      counterElement.innerHTML = charLimit - inputElement.value.length
+
+  availableSelectOptions = ->
+    selectedKeys = alreadySelectedOptions().map (k) ->
+      k.key
+    $.grep allSelectOptions(), (object, index) ->
+      $.inArray(object.key, selectedKeys) == -1
+
+  alreadySelectedOptions = ->
+    selected = []
+    if commentCount() > 0
+      for i in [0..(commentCount()-1)] by 1
+        el = commentSelect(i).find(':selected')[0]
+        selected.push({
+          key: el.value,
+          value: el.text
+        }) if el
+    selected
+
+  allSelectOptions = ->
+    options = [{key: '0', value: 'General'}]
+    $.each($('.question-text h4'), (index, questionEl) -> 
+      key = questionEl.parentElement.id.split('-')[3]
+      options.push({
+        key: key, 
+        value: questionEl.innerHTML
+      })
+    )
+    options
+
+  populateSelectOptions = (position, selected) ->
+    selectEl = commentSelect(position)
+    selectEl.empty()
+    $.each(availableSelectOptions(), (index, object) ->
+      selectEl.append($("<option></option>").attr("value", object.key).text(object.value))
+      if selected[0]
+        selectEl.find("option[value='" + selected[0].value + "']").prop('selected', true)
+    )
+
+  refreshSelectOptions = ->
+    for i in [0..5] by 1
+      populateSelectOptions(i, commentSelect(i).find(':selected'))
+
+  getCommentData = ->
+    comments = []
+    for i in [0..(commentCount()-1)] by 1
+      comments.push({
+        response_id: commentSelect(i).find(':selected')[0].value,
+        comment_text: commentTextarea(i)[0].value
+      })
+    comments
+
+  hidePlus = (position) ->
+    commentContainer(position).find('.fa-plus').hide()
+
+  showPlus = (position) ->
+    unless position == 5
+      commentContainer(position).find('.fa-plus').show()
+
+  noEmptyComments = ->
+    for i in [0..(commentCount() - 1)] by 1
+      return false unless $('#comment-' + i)[0].value.length >= 5
+    true
+
+  moveToPosition = (container, oldPosition, newPosition) ->
+    if newPosition > 0
+      container.insertAfter(commentContainer(newPosition - 1))
+    else
+      container.insertBefore(commentContainer(newPosition + 1))
+    container.attr('id', 'comment-container-' + newPosition)
+    commentSelect(oldPosition).attr('id', '_select-for-comment-' + newPosition)
+    commentTextarea(oldPosition).attr('id', 'comment-' + newPosition)
+
+  shiftUp = (emptyPosition) ->
+    for i in [(emptyPosition + 1)..6] by 1
+      moveToPosition(commentContainer(i), i, i - 1)
+
+  clearRequest = (array) ->
+    position = window.runningRequests.containsArray(array)
+    window.runningRequests.splice(position, 1)

@@ -1,0 +1,8 @@
+.container
+
+  p &nbsp;
+  h2 Upgrade Subscription
+
+  p Enter your card information now to subscribe your RippleCrew to our monthly paid subscription plan.
+  
+  = render :partial => 'subscriptions/form', :locals => { :url => update_subscription_subscription_path(@subscription), :button => 'Upgrade Subscription' }

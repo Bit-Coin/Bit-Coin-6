@@ -1,0 +1,38 @@
+h1 Add Survey Series to #{@company.name}
+
+.row
+  .col-md-6.col-md-offset-1.col-xs-12
+    = bootstrap_form_for [:admin, @css] do |f|
+      = f.hidden_field :company, value: @company.id
+      = f.select :survey_series, @css.options_for_select, include_blank: true,
+          label: 'Which survey series...'
+      = f.text_area :config, style: 'display:none;', hide_label: true
+
+      #buttons
+        = link_to "Cancel", admin_company_path(@company), class: 'btn btn-default',
+            style: 'margin-right:10px;'
+        = f.submit "Add", class: 'btn btn-success', id: 'submit', style: 'display:none;'
+
+// Gotta set JS vars this way.  Can't interpolate instance vars in coffescript
+javascript:
+  company_id = "#{@company.id}"
+
+coffee:
+  $(document).ready ->
+    $("#company_survey_series_survey_series").on 'change', ->
+      $.ajax
+        url: "/admin/company_survey_series/new.json"
+        method: 'get'
+        data:
+          company: company_id
+          survey_series: $(this).val()
+        success: (data, status, xhr) ->
+          renderConfig(data)
+          $('#submit').show()
+        error: (xhr, status, message) ->
+          alert "error"
+
+  renderConfig = (data) ->
+    el = $('#company_survey_series_config')
+    el.val(JSON.stringify(data.survey_series.default_config))
+    el.show()

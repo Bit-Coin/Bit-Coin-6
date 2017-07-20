@@ -1,0 +1,23 @@
+<% if @user.surveys.open.for_others.any? %>
+Your colleagues are waiting for feedback from you:
+
+  <% @user.surveys.open.for_others.order(created_at: :desc).each do |s| %>
+  <%= s.receiver.full_name %> <%= ' -- new!' if s.new? %>
+  <% end %>
+<% end %>
+
+<% if @user.surveys.open.for_self.any? %>
+You have a self-survey to complete.
+<% end %>
+
+<% if @user.personal_scores.any? %>
+Your Ripple Effect Score was last updated <%= @user.decorate.scores_updated_day %>.
+<% end %>
+
+<% if @user.surveys.open.for_others.count > 1 %>
+Respond to open surveys at <%= short_url(short_path: @user.short_path, host: @user.company.host) %>
+<% elsif @user.surveys.open.for_others.count == 1 %>
+Respond to <%= @user.surveys.open.for_others.last.receiver.first_name %>'s survey at <%= short_url(short_path: @user.short_path, host: @user.company.host) %>
+<% else %>
+Complete your self-survey at <%= short_url(short_path: @user.short_path, host: @user.company.host) %>
+<% end %>

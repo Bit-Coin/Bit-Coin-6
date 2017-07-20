@@ -1,0 +1,25 @@
+nav.navbar.navbar-default.navbar-fixed-top role='navigation'
+  .container
+    .hidden-md.hidden-lg.hidden-sm.pull-right.collapsed
+      ul.nav.navbar-nav.navbar-right
+        li = link_to 'Log In', login_path
+
+    .navbar-header
+      = link_to 'RIPPLE', root_path, class: 'navbar-brand'
+
+    .collapse.navbar-collapse#full-navbar
+      - if params[:controller] == 'pages'
+        ul.nav.navbar-nav
+          li = link_to 'How It Works', '/#howitworks'
+          li.dropdown
+            a href="#" data-toggle="dropdown"
+              | Who We Are
+              span.caret
+            ul.dropdown-menu
+              li = link_to 'Who We Are', '/#whoweare'
+              li = link_to 'Board of Directors', '/pages/board-of-trustees'
+              li = link_to 'Board of Advisors', '/pages/board-of-advisors'
+          li = link_to 'What We Think', 'https://www.facebook.com/RippleAnalyticsInc/?fref=ts', target: '_blank'
+      ul.nav.navbar-nav.navbar-right
+        li = link_to 'Sign Up', register_email_path
+        li = link_to 'Log In', login_path

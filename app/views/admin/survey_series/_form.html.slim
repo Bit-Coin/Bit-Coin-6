@@ -1,0 +1,37 @@
+.row
+  .col-md-8.col-md-offset-1
+
+    = bootstrap_form_for [:admin, @survey_series] do |f|
+      = f.select :parent_characteristic_id, 
+          Characteristic.where('parent_characteristic_id is null').map { |c| [c.name, c.id] }, 
+          label: 'Competency Model', include_blank: true
+      = f.text_field :name, label: 'Survey Series Name'
+      = f.text_field :description
+      = f.text_field :default_config, 
+          help: "Sorry about the format.  Will fix later.  Use string keys and hashrocket format."
+      = f.submit "Cancel"
+      = f.submit "Save"
+
+.row
+  .col-md-8.col-md-offset-1
+
+    hr
+    .pull-right = link_to "New", new_admin_survey_set_path(ss: @survey_series.id), 
+        class: 'btn btn-small btn-default'
+    h4 Survey Sets for #{@survey_series.name}
+
+    table.table.table-striped
+      thead
+        tr
+          th Position
+          th Name
+          th &nbsp;
+      tbody
+        - @survey_series.survey_sets.active.each do |sset|
+          tr
+            td = sset.position
+            td = sset.name
+            td
+              = link_to "<i class='fa fa-pencil'></i>".html_safe, edit_admin_survey_set_path(sset)
+              = link_to "<i class='fa fa-trash'></i>".html_safe, admin_survey_set_path(sset),
+                  method: :delete, data: { confirm: 'Delete?' }

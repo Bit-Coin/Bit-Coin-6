@@ -1,0 +1,8 @@
+.row
+  .col-md-6.col-md-offset-1.col-xs-12
+    = bootstrap_form_for [:admin, @role] do |f|
+      = f.text_field :name
+      = f.text_field :description
+      = f.submit 'Cancel'
+      = f.submit 'Save'
+      

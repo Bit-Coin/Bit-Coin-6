@@ -1,0 +1,26 @@
+h1 Edit Questions for #{@cm.name}
+
+p &nbsp;
+.pull-right = link_to "Add", new_admin_question_path(cm: @cm.id), class: 'btn btn-success'
+
+table.table.table-striped
+  thead
+    tr
+      th ID
+      th Component
+      th Other Phrased
+      th Self Phrased
+      th Response Set
+      th &nbsp;
+  tbody
+    - @cm.all_questions.order(:id).each do |q|
+      tr
+        td = q.id
+        td = q.characteristic.name
+        td = q.other_phrased
+        td = q.self_phrased
+        td = q.response_set.description
+        td
+          = link_to "<i class='fa fa-pencil'></i>".html_safe, edit_admin_question_path(q)
+          = link_to "<i class='fa fa-trash'></i>".html_safe, admin_question_path(q), 
+              method: :delete, confirm: 'Delete?'

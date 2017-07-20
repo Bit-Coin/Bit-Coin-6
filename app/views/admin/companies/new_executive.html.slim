@@ -1,0 +1,8 @@
+h1 Add new Executive to #{@company.name}
+br
+.row
+  .col-md-6.col-md-offset-1.col-xs-12
+    = bootstrap_form_tag :url => add_executive_admin_company_path(company_id: @company.id), :layout => :inline, :html => {:class => "form"} do |f|
+      = f.select(:executive, (@company.users.active.only_registered - @company.users.active.executives).collect {|u| [u.full_name, u.id]}, {:include_blank => true, :hide_label => true, :class => 'form-control'}, {:multiple => false})
+      span &nbsp;
+      = f.submit 'Save', :class => 'btn btn-sm btn-success'

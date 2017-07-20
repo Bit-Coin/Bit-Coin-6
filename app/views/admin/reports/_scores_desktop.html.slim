@@ -1,0 +1,112 @@
+- def fg_wid(s) (s*20).round end
+- def bg_wid(s) (100 - s*20).round end
+- def fg_hei(s) (s*100).round end
+- def bg_hei(s) (100 - s*100).round end
+
+/ Handle custom parent_characteristics, with or without component
+/ characteristics.
+- parent = @scores[:personal][0]
+- if @scores[:personal].length == 1 # componentless characteristic
+  - components = [@scores[:personal][0]]
+  - c_components = [@scores[:company][0]]
+  - s_components = [@scores[:self][0]]
+- else
+  - components = @scores[:personal][1..(@scores[:personal].length - 1)]
+  - c_components = @scores[:company][1..(@scores[:company].length - 1)]
+  - s_components = @scores[:self][1..(@scores[:self].length - 1)]
+
+/ Render this CM panel showing details if it is componentless or it
+/ is one of many CMs in use for this user.
+- display_details_by_default = (components.length == 1 || !@multiple_cms)
+
+.score-row.ripple-effect-row
+  .row
+    .col-md-5
+      .char-name.ripple-effect-name = parent[:characteristic][:score_name].html_safe
+    .col-md-4
+      .gauge 
+        .ripple-bar-fg style="width: #{fg_wid(parent[:scores][:overall])}%"
+        .ripple-bar-bg style="width: #{bg_wid(parent[:scores][:overall])}%"
+    .col-md-2
+      .overall-score.ripple-effect-score = @scores[:personal][0][:scores][:overall]
+    .col-md-1
+
+- components.each_with_index do |c, i|
+  .overview-area style="display: #{components.length > 0 ? 'block' : 'none'}"
+    .score-row data-char="#{c[:characteristic][:name]}"
+      .row
+        .col-md-5
+          .char-name = c[:characteristic][:name].titleize
+        .col-md-4
+          .gauge 
+            .bar-fg style="width: #{fg_wid(c[:scores][:overall])}%"
+            .bar-bg style="width: #{bg_wid(c[:scores][:overall])}%"
+        .col-md-2
+          .overall-score = c[:scores][:overall]
+        .col-md-1
+          .pull-right
+            button.btn.btn-success.details-button data-action='show-details' data-char="#{c[:characteristic][:name]}" Details
+  .detail-area 
+    .detail-row data-char="#{c[:characteristic][:name]}" style="display: #{components.length > 0 ? 'none' : 'block'}"
+      .row
+        .col-md-11
+          - if components.length > 0
+            .char-name = c[:characteristic][:name].titleize
+            .char-description = c[:characteristic][:description]
+          - else
+            .char-name = c[:characteristic][:description]
+        - if components.length > 0
+          .col-md-1
+            .pull-right
+              button.btn.btn-success.details data-action="hide-details" data-char="#{c[:characteristic][:name]}" Close
+      .row
+        .col-md-2
+          .box-score
+            .overall-score.personal-score-boxed = c[:scores][:overall]
+        .col-md-2
+          .box-score
+            .overall-score.self-score-boxed = s_components[i][:scores][:overall]
+        .col-md-2
+          .box-score
+            .overall-score.company-score-boxed = c_components[i][:scores][:overall]
+        
+        - c[:scores][:hist].each_with_index do |pair, h|
+          .col-md-1            
+            .histogram
+              .bar-bg style="height: #{bg_hei(pair[1])}px"
+              .bar-fg-personal style="height: #{fg_hei(pair[1])}px"
+            .histogram-spacer
+            .histogram
+              .bar-bg style="height: #{bg_hei(c_components[i][:scores][:hist][h][1])}px"
+              .bar-fg-company style="height: #{fg_hei(c_components[i][:scores][:hist][h][1])}px"
+        .col-md-1
+          .num-surveys-container
+            .num-surveys-num = c[:scores][:number]
+      .row
+        .col-md-2
+          .score-annotation YOUR SCORE
+        .col-md-2
+          .score-annotation SELF SCORE
+        .col-md-2
+          .score-annotation COMPANY AVERAGE
+        .col-md-1
+          .score-annotation 1
+        .col-md-1
+          .score-annotation 2
+        .col-md-1
+          .score-annotation 3
+        .col-md-1
+          .score-annotation 4
+        .col-md-1
+          .score-annotation 5
+        .col-md-1
+          .score-annotation #&nbsp;RESPs
+.row
+  .col-xs-12.col-md-5 
+    p Your #{@scores[:personal][0][:characteristic][:score_name].html_safe} was last updated on #{@scores[:published_at].strftime("%b&nbsp;%d,&nbsp;%Y").html_safe} and is calculated based on #{@scores[:total_responses]} responses.
+  .col-xs-12.col-md-1
+    p &nbsp;
+  .col-xs-12.col-md-6
+    p You can also view your detailed scores for #{link_to('each individual question', "/admin/system_reports/#{@user.id}/questions?cm_id=#{@scores[:cm_id]}")}.
+
+

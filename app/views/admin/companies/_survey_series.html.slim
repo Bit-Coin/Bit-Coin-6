@@ -1,0 +1,27 @@
+p &nbsp;
+p These options are available for SurveyPlans created in #{@company.name}.
+
+= link_to 'Add', new_admin_company_survey_series_path(company: @company),
+    class: 'btn btn-success pull-right'
+
+table.table.table-striped
+  thead
+    tr
+      th Competency Model
+      th Series Name
+      th Series Description
+      th Configuration
+      th &nbsp;
+  tbody
+    - @company.company_survey_series.order(:id).each do |css|
+      tr
+        td = css.survey_series.parent_characteristic.name.titleize
+        td = css.survey_series.name
+        td = css.survey_series.description
+        td 
+          - css.config.each do |k,v|
+            div #{k}: #{v}
+        td
+          span = link_to "<i class='fa fa-pencil'></i>".html_safe, edit_admin_company_survey_series_path(css)
+          span = link_to "<i class='fa fa-trash'></i>".html_safe, admin_company_survey_series_path(css),
+              method: :delete, data: { confirm: "Delete survey series?" }
