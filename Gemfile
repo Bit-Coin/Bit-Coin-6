@@ -3,76 +3,76 @@ source 'https://rails-assets.org'
 
 ruby '2.1.4'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.8'
 gem 'dotenv-rails', groups: [ :development, :test ]  # load this before anything else
 
 # Data
-gem 'acts-as-taggable-array-on'
+gem 'acts-as-taggable-array-on', '>= 0.3.0'
 gem 'attr_encrypted'
 gem 'aws-sdk'
 gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
 gem 'faker'
 gem 'pg'
-gem 'phony_rails'
+gem 'phony_rails', '>= 0.12.6'
 
 # Assets
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.1'
 gem 'nokogiri'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 4.0.5'
 gem 'slim'
 gem 'therubyracer',  platforms: :ruby
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '>= 2.7.1'
 
 # Auth
-gem 'devise'
-gem 'simple_token_authentication', '~> 1.0'
+gem 'devise', '>= 3.4.1'
+gem 'simple_token_authentication', '~> 1.9', '>= 1.9.1'
 
 # Front-end
-gem 'autoprefixer-rails'
+gem 'autoprefixer-rails', '>= 5.1.11'
 gem 'bootstrap_form'
-gem 'draper'
-gem 'font-awesome-rails'
-gem 'jbuilder'
+gem 'draper', '>= 2.1.0'
+gem 'font-awesome-rails', '>= 4.3.0.0'
+gem 'jbuilder', '>= 2.2.13'
 gem 'modernizr-rails'
 gem 'useragent'
 
 # Back-end
 gem 'aasm'
-gem 'business_time'
-gem 'kaminari'
-gem 'paperclip', require: 'paperclip'
-gem 'rails_admin'
+gem 'business_time', '>= 0.7.4'
+gem 'kaminari', '>= 0.16.3'
+gem 'paperclip', '4.2.1'
+gem 'rails_admin', '>= 0.6.7'
 gem 'resque'
-gem 'resque_mailer'
+gem 'resque_mailer', '>= 2.2.7'
 gem 'resque-scheduler'
-gem 'stripe'
+gem 'stripe', '>= 1.36.1'
 gem 'impressionist'
 
 # Services
 gem 'sendgrid-ruby' # sending
-gem 'sendgrid_toolkit', '>= 1.1.1' # api functions (bounces, etc.)
+gem 'sendgrid_toolkit', '>= 1.4.0' # api functions (bounces, etc.)
 gem 'twilio-ruby', '~> 3.12'
 gem "select2-rails"
-gem 'readmorejs-rails'
+gem 'readmorejs-rails', '>= 0.0.12'
 
 group :test do
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'minitest'
-  gem 'minitest-rails-capybara', '~> 2.1.0'
+  gem 'minitest-rails-capybara', '~> 2.1.1'
   gem 'minitest-reporters'
   gem 'poltergeist', '~> 1.6.0'
-  gem 'resque_unit'
+  gem 'resque_unit', '>= 0.4.8'
   gem 'timecop'
   gem 'webmock'
 end
 
 group :development, :test do
-  gem 'mailcatcher'
+  gem 'mailcatcher', '>= 0.6.1'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rubocop', '~> 0.46.0', require: false
-  gem 'bullet'
+  gem 'bullet', '>= 5.4.3'
 end
 
 group :production, :staging do
@@ -89,4 +89,4 @@ group :staging, :test, :production do
   gem 'unicorn'
   gem 'unicorn-rails'
 end
-gem 'ckeditor_rails'
+gem 'ckeditor_rails', '>= 4.5.10'
