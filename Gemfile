@@ -3,7 +3,7 @@ source 'https://rails-assets.org'
 
 ruby '2.1.4'
 
-gem 'rails', '4.2.1'
+gem 'rails', '5.0.0'
 gem 'dotenv-rails', groups: [ :development, :test ]  # load this before anything else
 
 # Data
@@ -16,22 +16,22 @@ gem 'pg'
 gem 'phony_rails'
 
 # Assets
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.1'
 gem 'nokogiri'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.5'
 gem 'slim'
 gem 'therubyracer',  platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
 
 # Auth
-gem 'devise'
-gem 'simple_token_authentication', '~> 1.0'
+gem 'devise', '>= 4.0.0'
+gem 'simple_token_authentication', '~> 1.14', '>= 1.14.0'
 
 # Front-end
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
-gem 'draper'
-gem 'font-awesome-rails'
+gem 'draper', '>= 2.1.0'
+gem 'font-awesome-rails', '>= 4.5.0.1'
 gem 'jbuilder'
 gem 'modernizr-rails'
 gem 'useragent'
@@ -39,12 +39,12 @@ gem 'useragent'
 # Back-end
 gem 'aasm'
 gem 'business_time'
-gem 'kaminari'
+gem 'kaminari', '>= 0.16.3'
 gem 'paperclip', require: 'paperclip'
-gem 'rails_admin'
-gem 'resque'
-gem 'resque_mailer'
-gem 'resque-scheduler'
+gem 'rails_admin', '>= 1.0.0'
+gem 'resque', '>= 1.25.2'
+gem 'resque_mailer', '>= 2.2.7'
+gem 'resque-scheduler', '>= 4.0.0'
 gem 'stripe'
 gem 'impressionist'
 
@@ -53,13 +53,13 @@ gem 'sendgrid-ruby' # sending
 gem 'sendgrid_toolkit', '>= 1.1.1' # api functions (bounces, etc.)
 gem 'twilio-ruby', '~> 3.12'
 gem "select2-rails"
-gem 'readmorejs-rails'
+gem 'readmorejs-rails', '>= 0.0.12'
 
 group :test do
-  gem 'capybara-screenshot'
+  gem 'capybara-screenshot', '>= 1.0.9'
   gem 'database_cleaner'
   gem 'minitest'
-  gem 'minitest-rails-capybara', '~> 2.1.0'
+  gem 'minitest-rails-capybara', '~> 3.0.0'
   gem 'minitest-reporters'
   gem 'poltergeist', '~> 1.6.0'
   gem 'resque_unit'
@@ -68,7 +68,7 @@ group :test do
 end
 
 group :development, :test do
-  gem 'mailcatcher'
+  gem 'mailcatcher', '>= 0.6.1'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rubocop', '~> 0.46.0', require: false
@@ -86,7 +86,7 @@ group :production do
 end
 
 group :staging, :test, :production do
-  gem 'unicorn'
-  gem 'unicorn-rails'
+  gem 'unicorn', '>= 4.9.0'
+  gem 'unicorn-rails', '>= 2.2.0'
 end
-gem 'ckeditor_rails'
+gem 'ckeditor_rails', '>= 4.5.10'
