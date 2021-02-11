@@ -3,7 +3,7 @@ source 'https://rails-assets.org'
 
 ruby '2.1.4'
 
-gem 'rails', '4.2.1'
+gem 'rails', '6.0.3.5'
 gem 'dotenv-rails', groups: [ :development, :test ]  # load this before anything else
 
 # Data
@@ -41,7 +41,7 @@ gem 'aasm'
 gem 'business_time'
 gem 'kaminari'
 gem 'paperclip', require: 'paperclip'
-gem 'rails_admin'
+gem 'rails_admin', '>= 2.0.0'
 gem 'resque'
 gem 'resque_mailer'
 gem 'resque-scheduler'
