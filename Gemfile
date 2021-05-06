@@ -3,7 +3,7 @@ source 'https://rails-assets.org'
 
 ruby '2.1.4'
 
-gem 'rails', '4.2.1'
+gem 'rails', '5.2.4.6'
 gem 'dotenv-rails', groups: [ :development, :test ]  # load this before anything else
 
 # Data
@@ -16,22 +16,22 @@ gem 'pg'
 gem 'phony_rails'
 
 # Assets
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.2.2'
 gem 'nokogiri'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.5'
 gem 'slim'
 gem 'therubyracer',  platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
 
 # Auth
-gem 'devise'
-gem 'simple_token_authentication', '~> 1.0'
+gem 'devise', '>= 4.4.2'
+gem 'simple_token_authentication', '~> 1.14', '>= 1.14.0'
 
 # Front-end
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
-gem 'draper'
-gem 'font-awesome-rails'
+gem 'draper', '>= 2.1.0'
+gem 'font-awesome-rails', '>= 4.7.0.4'
 gem 'jbuilder'
 gem 'modernizr-rails'
 gem 'useragent'
@@ -39,11 +39,11 @@ gem 'useragent'
 # Back-end
 gem 'aasm'
 gem 'business_time'
-gem 'kaminari'
+gem 'kaminari', '>= 0.16.3'
 gem 'paperclip', require: 'paperclip'
-gem 'rails_admin'
+gem 'rails_admin', '>= 1.0.0'
 gem 'resque'
-gem 'resque_mailer'
+gem 'resque_mailer', '>= 2.2.7'
 gem 'resque-scheduler'
 gem 'stripe'
 gem 'impressionist'
@@ -59,7 +59,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'minitest'
-  gem 'minitest-rails-capybara', '~> 2.1.0'
+  gem 'minitest-rails-capybara', '~> 3.0.0'
   gem 'minitest-reporters'
   gem 'poltergeist', '~> 1.6.0'
   gem 'resque_unit'
@@ -89,4 +89,4 @@ group :staging, :test, :production do
   gem 'unicorn'
   gem 'unicorn-rails'
 end
-gem 'ckeditor_rails'
+gem 'ckeditor_rails', '>= 4.5.10'
