@@ -56,7 +56,7 @@ gem "select2-rails"
 gem 'readmorejs-rails'
 
 group :test do
-  gem 'capybara-screenshot'
+  gem 'capybara-screenshot', '>= 1.0.9'
   gem 'database_cleaner'
   gem 'minitest'
   gem 'minitest-rails-capybara', '~> 2.1.0'
@@ -64,7 +64,7 @@ group :test do
   gem 'poltergeist', '~> 1.6.0'
   gem 'resque_unit'
   gem 'timecop'
-  gem 'webmock'
+  gem 'webmock', '>= 1.21.0'
 end
 
 group :development, :test do
