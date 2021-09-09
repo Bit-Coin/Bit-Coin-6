@@ -16,22 +16,22 @@ gem 'pg'
 gem 'phony_rails'
 
 # Assets
-gem 'coffee-rails', '~> 4.0.0'
-gem 'nokogiri'
-gem 'sass-rails', '~> 4.0.3'
+gem 'coffee-rails', '~> 4.0.1'
+gem 'nokogiri', '>= 1.8.2'
+gem 'sass-rails', '~> 4.0.5'
 gem 'slim'
 gem 'therubyracer',  platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
 
 # Auth
-gem 'devise'
-gem 'simple_token_authentication', '~> 1.0'
+gem 'devise', '>= 3.4.1'
+gem 'simple_token_authentication', '~> 1.9', '>= 1.9.1'
 
 # Front-end
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
-gem 'draper'
-gem 'font-awesome-rails'
+gem 'draper', '>= 2.1.0'
+gem 'font-awesome-rails', '>= 4.3.0.0'
 gem 'jbuilder'
 gem 'modernizr-rails'
 gem 'useragent'
@@ -39,27 +39,27 @@ gem 'useragent'
 # Back-end
 gem 'aasm'
 gem 'business_time'
-gem 'kaminari'
+gem 'kaminari', '>= 0.16.3'
 gem 'paperclip', require: 'paperclip'
-gem 'rails_admin'
+gem 'rails_admin', '>= 0.6.7'
 gem 'resque'
-gem 'resque_mailer'
+gem 'resque_mailer', '>= 2.2.7'
 gem 'resque-scheduler'
 gem 'stripe'
-gem 'impressionist'
+gem 'impressionist', '>= 1.5.2'
 
 # Services
 gem 'sendgrid-ruby' # sending
 gem 'sendgrid_toolkit', '>= 1.1.1' # api functions (bounces, etc.)
 gem 'twilio-ruby', '~> 3.12'
 gem "select2-rails"
-gem 'readmorejs-rails'
+gem 'readmorejs-rails', '>= 0.0.12'
 
 group :test do
-  gem 'capybara-screenshot'
+  gem 'capybara-screenshot', '>= 1.0.9'
   gem 'database_cleaner'
   gem 'minitest'
-  gem 'minitest-rails-capybara', '~> 2.1.0'
+  gem 'minitest-rails-capybara', '~> 2.1.1'
   gem 'minitest-reporters'
   gem 'poltergeist', '~> 1.6.0'
   gem 'resque_unit'
@@ -89,4 +89,4 @@ group :staging, :test, :production do
   gem 'unicorn'
   gem 'unicorn-rails'
 end
-gem 'ckeditor_rails'
+gem 'ckeditor_rails', '>= 4.5.10'
