@@ -16,16 +16,16 @@ gem 'pg'
 gem 'phony_rails'
 
 # Assets
-gem 'coffee-rails', '~> 4.0.0'
-gem 'nokogiri'
-gem 'sass-rails', '~> 4.0.3'
+gem 'coffee-rails', '~> 4.0.1'
+gem 'nokogiri', '>= 1.13.2'
+gem 'sass-rails', '~> 4.0.5'
 gem 'slim'
 gem 'therubyracer',  platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
 
 # Auth
 gem 'devise'
-gem 'simple_token_authentication', '~> 1.0'
+gem 'simple_token_authentication', '~> 1.9', '>= 1.9.1'
 
 # Front-end
 gem 'autoprefixer-rails'
@@ -59,7 +59,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'minitest'
-  gem 'minitest-rails-capybara', '~> 2.1.0'
+  gem 'minitest-rails-capybara', '~> 2.1.1'
   gem 'minitest-reporters'
   gem 'poltergeist', '~> 1.6.0'
   gem 'resque_unit'
