@@ -50,7 +50,7 @@ gem 'impressionist'
 
 # Services
 gem 'sendgrid-ruby' # sending
-gem 'sendgrid_toolkit', '>= 1.1.1' # api functions (bounces, etc.)
+gem 'sendgrid_toolkit', '>= 1.4.0' # api functions (bounces, etc.)
 gem 'twilio-ruby', '~> 3.12'
 gem "select2-rails"
 gem 'readmorejs-rails'
