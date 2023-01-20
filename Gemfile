@@ -3,11 +3,11 @@ source 'https://rails-assets.org'
 
 ruby '2.1.4'
 
-gem 'rails', '4.2.1'
+gem 'rails', '6.1.7.1'
 gem 'dotenv-rails', groups: [ :development, :test ]  # load this before anything else
 
 # Data
-gem 'acts-as-taggable-array-on'
+gem 'acts-as-taggable-array-on', '>= 0.4.0'
 gem 'attr_encrypted'
 gem 'aws-sdk'
 gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
@@ -16,23 +16,23 @@ gem 'pg'
 gem 'phony_rails'
 
 # Assets
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.2.2'
 gem 'nokogiri'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.8'
 gem 'slim'
 gem 'therubyracer',  platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
 
 # Auth
-gem 'devise'
-gem 'simple_token_authentication', '~> 1.0'
+gem 'devise', '>= 4.7.0'
+gem 'simple_token_authentication', '~> 1.16', '>= 1.16.0'
 
 # Front-end
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
 gem 'draper'
-gem 'font-awesome-rails'
-gem 'jbuilder'
+gem 'font-awesome-rails', '>= 4.7.0.6'
+gem 'jbuilder', '>= 2.6.4'
 gem 'modernizr-rails'
 gem 'useragent'
 
@@ -41,7 +41,7 @@ gem 'aasm'
 gem 'business_time'
 gem 'kaminari'
 gem 'paperclip', require: 'paperclip'
-gem 'rails_admin'
+gem 'rails_admin', '>= 2.0.0'
 gem 'resque'
 gem 'resque_mailer'
 gem 'resque-scheduler'
@@ -59,7 +59,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'minitest'
-  gem 'minitest-rails-capybara', '~> 2.1.0'
+  gem 'minitest-rails-capybara', '~> 3.0.0'
   gem 'minitest-reporters'
   gem 'poltergeist', '~> 1.6.0'
   gem 'resque_unit'
@@ -68,7 +68,7 @@ group :test do
 end
 
 group :development, :test do
-  gem 'mailcatcher'
+  gem 'mailcatcher', '>= 0.6.5'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rubocop', '~> 0.46.0', require: false
