@@ -68,7 +68,7 @@ group :test do
 end
 
 group :development, :test do
-  gem 'mailcatcher'
+  gem 'mailcatcher', '>= 0.10.0'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rubocop', '~> 0.46.0', require: false
