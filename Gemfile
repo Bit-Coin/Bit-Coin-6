@@ -3,7 +3,7 @@ source 'https://rails-assets.org'
 
 ruby '2.1.4'
 
-gem 'rails', '4.2.1'
+gem 'rails', '7.0.0'
 gem 'dotenv-rails', groups: [ :development, :test ]  # load this before anything else
 
 # Data
@@ -18,7 +18,7 @@ gem 'phony_rails'
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
 gem 'nokogiri'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 6.0.0'
 gem 'slim'
 gem 'therubyracer',  platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
@@ -39,9 +39,9 @@ gem 'useragent'
 # Back-end
 gem 'aasm'
 gem 'business_time'
-gem 'kaminari'
+gem 'kaminari', '>= 1.0.0'
 gem 'paperclip', require: 'paperclip'
-gem 'rails_admin'
+gem 'rails_admin', '>= 3.0.0'
 gem 'resque'
 gem 'resque_mailer'
 gem 'resque-scheduler'
